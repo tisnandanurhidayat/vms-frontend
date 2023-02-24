@@ -3,16 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const invoiceresponse: AppRouteModule = {
-  path: '/system',
-  name: 'System',
+const InvoiceResponse: AppRouteModule = {
+  path: '/invoice-response',
+  name: 'InvoiceResponse',
   component: LAYOUT,
-  redirect: '/system/account',
+  redirect: '/invoice-response',
   meta: {
     orderNo: 22,
     icon: 'ion:settings-outline',
-    title: t('invoice response'),
+    title: t('Invoice Response'),
   },
 };
 
-export default invoiceresponse;
+export default InvoiceResponse;

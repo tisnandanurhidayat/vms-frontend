@@ -3,26 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const receivingadviceresponse: AppRouteModule = {
-  path: '/receivingadviceresponse',
-  name: 'receivingadviceresponse',
+const ReceivingAdviceResponse: AppRouteModule = {
+  path: '/receiving-advice-response',
+  name: 'ReceivingAdviceResponse',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  redirect: '/receiving-advice-response',
   meta: {
     orderNo: 18,
     icon: 'ion:rocket-outline',
-    title: t('receiving advice respon'),
+    title: t('Receiving Advice Response'),
   },
-  children: [
-    {
-      path: 'baiduMap',
-      name: 'BaiduMap',
-      meta: {
-        title: t('wew'),
-      },
-      component: () => import('/@/views/demo/charts/map/Baidu.vue'),
-    },
-  ],
 };
 
-export default receivingadviceresponse;
+export default ReceivingAdviceResponse;

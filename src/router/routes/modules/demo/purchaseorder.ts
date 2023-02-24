@@ -3,26 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const purchaseorder: AppRouteModule = {
-  path: '/purchaseorder',
-  name: 'Purchaseorder',
+const PurchaseOrder: AppRouteModule = {
+  path: '/purchase-order',
+  name: 'PurchaseOrder',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  redirect: '/purchase-order',
   meta: {
     orderNo: 15,
     icon: 'ion:paw-outline',
-    title: t('purchase order'),
+    title: t('Purchase Order'),
   },
-  children: [
-    {
-      path: 'baiduMap',
-      name: 'BaiduMap',
-      meta: {
-        title: t('wew'),
-      },
-      component: () => import('/@/views/demo/charts/map/Baidu.vue'),
-    },
-  ],
 };
 
-export default purchaseorder;
+export default PurchaseOrder;
