@@ -21,6 +21,7 @@ const administration: AppRouteModule = {
         title: t('wew'),
       },
       // component: () => import('/@/views/demo/charts/map/Baidu.vue'),
+      // component: () => import('/@/views/demo/purchaseOrder/index.vue'),
     },
   ],
 };

@@ -4,23 +4,26 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const purchaseorder: AppRouteModule = {
-  path: '/purchaseorder',
+  path: '/PurchaseOrder',
   name: 'Purchaseorder',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  redirect: '/purchaseorder/index',
   meta: {
-    orderNo: 15,
-    icon: 'ion:paw-outline',
-    title: t('purchase order'),
+    hideChildrenInMenu: true,
+    icon: 'simple-icons:about-dot-me',
+    title: t('purchaseorder'),
+    orderNo: 14,
   },
   children: [
     {
-      path: 'baiduMap',
-      name: 'BaiduMap',
+      path: 'index',
+      name: 'purchaseorder',
+      component: () => import('/@/views/demo/purchaseOrder/index.vue'),
       meta: {
-        title: t('wew'),
+        title: t('purchaseorder'),
+        icon: 'purchaseorder',
+        hideMenu: true,
       },
-      component: () => import('/@/views/demo/charts/map/Baidu.vue'),
     },
   ],
 };
