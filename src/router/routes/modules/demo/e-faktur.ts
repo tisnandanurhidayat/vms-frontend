@@ -3,16 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const efaktur: AppRouteModule = {
-  path: '/efaktur',
-  name: 'efaktur',
+const EFaktur: AppRouteModule = {
+  path: '/e-faktur',
+  name: 'EFaktur',
   component: LAYOUT,
-  redirect: '/efaktur',
+  // redirect: '/e-faktur',
   meta: {
     orderNo: 25,
     icon: 'ion:add-circle-outline',
-    title: t('e-faktur'),
+    title: t('E-Faktur'),
   },
 };
 
-export default efaktur;
+export default EFaktur;
