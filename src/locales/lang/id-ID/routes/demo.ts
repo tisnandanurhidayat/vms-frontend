@@ -1,0 +1,212 @@
+export default {
+  charts: {
+    baiduMap: 'Baidu Map',
+    aMap: 'Peta',
+    googleMap: 'Google Map',
+    charts: 'Diagram',
+    map: 'Peta',
+    line: 'Garis',
+    pie: 'Lingkaran',
+  },
+  administration: {
+    baiduMap: 'Baidu Map',
+    aMap: 'Peta',
+    googleMap: 'Google Map',
+    administration: 'Administrasi',
+    map: 'Peta',
+    line: 'Garis',
+    pie: 'Lingkaran',
+  },
+  comp: {
+    comp: 'Komponen',
+    basic: 'Sederhana',
+    transition: 'Animasi',
+    countTo: 'Hitung Hingga',
+
+    scroll: 'Gulir',
+    scrollBasic: 'Sederhana',
+    scrollAction: 'Fungsi Gulir',
+    virtualScroll: 'Gulir Virtual',
+
+    tree: 'Tree',
+
+    treeBasic: 'Sederhana',
+    editTree: 'Searchable/perkakas',
+    actionTree: 'Operasi fungsi',
+
+    modal: 'Modal',
+    drawer: 'Laci',
+    desc: 'Deskripsi',
+
+    lazy: 'Lazy',
+    lazyBasic: 'Sederhana',
+    lazyTransition: 'Animasi',
+
+    verify: 'Pemeriksaan',
+    verifyDrag: 'Tarik ',
+    verifyRotate: 'Pulihkan Gambar',
+
+    qrcode: 'Kode QR',
+    strength: 'Kekuatan sandi',
+    upload: 'Unggah',
+
+    loading: 'Menunggu',
+
+    time: 'Waktu Relatif',
+    cropperImage: 'Pemangkas Gambar',
+    cardList: 'Daftar Kartu',
+  },
+  editor: {
+    editor: 'Editor',
+    jsonEditor: 'Editor Json',
+    markdown: 'Editor markdown',
+
+    tinymce: 'Teks rich',
+    tinymceBasic: 'Sederhana',
+    tinymceForm: 'bentuk tertanam',
+  },
+  excel: {
+    excel: 'Excel',
+    customExport: 'Pilih format ekspor',
+    jsonExport: 'Ekspor data JSON',
+    arrayExport: 'Ekspor data array',
+    importExcel: 'Impor',
+  },
+  feat: {
+    feat: 'Function Laman',
+    icon: 'Ikon',
+    tabs: 'Tab',
+    tabDetail: 'Detail Tab',
+    sessionTimeout: 'Waktu Habis Sesi',
+    print: 'Cetak',
+    contextMenu: 'Menu Konteks',
+    download: 'Unduh',
+    clickOutSide: 'Klik di Luar',
+    imgPreview: 'Pratinjau Gambar',
+    copy: 'Papan Klip',
+    msg: 'Papan Pesan',
+    watermark: 'Watermark',
+    ripple: 'Ripple',
+    fullScreen: 'Layar Penuh',
+    errorLog: 'Log Eror',
+    tab: 'Tab dengan parameter',
+    tab1: 'Tab dengan parameter 1',
+    tab2: 'Tab dengan parameter 2',
+    menu: 'Menu dengan parameter',
+    menu1: 'Menu dengan parameter 1',
+    menu2: 'Menu dengan parameter 2',
+
+    ws: 'Tes websocket',
+
+    breadcrumb: 'Remah',
+    breadcrumbFlat: 'Mode Rata',
+    breadcrumbFlatDetail: 'Detail mode rata',
+    requestDemo: 'Demo request ulang',
+
+    breadcrumbChildren: 'Mode level',
+    breadcrumbChildrenDetail: 'Detail mode level',
+  },
+  flow: {
+    name: 'Editor grafis',
+    flowChart: 'FlowChart',
+  },
+  form: {
+    form: 'Form',
+    basic: 'Sederhana',
+    useForm: 'useForm',
+    refForm: 'RefForm',
+    advancedForm: 'Dapat Dikecilkan',
+    ruleForm: 'Validasi form',
+    dynamicForm: 'Dinamis',
+    customerForm: 'Custom',
+    appendForm: 'Tambahkan',
+    tabsForm: 'TabsForm',
+  },
+  iframe: {
+    frame: 'Eksternal',
+    antv: 'antVue doc (tertanam)',
+    doc: 'Project doc (tertanam)',
+    docExternal: 'Project doc (eksternal)',
+  },
+  level: { level: 'MultiMenu' },
+  page: {
+    page: 'Laman',
+
+    form: 'Form',
+    formBasic: 'Form Sederhana',
+    formStep: 'Form Langkah',
+    formHigh: 'Form Lanjutan',
+
+    desc: 'Detail',
+    descBasic: 'Detail Sederhana',
+    descHigh: 'Detail Lanjutan',
+
+    result: 'Hasil',
+    resultSuccess: 'Sukses',
+    resultFail: 'Gagal',
+
+    account: 'Personal',
+    accountCenter: 'Pusat Personal',
+    accountSetting: 'Setelah Personal',
+
+    exception: 'Exception',
+    netWorkError: 'Eror Jarangan',
+    notData: 'Tidak ada data',
+
+    list: 'Laman daftar',
+    listCard: 'Daftar kartu',
+    basic: 'Daftar sederhana',
+    listBasic: 'Daftar sederhana',
+    listSearch: 'Daftar pencarian',
+  },
+  permission: {
+    permission: 'Izin',
+
+    front: 'front-end',
+    frontPage: 'Page',
+    frontBtn: 'Button',
+    frontTestA: 'Test page A',
+    frontTestB: 'Test page B',
+
+    back: 'background',
+    backPage: 'Page',
+    backBtn: 'Button',
+  },
+  setup: {
+    page: 'Laman intro',
+  },
+  system: {
+    moduleName: 'Manajemen sistem',
+
+    account: 'Manajemen akun',
+    account_detail: 'Detail akun',
+    password: 'Ganti sandi',
+
+    dept: 'Manajemen departemen',
+
+    menu: 'Manajemen menu',
+    role: 'Manajemen peran',
+  },
+  table: {
+    table: 'Table',
+
+    basic: 'Basic',
+    treeTable: 'Tree',
+    fetchTable: 'Remote loading',
+    fixedColumn: 'Fixed column',
+    customerCell: 'Custom column',
+    formTable: 'Open search',
+    useTable: 'UseTable',
+    refTable: 'RefTable',
+    multipleHeader: 'MultiLevel header',
+    mergeHeader: 'Merge cells',
+    expandTable: 'Expandable table',
+    fixedHeight: 'Fixed height',
+    footerTable: 'Footer',
+    editCellTable: 'Editable cell',
+    editRowTable: 'Editable row',
+    authColumn: 'Auth column',
+    resizeParentHeightTable: 'resizeParentHeightTable',
+    vxeTable: 'VxeTable',
+  },
+};

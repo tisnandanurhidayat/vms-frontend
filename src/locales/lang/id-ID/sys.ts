@@ -1,0 +1,103 @@
+export default {
+  api: {
+    operationSuccess: 'Operasi Berhasil',
+    operationFailed: 'Operation Gagal',
+    errorTip: 'Tip Error',
+    successTip: 'Tip Sukses',
+    errorMessage: 'Operasi gagal, sistem abnormal!',
+    timeoutMessage: 'Sesi login habis, silakan masuk kembali!',
+    apiTimeoutMessage: 'Permintaan antarmuka habis, silakan muat ulang aplikasi dan coba lagi!',
+    apiRequestFailed: 'Permintaan antarmuka gagal, silakan coba lagi!',
+    networkException: 'Anomali Jaringan',
+    networkExceptionMsg: 'Silakan cek apakah internet Anda normal! Jaringannya abnormal',
+    errMsg401: 'Pengguna tidak memiliki izin (eror token, nama pengguna, sandi)!',
+    errMsg403: 'Pengguna terautorisasi, tetapi aksesnya terlarang!',
+    errMsg404: 'Eror jaringan request, sumber daya tidak ditemukan!',
+    errMsg405: 'Eror jaringan request, metode request tidak diperkenankan!',
+    errMsg408: 'Waktu jaringan request habis!',
+    errMsg500: 'Eror server, silakan hubungi administrator!',
+    errMsg501: 'Jaringan tidak terimplementasi!',
+    errMsg502: 'Eror Jaringan!',
+    errMsg503: 'Layanan tak tersedia atau server sedang penuh!',
+    errMsg504: 'Waktu jaringan habis!',
+    errMsg505: 'Versi http tidak mendukung request!',
+  },
+  app: {
+    logoutTip: 'Pengingat',
+    logoutMessage: 'Konfirmasi keluar sistem?',
+    menuLoading: 'Menunggu menu...',
+  },
+  errorLog: {
+    tableTitle: 'Daftar log eror',
+    tableColumnType: 'Tipe',
+    tableColumnDate: 'Waktu',
+    tableColumnFile: 'Berkas',
+    tableColumnMsg: 'Pesan eror',
+    tableColumnStackMsg: 'Info stak',
+
+    tableActionDesc: 'Detail',
+
+    modalTitle: 'Detail eror',
+
+    fireVueError: 'Eror fire vue',
+    fireResourceError: 'Eror fire resource',
+    fireAjaxError: 'Eror fire ajax',
+
+    enableMessage: 'Hanya efektif ketika useErrorHandle=true di `/src/settings/projectSetting.ts`.',
+  },
+  exception: {
+    backLogin: 'Kembali ke login',
+    backHome: 'Kembali ke beranda',
+    subTitle403: 'Maaf, Anda tidak memiliki akses ke laman ini.',
+    subTitle404: 'Maaf, laman yang Anda kunjungi tidak tersedia.',
+    subTitle500: 'Maaf, server sedang eror.',
+    noDataTitle: 'Tidak ada data.',
+    networkErrorTitle: 'Eror Jaringan',
+    networkErrorSubTitle: 'Maaf，jaringan Anda terputus. Silakan cek kembali jaringan Anda!',
+  },
+  lock: {
+    unlock: 'Klik untuk membuka',
+    alert: 'Eror sandi kunci layar',
+    backToLogin: 'Kembali ke login',
+    entry: 'Masuk ke sistem',
+    placeholder: 'Silakan masukkan sandi kunci layar atau sandi pengguna',
+  },
+  login: {
+    backSignIn: 'Kembali masuk',
+    mobileSignInFormTitle: 'Masuk via mobile',
+    qrSignInFormTitle: 'Masuk via kode QR',
+    signInFormTitle: 'Masuk',
+    signUpFormTitle: 'Daftar',
+    forgetFormTitle: 'Reset sandi',
+
+    signInTitle: 'Vendor Management System',
+    signInDesc: 'Masukkan data pribadi untuk masuk!',
+    policy: 'Saya setuju dengan Aturan Privasi xxx ',
+    scanSign: `Memindai kode untuk menyelesaikan login`,
+
+    loginButton: 'Masuk',
+    registerButton: 'Daftar',
+    rememberMe: 'Ingat saya',
+    forgetPassword: 'Lupa Sandi?',
+    otherSignIn: 'Masuk dengan',
+
+    // notify
+    loginSuccessTitle: 'Berhasil Masuk',
+    loginSuccessDesc: 'Selamat datang kembali',
+
+    // placeholder
+    accountPlaceholder: 'Silakan masukkan username',
+    passwordPlaceholder: 'Silakan masukkan sandi',
+    smsPlaceholder: 'Silakan masukkan kode SMS',
+    mobilePlaceholder: 'Silakan masukkan telepon',
+    policyPlaceholder: 'Registrasi setelah pengecekan',
+    diffPwd: 'Kedua sandi tidak konsisten',
+
+    userName: 'Username',
+    password: 'Sandi',
+    confirmPassword: 'Konfirmasi Sandi',
+    email: 'Email',
+    smsCode: 'Kode SMS',
+    mobile: 'Telepon',
+  },
+};
