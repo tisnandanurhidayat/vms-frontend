@@ -3,16 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const paymentreferencedetail: AppRouteModule = {
-  path: '/paymentreferencedetail',
-  name: 'paymentreferencedetail',
+const PaymentReferenceDetail: AppRouteModule = {
+  path: '/payment-reference-detail', //written as prh
+  name: 'PaymentReferenceDetail',
   component: LAYOUT,
-  redirect: '/paymentreferencedetail',
+  redirect: '/payment-reference-detail',
   meta: {
     orderNo: 24,
     icon: 'ion:add-circle-outline',
-    title: t('payment reference deta'),
+    title: t('Payment Reference Detail'),
   },
 };
 
-export default paymentreferencedetail;
+export default PaymentReferenceDetail;

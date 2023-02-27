@@ -3,22 +3,21 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const purchaseorder: AppRouteModule = {
-  path: '/PurchaseOrder',
-  name: 'Purchaseorder',
+const PurchaseOrder: AppRouteModule = {
+  path: '/purchase-order',
+  name: 'PurchaseOrder',
   component: LAYOUT,
-  redirect: '/purchaseorder/index',
+  redirect: '/purchase-order',
   meta: {
-    hideChildrenInMenu: true,
-    icon: 'simple-icons:about-dot-me',
-    title: t('purchaseorder'),
-    orderNo: 14,
+    orderNo: 15,
+    icon: 'ion:paw-outline',
+    title: t('Purchase Order'),
   },
   children: [
     {
-      path: 'forms',
+      path: 'index',
       name: 'purchaseorder',
-      component: () => import('/@/views/demo/purchaseOrder/forms.vue'),
+      component: () => import('/@/views/demo/purchaseOrder/index.vue'),
       meta: {
         title: t('purchaseorder'),
         icon: 'purchaseorder',
@@ -28,4 +27,4 @@ const purchaseorder: AppRouteModule = {
   ],
 };
 
-export default purchaseorder;
+export default PurchaseOrder;

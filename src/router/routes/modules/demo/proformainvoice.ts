@@ -3,26 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const proformainvoice: AppRouteModule = {
-  path: '/proformainvoice',
-  name: 'Proformainvoice',
+const ProformaInvoice: AppRouteModule = {
+  path: '/proforma-invoice',
+  name: 'ProformaInvoice',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  redirect: '/proforma-invoice',
   meta: {
     orderNo: 19,
     icon: 'ion:medkit-outline',
-    title: t('proforma invoice'),
+    title: t('Proforma Invoice'),
   },
-  children: [
-    {
-      path: 'proformainvoice',
-      name: 'proformainvoice',
-      meta: {
-        title: t('wew'),
-      },
-      component: () => import('/@/views/demo/charts/map/Baidu.vue'),
-    },
-  ],
 };
 
-export default proformainvoice;
+export default ProformaInvoice;

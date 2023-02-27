@@ -3,16 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const creditnote: AppRouteModule = {
-  path: '/creditnote',
-  name: 'creditnote',
+const CreditNote: AppRouteModule = {
+  path: '/credit-note',
+  name: 'CreditNote',
   component: LAYOUT,
-  redirect: '/creditnote',
+  redirect: '/credit-note',
   meta: {
     orderNo: 30,
     icon: 'ion:add-circle-outline',
-    title: t('creditnote'),
+    title: t('Credit Note'),
   },
 };
 
-export default creditnote;
+export default CreditNote;

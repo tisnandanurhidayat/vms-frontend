@@ -3,26 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const dispatchadvice: AppRouteModule = {
-  path: '/dispatchadvice',
-  name: 'Dispatchadvice',
+const DispatchAdvice: AppRouteModule = {
+  path: '/dispatch-advice',
+  name: 'DispatchAdvice',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  redirect: '/dispatch-advice',
   meta: {
     orderNo: 16,
     icon: 'ion:game-controller-outline',
-    title: t('dispatch advice'),
+    title: t('Dispatch Advice'),
   },
-  children: [
-    {
-      path: 'baiduMap',
-      name: 'baiduMap',
-      meta: {
-        title: t('wew'),
-      },
-      // component: () => import('/@/views/demo/charts/map/Baidu.vue'),
-    },
-  ],
 };
 
-export default dispatchadvice;
+export default DispatchAdvice;
