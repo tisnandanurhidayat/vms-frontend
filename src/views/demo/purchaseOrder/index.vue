@@ -1,171 +1,146 @@
 <template>
-  <PageWrapper title="UseForm operation example">
-    <div>
-      <a-button @click="setProps({ size: 'default' })" class="mr-2"> Pencarian Khusus </a-button>
-    </div>
-    <CollapseContainer title="Filter">
-      <BasicForm @register="register" @submit="handleSubmit" />
-    </CollapseContainer>
-  </PageWrapper>
+  <div class="p-4">
+    <BasicTable @register="registerTable">
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'action'">
+          <TableAction
+            :actions="[
+              {
+                label: 'edit',
+                onClick: handleEdit.bind(null, record),
+                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
+              },
+              {
+                label: 'Hapus',
+                icon: 'ic:outline-delete-outline',
+                onClick: handleDelete.bind(null, record),
+                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
+              },
+            ]"
+            :dropDownActions="[
+              {
+                label: 'aktifkan',
+                popConfirm: {
+                  title: 'apakah di aftifkan? ',
+                  confirm: handleOpen.bind(null, record),
+                },
+                ifShow: (_action) => {
+                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
+                },
+              },
+              {
+                label: 'dinonaktifkan',
+                popConfirm: {
+                  title: 'nonaktifkan? ',
+                  confirm: handleOpen.bind(null, record),
+                },
+                ifShow: () => {
+                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
+                },
+              },
+              {
+                label: 'kontrol serentak',
+                popConfirm: {
+                  title: 'apakah anda ingin menampilkan secara dinamis? ',
+                  confirm: handleOpen.bind(null, record),
+                },
+                auth: 'super', // 同时根据权限和业务控制是否显示
+                ifShow: () => {
+                  return true;
+                },
+              },
+            ]"
+          />
+        </template>
+      </template>
+    </BasicTable>
+  </div>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
-  import { CollapseContainer } from '/@/components/Container/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  // import { PageWrapper } from '/@/components/Page';
+  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
 
-  const schemas: FormSchema[] = [
+  import { demoListApi } from '/@/api/demo/table';
+  const columns: BasicColumn[] = [
     {
-      field: 'Merchant',
-      component: 'Input',
-      label: 'Merchant',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'merchant',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
+      title: 'Referensi',
+      dataIndex: 'no',
+      width: 100,
     },
     {
-      field: 'Status',
-      component: 'Select',
-      label: 'Status',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Sembako',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'Batak',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
+      title: 'nama gelar',
+      dataIndex: 'name',
+      width: 200,
+      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
     },
     {
-      field: 'Business Unit',
-      component: 'Select',
-      label: 'Business Unit',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Indomaret',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'Udin',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
+      title: 'Merchant',
+      dataIndex: 'status',
     },
     {
-      field: 'Toko',
-      component: 'Select',
-      label: 'Toko',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Keramik',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'Serba guna',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
+      title: 'Nomer Order',
+      dataIndex: 'status1',
     },
     {
-      field: 'Kode Supplier',
-      component: 'Input',
-      label: 'Kode Supplier',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Kode Supplier',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
+      title: 'Tanggal Order',
+      dataIndex: 'beginTime',
     },
     {
-      field: 'View Revised',
-      component: 'Checkbox',
-      label: 'View Revised POs',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Option 1',
-            value: '1',
-          },
-          {
-            label: 'Option 2',
-            value: '2',
-          },
-        ],
-      },
+      title: 'Status',
+      dataIndex: 'status3',
     },
     {
-      field: 'orderDate',
-      component: 'RangePicker',
-      label: 'Order Date From',
-      colProps: {
-        span: 8,
-      },
+      title: 'Perubahan Terakhir',
+      dataIndex: 'endTime',
+      width: 200,
     },
+    {
+      title: 'Toko',
+      dataIndex: 'status5',
+    },
+    // {
+    //   title: 'alamat',
+    //   dataIndex: 'address',
+    //   auth: 'super', // 同时根据权限和业务控制是否显示
+    //   ifShow: (_column) => {
+    //     return true;
+    //   },
+    // },
   ];
-
   export default defineComponent({
-    components: { BasicForm, CollapseContainer },
+    components: { BasicTable, TableAction },
     setup() {
-      const { createMessage } = useMessage();
-
-      const [register, { setProps }] = useForm({
-        labelWidth: 120,
-        schemas,
-        actionColOptions: {
-          span: 24,
+      const [registerTable] = useTable({
+        title: 'Tabel List PurchaseOrder',
+        api: demoListApi,
+        columns: columns,
+        bordered: true,
+        // rowKey: 'id',
+        rowSelection: {
+          type: 'checkbox',
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        actionColumn: {
+          width: 250,
+          title: 'Action',
+          dataIndex: 'action',
+          // slots: { customRender: 'action' },
+        },
       });
+      function handleEdit(record: Recordable) {
+        console.log('klik untuk mengedit', record);
+      }
+      function handleDelete(record: Recordable) {
+        console.log('klik untuk menghapus', record);
+      }
+      function handleOpen(record: Recordable) {
+        console.log('klik untuk mengaktifkan', record);
+      }
       return {
-        register,
-        schemas,
-        handleSubmit: (values: Recordable) => {
-          createMessage.success('click search,values:' + JSON.stringify(values));
-        },
-        setProps,
+        registerTable,
+        handleEdit,
+        handleDelete,
+        handleOpen,
       };
     },
   });
 </script>
-<style>
-  .tombol {
-    text-align: right;
-  }
-</style>
