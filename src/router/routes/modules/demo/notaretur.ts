@@ -3,16 +3,16 @@ import type { AppRouteModule } from '/@/router/types';
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
-const notaretur: AppRouteModule = {
-  path: '/notaretur',
-  name: 'notaretur',
+const NotaRetur: AppRouteModule = {
+  path: '/nota-retur',
+  name: 'NotaRetur',
   component: LAYOUT,
-  redirect: '/notaretur',
+  redirect: '/nota-retur',
   meta: {
     orderNo: 29,
     icon: 'ion:add-circle-outline',
-    title: t('nota retur'),
+    title: t('Nota Retur'),
   },
 };
 
-export default notaretur;
+export default NotaRetur;
