@@ -16,9 +16,9 @@ const purchaseorder: AppRouteModule = {
   },
   children: [
     {
-      path: 'index',
+      path: 'forms',
       name: 'purchaseorder',
-      component: () => import('/@/views/demo/purchaseOrder/index.vue'),
+      component: () => import('/@/views/demo/purchaseOrder/forms.vue'),
       meta: {
         title: t('purchaseorder'),
         icon: 'purchaseorder',
