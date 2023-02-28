@@ -2,7 +2,9 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
-import addChild from './childMenu';
+import addChild from './layout-menu/childMenu';
+
+const REPORT_PREFIX = 'REP';
 
 const report: AppRouteModule = {
   path: '/report',
@@ -15,9 +17,14 @@ const report: AppRouteModule = {
     title: t('Report'),
   },
   children: [
-    addChild('discrepancy', 'DiscrepancyReport', 'Discrepancy Report', [
-      addChild('quantity', 'QuantityDiscrepencyReport', 'Quantity Discrepency Report'),
-      addChild('price', 'PriceDiscrepencyReport', 'Price Discrepency Report'),
+    addChild('discrepancy', 'DiscrepancyReport', 'Discrepancy Report', undefined, [
+      addChild(
+        'quantity',
+        'QuantityDiscrepencyReport',
+        'Quantity Discrepency Report',
+        REPORT_PREFIX,
+      ),
+      addChild('price', 'PriceDiscrepencyReport', 'Price Discrepency Report', REPORT_PREFIX),
     ]),
   ],
 };

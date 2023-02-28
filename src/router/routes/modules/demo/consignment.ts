@@ -2,7 +2,9 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
-import addChild from './childMenu';
+import addChild from './layout-menu/childMenu';
+
+const CONSIGNMENT_PREFIX = 'CSG';
 
 const consignment: AppRouteModule = {
   path: '/consignment',
@@ -15,10 +17,15 @@ const consignment: AppRouteModule = {
     title: t('Consignment'),
   },
   children: [
-    addChild('pfi', 'ConsignmentPFI', 'Consignment PFI'),
-    addChild('invoice', 'ConsignmentInvoice', 'Consignment Invoice'),
-    addChild('sales-analysis', 'SalesAnalysis', 'Sales Analysis'),
-    addChild('sales-litigation-analysis', 'SalesLitigationAnalysis', 'Sales Litigation Analysis'),
+    addChild('pfi', 'ConsignmentPFI', 'Consignment PFI', CONSIGNMENT_PREFIX),
+    addChild('invoice', 'ConsignmentInvoice', 'Consignment Invoice', CONSIGNMENT_PREFIX),
+    addChild('sales-analysis', 'SalesAnalysis', 'Sales Analysis', CONSIGNMENT_PREFIX),
+    addChild(
+      'sales-litigation-analysis',
+      'SalesLitigationAnalysis',
+      'Sales Litigation Analysis',
+      CONSIGNMENT_PREFIX,
+    ),
   ],
 };
 
