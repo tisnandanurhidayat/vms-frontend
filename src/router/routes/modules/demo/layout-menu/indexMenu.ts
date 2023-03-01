@@ -3,7 +3,7 @@ import addLayout from './layoutMenu';
 
 function addIndex(path: string, name: string, title: string): AppRouteRecordRaw {
   const component = () => {
-    return import(/* @vite-ignore */ `/@/views/components/${name}.vue`);
+    return import(/* @vite-ignore */ `/@/views/demo/components/${name}.vue`);
   };
   return addLayout(path, name, title, component, undefined, true);
 }

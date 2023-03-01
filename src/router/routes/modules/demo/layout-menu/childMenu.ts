@@ -10,7 +10,7 @@ function addChild(
 ): AppRouteRecordRaw {
   const component = () => {
     return componentPrefix != undefined
-      ? import(/* @vite-ignore */ `/@/views/components/${componentPrefix}/${name}.vue`)
+      ? import(/* @vite-ignore */ `/@/views/demo/components/${componentPrefix}/${name}.vue`)
       : undefined;
   };
   return addLayout(path, name, title, component, children);

@@ -8,6 +8,7 @@ const NotaRetur: AppRouteModule = {
   path: '/nota-retur',
   name: 'NotaRetur',
   component: LAYOUT,
+  redirect: '/nota-retur/index',
   meta: {
     orderNo: 29,
     icon: 'ion:add-circle-outline',

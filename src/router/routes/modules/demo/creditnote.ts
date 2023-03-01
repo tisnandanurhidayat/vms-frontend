@@ -8,6 +8,7 @@ const CreditNote: AppRouteModule = {
   path: '/credit-note',
   name: 'CreditNote',
   component: LAYOUT,
+  redirect: '/credit-note/index',
   meta: {
     orderNo: 30,
     hideChildrenInMenu: true,

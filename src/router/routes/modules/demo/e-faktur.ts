@@ -8,6 +8,7 @@ const EFaktur: AppRouteModule = {
   path: '/e-faktur',
   name: 'EFaktur',
   component: LAYOUT,
+  redirect: '/e-faktur/index',
   meta: {
     orderNo: 25,
     icon: 'ion:add-circle-outline',

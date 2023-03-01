@@ -18,7 +18,7 @@ const demoList = (() => {
       beginTime: '@datetime',
       endTime: '@datetime',
       address: '@city()',
-      name: '@cname()',
+      name: 'tisnanda',
       name1: '@cname()',
       name2: '@cname()',
       name3: '@cname()',
