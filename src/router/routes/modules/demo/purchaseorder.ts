@@ -4,20 +4,20 @@ import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
 
 const PurchaseOrder: AppRouteModule = {
-  path: '/purchase-order',
+  path: '/purchaseorder',
   name: 'PurchaseOrder',
   component: LAYOUT,
-  redirect: '/purchase-order',
+  redirect: '/purchaseorder/index',
   meta: {
     orderNo: 15,
-    icon: 'ion:paw-outline',
+    icon: 'ion:medkit-outline',
     title: t('Purchase Order'),
   },
   children: [
     {
       path: 'index',
       name: 'purchaseorder',
-      component: () => import('/@/views/demo/purchaseOrder/index.vue'),
+      component: () => import('/@/views/demo/components/PurchaseOrder.vue'),
       meta: {
         title: t('purchaseorder'),
         icon: 'purchaseorder',
