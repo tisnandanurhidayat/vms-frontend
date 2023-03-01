@@ -2,7 +2,9 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
-import addChild from './childMenu';
+import addChild from './layout-menu/childMenu';
+
+const RETUR_PREFIX = 'RET';
 
 const retur: AppRouteModule = {
   path: '/retur',
@@ -15,12 +17,27 @@ const retur: AppRouteModule = {
     title: t('Retur'),
   },
   children: [
-    addChild('request', 'ReturRequest', 'Retur Request'),
-    addChild('request-response', 'ReturRequestResponse', 'Retur Request Response'),
-    addChild('confirmation', 'ReturConfirmation', 'Retur Confirmation'),
-    addChild('confirmation?status=CLOSED', 'ClosedReturConfirmation', 'Closed Retur Confirmation'),
-    addChild('request-notification', 'ReturRequestNotification', 'Retur Request Notification'),
-    addChild('confirmation-notification', 'ReturConfirmation', 'Retur Confirmation Notification'),
+    addChild('request', 'ReturRequest', 'Retur Request', RETUR_PREFIX),
+    addChild('request-response', 'ReturRequestResponse', 'Retur Request Response', RETUR_PREFIX),
+    addChild('confirmation', 'ReturConfirmation', 'Retur Confirmation', RETUR_PREFIX),
+    addChild(
+      'confirmation?status=CLOSED',
+      'ClosedReturConfirmation',
+      'Closed Retur Confirmation',
+      RETUR_PREFIX,
+    ),
+    addChild(
+      'request-notification',
+      'ReturRequestNotification',
+      'Retur Request Notification',
+      RETUR_PREFIX,
+    ),
+    addChild(
+      'confirmation-notification',
+      'ReturConfirmation',
+      'Retur Confirmation Notification',
+      RETUR_PREFIX,
+    ),
   ],
 };
 

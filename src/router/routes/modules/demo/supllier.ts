@@ -2,13 +2,15 @@ import type { AppRouteModule } from '/@/router/types';
 
 import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
-import addChild from './childMenu';
+import addChild from './layout-menu/childMenu';
+
+const SUPPLIER_PREFIX = 'SUP';
 
 const supplier: AppRouteModule = {
   path: '/supplier',
   name: 'Supplier',
   component: LAYOUT,
-  redirect: '/charts/echarts/map',
+  // redirect: '/charts/echarts/map',
   meta: {
     orderNo: 13,
     icon: 'ion:logo-buffer',
@@ -16,10 +18,10 @@ const supplier: AppRouteModule = {
   },
   // component: () => import('/@/views/demo/charts/map/Baidu.vue'),
   children: [
-    addChild('master-detail', 'SupplierMasterDetail', 'Supplier Master Detail'),
-    addChild('registered', 'RegisteredSupplier', 'Registered Supplier'),
-    addChild('create', 'CreateSupplier', 'Create Supplier'),
-    addChild('users', 'SupplierUsers', 'SupplierUsers'),
+    addChild('master-detail', 'SupplierMasterDetail', 'Supplier Master Detail', SUPPLIER_PREFIX),
+    addChild('registered', 'RegisteredSupplier', 'Registered Supplier', SUPPLIER_PREFIX),
+    addChild('create', 'CreateSupplier', 'Create Supplier', SUPPLIER_PREFIX),
+    addChild('users', 'SupplierUsers', 'SupplierUsers', SUPPLIER_PREFIX),
   ],
 };
 
