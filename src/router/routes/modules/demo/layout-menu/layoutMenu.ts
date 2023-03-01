@@ -1,23 +1,24 @@
-import { getParentLayout } from '/@/router/constant';
 import type { AppRouteRecordRaw } from '/@/router/types';
 import { t } from '/@/hooks/web/useI18n';
 
-function addChild(
+function addLayout(
   path: string,
   name: string,
   title: string,
+  component: AppRouteRecordRaw['component'],
   children?: AppRouteRecordRaw[],
+  hideMenu?: boolean,
 ): AppRouteRecordRaw {
   return {
     path: path,
     name: name,
-    component: getParentLayout(name), //subject to change
-    // component: getComponent(name)
+    component: component,
     meta: {
       title: t(title),
+      hideMenu: hideMenu,
     },
     children: children,
   };
 }
 
-export default addChild;
+export default addLayout;

@@ -1,30 +1,20 @@
 import type { AppRouteModule } from '/@/router/types';
 
-import { LAYOUT } from '/@/router/constant';
 import { t } from '/@/hooks/web/useI18n';
+import { LAYOUT } from '/@/router/constant';
+import addIndex from './layout-menu/indexMenu';
 
 const PurchaseOrder: AppRouteModule = {
-  path: '/purchaseorder',
+  path: '/purchase-order',
   name: 'PurchaseOrder',
   component: LAYOUT,
-  redirect: '/purchaseorder/index',
   meta: {
     orderNo: 15,
-    icon: 'ion:medkit-outline',
+    icon: 'ion:paw-outline',
+    hideChildrenInMenu: true,
     title: t('Purchase Order'),
   },
-  children: [
-    {
-      path: 'index',
-      name: 'purchaseorder',
-      component: () => import('/@/views/demo/components/PurchaseOrder.vue'),
-      meta: {
-        title: t('purchaseorder'),
-        icon: 'purchaseorder',
-        hideMenu: true,
-      },
-    },
-  ],
+  children: [addIndex('index', 'PurchaseOrder', 'Purchase Order')],
 };
 
 export default PurchaseOrder;
