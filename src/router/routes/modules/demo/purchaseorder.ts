@@ -7,6 +7,7 @@ import addIndex from './layout-menu/indexMenu';
 const PurchaseOrder: AppRouteModule = {
   path: '/purchase-order',
   name: 'PurchaseOrder',
+  redirect: 'purchase-order/index',
   component: LAYOUT,
   meta: {
     orderNo: 15,

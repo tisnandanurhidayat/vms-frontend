@@ -87,7 +87,7 @@
       },
     },
     {
-      field: 'Dispatch Date From',
+      field: 'Date From',
       component: 'RangePicker',
       label: 'Order From',
       colProps: {
@@ -196,25 +196,20 @@
       dataIndex: 'name',
     },
     {
-      title: 'Nomer Order',
+      title: 'Nomer DA',
       dataIndex: 'no',
     },
     {
-      title: 'Tanggal Order',
+      title: 'Tanggal DA',
       dataIndex: 'beginTime',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status3',
-    },
-    {
-      title: 'Perubahan Terakhir',
-      dataIndex: 'endTime',
-      width: 200,
     },
     {
       title: 'Toko',
       dataIndex: 'name',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status3',
     },
     // {
     //   title: 'alamat',

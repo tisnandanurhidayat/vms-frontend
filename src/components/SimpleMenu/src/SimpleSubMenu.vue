@@ -1,7 +1,7 @@
 <template>
   <MenuItem
     :name="item.path"
-    v-if="!menuHasChildren(item) && getShowMenu"
+    v-if="!menuHasChildren(item) && getShowMenu && item.name != undefined"
     v-bind="$props"
     :class="getLevelClass"
   >

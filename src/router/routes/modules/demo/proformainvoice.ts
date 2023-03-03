@@ -8,6 +8,7 @@ const ProformaInvoice: AppRouteModule = {
   path: '/proforma-invoice',
   name: 'ProformaInvoice',
   component: LAYOUT,
+  redirect: '/proforma-invoice/index',
   meta: {
     orderNo: 19,
     icon: 'ion:medkit-outline',
