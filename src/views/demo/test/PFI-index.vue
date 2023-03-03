@@ -87,7 +87,21 @@
       },
     },
     {
-      field: 'Date From',
+      field: 'Kode Supplier',
+      component: 'Input',
+      label: 'Kode Supplier',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        placeholder: 'Kode Supplier',
+        onChange: (e: any) => {
+          console.log(e);
+        },
+      },
+    },
+    {
+      field: 'Order Date From',
       component: 'RangePicker',
       label: 'Order From',
       colProps: {
@@ -118,20 +132,6 @@
       },
     },
     {
-      field: 'search CDT/PO No',
-      component: 'Input',
-      label: 'search CDT/PO No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'search CDT/PO No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
-    },
-    {
       field: 'Toko',
       component: 'Select',
       label: 'Toko',
@@ -150,6 +150,22 @@
             label: 'toko rezeki',
             value: '2',
             key: '2',
+          },
+        ],
+      },
+    },
+    {
+      field: 'view revised POs',
+      component: 'CheckboxGroup',
+      label: 'view revised POs',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        options: [
+          {
+            // label: '选项1',
+            value: '1',
           },
         ],
       },
@@ -196,20 +212,25 @@
       dataIndex: 'name',
     },
     {
-      title: 'Nomer DA',
+      title: 'Nomer Order',
       dataIndex: 'no',
     },
     {
-      title: 'Tanggal DA',
+      title: 'Tanggal Order',
       dataIndex: 'beginTime',
-    },
-    {
-      title: 'Toko',
-      dataIndex: 'name',
     },
     {
       title: 'Status',
       dataIndex: 'status3',
+    },
+    {
+      title: 'Perubahan Terakhir',
+      dataIndex: 'endTime',
+      width: 200,
+    },
+    {
+      title: 'Toko',
+      dataIndex: 'name',
     },
     // {
     //   title: 'alamat',
@@ -236,7 +257,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List DispatchAdvice',
+        title: 'Tabel List PFI',
         api: demoListApi,
         columns: columns,
         bordered: true,

@@ -7,6 +7,7 @@ import { LAYOUT } from '/@/router/constant';
 const DispatchAdvice: AppRouteModule = {
   path: '/dispatch-advice',
   name: 'DispatchAdvice',
+  redirect: '/dispatch-advice/index',
   component: LAYOUT,
   meta: {
     orderNo: 16,

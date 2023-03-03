@@ -73,21 +73,63 @@
 
   const schemas: FormSchema[] = [
     {
-      field: 'Merchant',
+      field: 'Dept Code From',
       component: 'Input',
-      label: 'Merchant',
+      label: 'Dept Code From',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'merchant',
+        placeholder: 'merchaDept Code Fromnt',
         onChange: (e: any) => {
           console.log(e);
         },
       },
     },
     {
-      field: 'Date From',
+      field: 'Sup Code From',
+      component: 'Input',
+      label: 'Sup Code From',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        placeholder: 'Sup Code From',
+        onChange: (e: any) => {
+          console.log(e);
+        },
+      },
+    },
+    {
+      field: 'Dept Code To',
+      component: 'Input',
+      label: 'Dept Code To',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        placeholder: 'Dept Code To',
+        onChange: (e: any) => {
+          console.log(e);
+        },
+      },
+    },
+    {
+      field: 'Sup Code To',
+      component: 'Input',
+      label: 'Sup Code To',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        placeholder: 'Sup Code To',
+        onChange: (e: any) => {
+          console.log(e);
+        },
+      },
+    },
+    {
+      field: 'Order Date From',
       component: 'RangePicker',
       label: 'Order From',
       colProps: {
@@ -118,20 +160,6 @@
       },
     },
     {
-      field: 'search CDT/PO No',
-      component: 'Input',
-      label: 'search CDT/PO No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'search CDT/PO No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
-    },
-    {
       field: 'Toko',
       component: 'Select',
       label: 'Toko',
@@ -150,6 +178,22 @@
             label: 'toko rezeki',
             value: '2',
             key: '2',
+          },
+        ],
+      },
+    },
+    {
+      field: 'view revised POs',
+      component: 'CheckboxGroup',
+      label: 'view revised POs',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        options: [
+          {
+            // label: '选项1',
+            value: '1',
           },
         ],
       },
@@ -196,20 +240,25 @@
       dataIndex: 'name',
     },
     {
-      title: 'Nomer DA',
+      title: 'Nomer Order',
       dataIndex: 'no',
     },
     {
-      title: 'Tanggal DA',
+      title: 'Tanggal Order',
       dataIndex: 'beginTime',
-    },
-    {
-      title: 'Toko',
-      dataIndex: 'name',
     },
     {
       title: 'Status',
       dataIndex: 'status3',
+    },
+    {
+      title: 'Perubahan Terakhir',
+      dataIndex: 'endTime',
+      width: 200,
+    },
+    {
+      title: 'Toko',
+      dataIndex: 'name',
     },
     // {
     //   title: 'alamat',
@@ -236,7 +285,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List DispatchAdvice',
+        title: 'Tabel List INV',
         api: demoListApi,
         columns: columns,
         bordered: true,
