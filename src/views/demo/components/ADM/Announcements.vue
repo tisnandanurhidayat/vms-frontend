@@ -1,301 +1,134 @@
 <template>
-  <CollapseContainer title="FILTERS">
-    <BasicForm @register="register" @submit="handleSubmit" />
-  </CollapseContainer>
-
-  <div class="p-1">
-    <BasicTable @register="registerTable">
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
-              {
-                label: 'edit',
-                onClick: handleEdit.bind(null, record),
-                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
-              },
-              {
-                label: 'Hapus',
-                icon: 'ic:outline-delete-outline',
-                onClick: handleDelete.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
-              },
-            ]"
-            :dropDownActions="[
-              {
-                label: 'aktifkan',
-                popConfirm: {
-                  title: 'apakah di aftifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: (_action) => {
-                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
-                },
-              },
-              {
-                label: 'dinonaktifkan',
-                popConfirm: {
-                  title: 'nonaktifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: () => {
-                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
-                },
-              },
-              {
-                label: 'kontrol serentak',
-                popConfirm: {
-                  title: 'apakah anda ingin menampilkan secara dinamis? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                auth: 'super', // 同时根据权限和业务控制是否显示
-                ifShow: () => {
-                  return true;
-                },
-              },
-            ]"
-          />
-        </template>
-      </template>
-    </BasicTable>
-  </div>
+  <PageWrapper title="Announcement Forms">
+    <div class="p-4">
+      <div class="md:flex enter-y">
+        <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
+          <CollapseContainer title="Dashboard Announcement" :can-expan="false">
+            <BasicForm @register="register" @submit="handleSubmit" /><!-- subject to change -->
+          </CollapseContainer>
+        </div>
+        <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
+          <CollapseContainer title="Log-In Announcement" :can-expan="false">
+            <BasicForm @register="register" @submit="handleSubmit" /><!-- subject to change -->
+          </CollapseContainer>
+        </div>
+      </div>
+    </div>
+  </PageWrapper>
 </template>
-
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
-  import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
+  import { PageWrapper } from '/@/components/Page';
   // import { areaRecord } from '/@/api/demo/cascader';
 
   const schemas: FormSchema[] = [
     {
-      field: 'Merchant',
+      field: 'announcementSubject',
       component: 'Input',
-      label: 'Merchant',
+      label: 'Subject:',
       colProps: {
-        span: 8,
+        span: 16,
       },
+      required: true,
       componentProps: {
-        placeholder: 'merchant',
+        placeholder: ' ',
+        //subject to change
         onChange: (e: any) => {
           console.log(e);
         },
       },
     },
     {
-      field: 'Kode Supplier',
-      component: 'Input',
-      label: 'Kode Supplier',
+      field: 'announcementMessage',
+      component: 'InputTextArea',
+      label: 'Message:',
       colProps: {
-        span: 8,
+        span: 20,
       },
+      required: true,
       componentProps: {
-        placeholder: 'Kode Supplier',
+        placeholder: ' ',
+        //subject to change
         onChange: (e: any) => {
           console.log(e);
         },
       },
     },
     {
-      field: 'Order Date From',
-      component: 'RangePicker',
-      label: 'Order From',
-      colProps: {
-        span: 8,
-      },
-    },
-    {
-      field: 'Status',
+      field: 'announcementImportance',
       component: 'Select',
-      label: 'Status',
+      label: 'Importance:',
       colProps: {
-        span: 8,
+        span: 16,
+      },
+      required: true,
+      defaultValue: {
+        label: 'HIGH',
+        value: '1',
+        key: '1',
       },
       componentProps: {
-        placeholder: '--Select--',
         options: [
           {
-            label: 'toko sembako',
+            label: 'HIGH',
             value: '1',
             key: '1',
           },
           {
-            label: 'toko buah',
+            label: 'MEDIUM',
             value: '2',
             key: '2',
+          },
+          {
+            label: 'LOW',
+            value: '3',
+            key: '3',
           },
         ],
       },
     },
     {
-      field: 'Toko',
-      component: 'Select',
-      label: 'Toko',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'All',
-        options: [
-          {
-            label: 'toko udin',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko rezeki',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'view revised POs',
+      field: 'announcementPostStatus',
       component: 'CheckboxGroup',
-      label: 'view revised POs',
+      label: 'Post:',
       colProps: {
-        span: 8,
+        span: 16,
       },
       componentProps: {
         options: [
           {
-            // label: '选项1',
             value: '1',
           },
         ],
       },
     },
-    {
-      field: 'Business Unit',
-      component: 'Select',
-      label: 'Business Unit',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'All',
-        options: [
-          {
-            label: 'IT',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'BOD',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-    },
-  ];
-
-  const columns: BasicColumn[] = [
-    {
-      title: 'Referensi',
-      dataIndex: 'no',
-      width: 100,
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
-    },
-    {
-      title: 'Merchant',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Nomer Order',
-      dataIndex: 'no',
-    },
-    {
-      title: 'Tanggal Order',
-      dataIndex: 'beginTime',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status3',
-    },
-    {
-      title: 'Perubahan Terakhir',
-      dataIndex: 'endTime',
-      width: 200,
-    },
-    {
-      title: 'Toko',
-      dataIndex: 'name',
-    },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, TableAction, BasicTable },
+    components: { BasicForm, CollapseContainer, PageWrapper },
     setup() {
       const { createMessage } = useMessage();
 
       const [register, { setProps }] = useForm({
-        labelWidth: 120,
+        labelWidth: 100,
         schemas,
         actionColOptions: {
-          span: 24,
-        },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
-      });
-
-      const [registerTable] = useTable({
-        title: 'Tabel List PurchaseOrder',
-        api: demoListApi,
-        columns: columns,
-        bordered: true,
-        tableSetting: { fullScreen: true },
-        // rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-        },
-        actionColumn: {
-          width: 250,
-          title: 'Action',
-          dataIndex: 'action',
-          // slots: { customRender: 'action' },
+          span: 30,
         },
       });
 
-      function handleEdit(record: Recordable) {
-        console.log('klik untuk mengedit', record);
-      }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
-      }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
-      }
+      setProps({ showResetButton: false });
 
       return {
-        registerTable,
-        handleEdit,
-        handleDelete,
-        handleOpen,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
         setProps,
-        // handleLoad,
       };
     },
   });
