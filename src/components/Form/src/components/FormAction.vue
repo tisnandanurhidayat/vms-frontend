@@ -112,7 +112,7 @@
       const getSubmitBtnOptions = computed(() => {
         return Object.assign(
           {
-            text: t('common.queryText'),
+            text: t('submit'),
           },
           props.submitButtonOptions,
         );
