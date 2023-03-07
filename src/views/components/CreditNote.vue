@@ -4,9 +4,7 @@
   </CollapseContainer>
 
   <div class="p-1">
-    <BasicTable @register="registerTable">
-      <!-- <template #bodyCell="{ column, record }"> </template> -->
-    </BasicTable>
+    <BasicTable @register="registerTable" />
   </div>
 </template>
 

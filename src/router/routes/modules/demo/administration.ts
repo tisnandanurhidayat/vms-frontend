@@ -6,8 +6,8 @@ import { t } from '/@/hooks/web/useI18n';
 import addChild from './layout-menu/childMenu';
 
 const ADMINISTRATION_PREFIX = 'ADM';
-const CONFIGURATION_PREFIX = 'CNF';
-const RE_PROCESS_PREFIX = 'REP';
+const CONFIGURATION_PREFIX = 'ADM/CNF';
+const RE_PROCESS_PREFIX = 'ADM/REP';
 
 const Administration: AppRouteModule = {
   path: '/admin',

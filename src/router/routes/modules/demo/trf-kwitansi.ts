@@ -8,6 +8,7 @@ const TrfKwitansi: AppRouteModule = {
   path: '/trfkwi',
   name: 'TrfKwitansi',
   component: LAYOUT,
+  redirect: '/trfkwi/index',
   meta: {
     orderNo: 28,
     icon: 'ion:add-circle-outline',

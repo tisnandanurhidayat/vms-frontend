@@ -4,7 +4,9 @@
   </CollapseContainer>
 
   <div class="p-1">
-    <BasicTable @register="registerTable" />
+    <BasicTable @register="registerTable">
+      <template #bodyCell="{ column, record }"> </template>
+    </BasicTable>
   </div>
 </template>
 
@@ -13,7 +15,7 @@
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
+  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
   // import { PageWrapper } from '/@/components/Page';
   // import { areaRecord } from '/@/api/demo/cascader';
@@ -136,7 +138,7 @@
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, BasicTable },
+    components: { BasicForm, CollapseContainer, TableAction, BasicTable },
     setup() {
       const { createMessage } = useMessage();
 

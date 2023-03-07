@@ -8,6 +8,7 @@ const InvoiceResponse: AppRouteModule = {
   path: '/invoice-response',
   name: 'InvoiceResponse',
   component: LAYOUT,
+  redirect: '/invoice-response/index',
   meta: {
     orderNo: 22,
     icon: 'ion:settings-outline',
