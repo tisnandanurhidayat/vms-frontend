@@ -6,9 +6,9 @@ import { LAYOUT } from '/@/router/constant';
 
 const DispatchAdvice: AppRouteModule = {
   path: '/dispatch-advice',
-  name: 'DispathAdvice',
-  component: LAYOUT,
+  name: 'DispatchAdvice',
   redirect: '/dispatch-advice/index',
+  component: LAYOUT,
   meta: {
     orderNo: 16,
     icon: 'ion:game-controller-outline',
