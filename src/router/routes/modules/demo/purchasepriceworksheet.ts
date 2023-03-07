@@ -8,6 +8,7 @@ const PurchasePriceWorksheet: AppRouteModule = {
   path: '/purchase-price-worksheet',
   name: 'PurchasePriceWorksheet',
   component: LAYOUT,
+  redirect: '/purchase-price-worksheet/index',
   meta: {
     orderNo: 31,
     icon: 'ion:add-circle-outline',

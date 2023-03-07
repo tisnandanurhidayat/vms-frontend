@@ -1,8 +1,7 @@
 <template>
-  
   <CollapseContainer title="FILTERS">
     <a-button ghost type="primary" class="ml-2 btnn"> download xls </a-button>
-    <div class="p-3"><BasicForm @register="register" @submit="handleSubmit"/></div>
+    <div class="p-3"><BasicForm @register="register" @submit="handleSubmit" /></div>
     <!-- <a-button ghost type="primary" class="ml-2"> download xls </a-button> -->
   </CollapseContainer>
 
@@ -71,8 +70,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  import { Card, Row, Col } from 'ant-design-vue';
-  
+
   // import { PageWrapper } from '/@/components/Page';
   // import { areaRecord } from '/@/api/demo/cascader';
 
@@ -344,8 +342,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List Invoice' ,
-        button: 'succes',
+        title: 'Tabel List Invoice',
         api: demoListApi,
         columns: columns,
         bordered: true,

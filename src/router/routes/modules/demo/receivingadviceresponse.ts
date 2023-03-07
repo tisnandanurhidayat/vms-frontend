@@ -8,6 +8,7 @@ const ReceivingAdviceResponse: AppRouteModule = {
   path: '/receiving-advice-response',
   name: 'ReceivingAdviceResponse',
   component: LAYOUT,
+  redirect: '/receiving-advice-response/index',
   meta: {
     orderNo: 18,
     icon: 'ion:rocket-outline',

@@ -112,7 +112,7 @@
       const getSubmitBtnOptions = computed(() => {
         return Object.assign(
           {
-            text: t('submit'),
+            text: 'Submit',
           },
           props.submitButtonOptions,
         );

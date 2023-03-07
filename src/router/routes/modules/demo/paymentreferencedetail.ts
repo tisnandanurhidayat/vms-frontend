@@ -8,6 +8,7 @@ const PaymentReferenceDetail: AppRouteModule = {
   path: '/payment-reference-detail', //written as prh
   name: 'PaymentReferenceDetail',
   component: LAYOUT,
+  redirect: '/payment-reference-detail/index',
   meta: {
     orderNo: 24,
     icon: 'ion:add-circle-outline',

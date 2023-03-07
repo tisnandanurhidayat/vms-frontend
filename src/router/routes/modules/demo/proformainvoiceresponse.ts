@@ -8,6 +8,7 @@ const ProformaInvoiceResponse: AppRouteModule = {
   path: '/proforma-invoice-response',
   name: 'ProformaInvoiceResponse',
   component: LAYOUT,
+  redirect: '/proforma-invoice-response/index',
   meta: {
     orderNo: 20,
     hideChildrenInMenu: true,
