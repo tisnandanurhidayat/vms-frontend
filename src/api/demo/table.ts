@@ -3,6 +3,7 @@ import { DemoParams, DemoListGetResultModel } from './model/tableModel';
 
 enum Api {
   DEMO_LIST = '/table/getDemoList',
+  // DEMO_ARCHIVE_DOCUMENT_LIST = '/table/getDemoArchiveDocList'
 }
 
 /**
@@ -18,3 +19,8 @@ export const demoListApi = (params: DemoParams) =>
       ignoreCancelToken: true,
     },
   });
+
+// export const getDemoArchiveDocList = (params: DemoParams) =>
+//   defHttp.get<getDemoArchiveDocListGetResultModel>({
+//     url. Api.
+//   })
