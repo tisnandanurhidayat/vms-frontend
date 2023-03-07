@@ -5,8 +5,7 @@
 
   <div class="p-1">
     <BasicTable @register="registerTable">
-      <template #bodyCell="{ column, record }">
-      </template>
+      <!-- <template #bodyCell="{ column, record }"> </template> -->
     </BasicTable>
   </div>
 </template>
@@ -16,7 +15,7 @@
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
   // import { PageWrapper } from '/@/components/Page';
   // import { areaRecord } from '/@/api/demo/cascader';
@@ -74,6 +73,14 @@
       },
     },
     {
+      field: 'Return Date From',
+      component: 'RangePicker',
+      label: 'Return From',
+      colProps: {
+        span: 8,
+      },
+    },
+    {
       field: 'Business Unit',
       component: 'Select',
       label: 'Business Unit',
@@ -101,6 +108,7 @@
   const columns: BasicColumn[] = [
     {
       title: 'Kode Supllier',
+      sorter: true,
       dataIndex: 'no',
     },
     {
@@ -144,7 +152,7 @@
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, TableAction, BasicTable },
+    components: { BasicForm, CollapseContainer, BasicTable },
     setup() {
       const { createMessage } = useMessage();
 
@@ -158,7 +166,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List PurchaseOrder',
+        title: 'Tabel List Credit Note',
         api: demoListApi,
         columns: columns,
         bordered: true,
