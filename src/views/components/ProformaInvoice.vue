@@ -118,14 +118,14 @@
       },
     },
     {
-      field: 'search CDT/PO No',
+      field: 'search CDT/No',
       component: 'Input',
-      label: 'search CDT/PO No',
+      label: 'search CDT/No',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'search CDT/PO No',
+        placeholder: 'search CDT/No',
         onChange: (e: any) => {
           console.log(e);
         },
