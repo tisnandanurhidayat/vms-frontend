@@ -68,6 +68,8 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
+  // import { useRouter } from 'vue-router';
+  // import { useGetPurchaseOrder } from '/@/api/vms/hooks/purchaseOrderHook';
   // import { PageWrapper } from '/@/components/Page';
   // import { areaRecord } from '/@/api/demo/cascader';
 
@@ -255,6 +257,30 @@
     //   },
     // },
   ];
+
+  // const router = useRouter();
+
+  // if (!router.isReady()) {
+  // } else {
+  //   const { data } = useGetPurchaseOrder({});
+  //   // const { data, fetchNextPage, hasNextPage, isFetching, status } = useGetPurchaseOrder();
+
+  //   console.log(data);
+  // }
+
+  // return data;
+  // const PurchaseOrder = () => {
+  //   const router = useRouter();
+
+  //   if (!router.isReady()) {
+  //     return;
+  //   }
+  //   const { data } = useGetPurchaseOrder({});
+  //   // const { data, fetchNextPage, hasNextPage, isFetching, status } = useGetPurchaseOrder();
+
+  //   console.log(data);
+  //   // return data;
+  // };
 
   export default defineComponent({
     components: { BasicForm, CollapseContainer, TableAction, BasicTable },
