@@ -262,10 +262,9 @@
 
   // if (!router.isReady()) {
   // } else {
-  //   const { data } = useGetPurchaseOrder({});
-  //   // const { data, fetchNextPage, hasNextPage, isFetching, status } = useGetPurchaseOrder();
 
-  //   console.log(data);
+  // const { data, fetchNextPage, hasNextPage, isFetching, status } = useGetPurchaseOrder();
+
   // }
 
   // return data;
@@ -286,7 +285,8 @@
     components: { BasicForm, CollapseContainer, TableAction, BasicTable },
     setup() {
       const { createMessage } = useMessage();
-
+      // const { data } = useGetPurchaseOrder({});
+      // console.log(data);
       const [register, { setProps }] = useForm({
         labelWidth: 120,
         schemas,
