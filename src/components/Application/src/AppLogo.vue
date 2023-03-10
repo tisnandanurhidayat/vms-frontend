@@ -3,11 +3,16 @@
  * @Description: logo component
 -->
 <template>
-  <div class="anticon" :class="getAppLogoClass" @click="goHome">
-    <img src="../../../assets/images/logo.png" />
-    <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
-      TRANSMART
+  <div class="anticon" :class="getAppLogoClass" @click="goHome" v-cloak>
+    <div v-if="showTitle">
+      <div v-if="getCollapsedShowTitle">
+        <img src="../../../assets/images/logo-short-white-bg.png" />
+      </div>
+      <div v-else>
+        <img src="../../../assets/images/logo-white-bg.png" />
+      </div>
     </div>
+    <div id="collapse" v-else><img src="../../../assets/images/logo-short-white-bg.png" /></div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -46,12 +51,12 @@
     { 'collapsed-show-title': unref(getCollapsedShowTitle) },
   ]);
 
-  const getTitleClass = computed(() => [
-    `${prefixCls}__title`,
-    {
-      'xs:opacity-0': !props.alwaysShowTitle,
-    },
-  ]);
+  // const getTitleClass = computed(() => [
+  //   `${prefixCls}__title`,
+  //   {
+  //     'xs:opacity-0': !props.alwaysShowTitle,
+  //   },
+  // ]);
 
   function goHome() {
     go(userStore.getUserInfo.homePath || PageEnum.BASE_HOME);

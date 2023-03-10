@@ -11,19 +11,20 @@
     </div>
 
     <span class="-enter-x xl:hidden">
-      <AppLogo :alwaysShowTitle="true" />
+      <AppLogo :showTitle="false" />
     </span>
 
     <div class="container relative h-full py-2 mx-auto sm:px-10">
       <div class="flex h-full">
-        <div class="hidden min-h-full pl-4 mr-4 xl:flex xl:flex-col xl:w-6/12">
-          <AppLogo class="-enter-x" />
+        <div class="hidden h-full pl-4 mr-4 xl:flex xl:flex-col xl:w-6/12">
           <div class="my-auto">
-            <img
+            <!-- <AppLogo class="-enter-x" /> -->
+            <img src="../../../assets/images/logo-white-bg.png" class="w-1/2 -mt-16 -enter-x" />
+            <!-- <img
               :alt="title"
               src="../../../assets/svg/login-box-bg.svg"
               class="w-1/2 -mt-16 -enter-x"
-            />
+            /> -->
             <div class="mt-10 font-medium text-white -enter-x">
               <!-- <span class="inline-block mt-4 text-3xl"> {{ t('sys.login.signInTitle') }}</span> -->
               <span class="inline-block mt-4 text-3xl">Backstage management system</span>
@@ -56,7 +57,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed } from 'vue';
+  // import { computed } from 'vue';
   import { AppLogo } from '/@/components/Application';
   import { AppLocalePicker, AppDarkModeToggle } from '/@/components/Application';
   import LoginForm from './LoginForm.vue';
@@ -64,7 +65,7 @@
   import RegisterForm from './RegisterForm.vue';
   // import MobileForm from './MobileForm.vue';
   // import QrCodeForm from './QrCodeForm.vue';
-  import { useGlobSetting } from '/@/hooks/setting';
+  // import { useGlobSetting } from '/@/hooks/setting';
   // import { useI18n } from '/@/hooks/web/useI18n';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useLocaleStore } from '/@/store/modules/locale';
@@ -75,12 +76,12 @@
     },
   });
 
-  const globSetting = useGlobSetting();
+  // const globSetting = useGlobSetting();
   const { prefixCls } = useDesign('login');
   // const { t } = useI18n();
   const localeStore = useLocaleStore();
   const showLocale = localeStore.getShowPicker;
-  const title = computed(() => globSetting?.title ?? '');
+  // const title = computed(() => globSetting?.title ?? '');
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-login';
@@ -138,8 +139,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      margin-left: -48%;
-      background-image: url(/@/assets/svg/login-bg.svg);
+      margin-left: -50%;
+      background-image: url(/@/assets/svg/log-in-bg.svg);
       background-position: 100%;
       background-repeat: no-repeat;
       background-size: auto 100%;
@@ -176,7 +177,9 @@
         }
 
         img {
-          width: 48px;
+          height: 48px;
+          width: 100%;
+          margin-top: 20px;
         }
       }
     }

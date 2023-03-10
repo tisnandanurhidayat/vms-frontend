@@ -182,7 +182,12 @@
 
       img {
         width: @logo-width;
-        height: @logo-width;
+        height: @logo-height;
+      }
+
+      img #collapse {
+        width: @logo-height;
+        height: @logo-height;
       }
     }
 

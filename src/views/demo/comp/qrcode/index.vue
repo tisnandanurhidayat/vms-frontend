@@ -29,7 +29,7 @@
       <CollapseContainer title="在线logo示例" class="text-center mb-6 qrcode-demo-item">
         <QrCode
           :value="qrCodeUrl"
-          logo="https://vebn.oss-cn-beijing.aliyuncs.com/vben/logo.png"
+          logo="resource/img/pwa-192x192.png"
           :options="{
             color: { dark: '#55D187' },
           }"
