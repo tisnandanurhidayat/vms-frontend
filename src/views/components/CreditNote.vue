@@ -71,6 +71,14 @@
       },
     },
     {
+      field: 'Return Date From',
+      component: 'RangePicker',
+      label: 'Return From',
+      colProps: {
+        span: 8,
+      },
+    },
+    {
       field: 'Business Unit',
       component: 'Select',
       label: 'Business Unit',
@@ -98,6 +106,7 @@
   const columns: BasicColumn[] = [
     {
       title: 'Kode Supllier',
+      sorter: true,
       dataIndex: 'no',
     },
     {
@@ -155,7 +164,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List PurchaseOrder',
+        title: 'Tabel List Credit Note',
         api: demoListApi,
         columns: columns,
         bordered: true,
