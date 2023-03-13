@@ -16,7 +16,7 @@ const Administration: AppRouteModule = {
   redirect: '/admin',
   meta: {
     orderNo: 12,
-    icon: 'ion:add-circle-outline',
+    icon: 'ic:baseline-person',
     title: t('Administration'),
   },
   children: [

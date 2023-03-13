@@ -12,7 +12,7 @@ const CreditNote: AppRouteModule = {
   meta: {
     orderNo: 30,
     hideChildrenInMenu: true,
-    icon: 'ion:add-circle-outline',
+    icon: 'mdi:receipt-text-arrow-left',
     title: t('Credit Note'),
   },
   children: [addIndex('index', 'CreditNote', 'Credit Note')],

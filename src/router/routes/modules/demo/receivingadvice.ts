@@ -11,7 +11,7 @@ const ReceivingAdvice: AppRouteModule = {
   redirect: '/receiving-advice/index',
   meta: {
     orderNo: 17,
-    icon: 'ion:rainy-outline',
+    icon: 'ic:baseline-local-shipping',
     hideChildrenInMenu: true,
     title: t('Receiving Advice'),
   },

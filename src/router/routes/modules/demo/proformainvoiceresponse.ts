@@ -12,7 +12,7 @@ const ProformaInvoiceResponse: AppRouteModule = {
   meta: {
     orderNo: 20,
     hideChildrenInMenu: true,
-    icon: 'whh:paintroll',
+    icon: 'ion:receipt-outline',
     title: t('Proforma Invoice Response'),
   },
   children: [addIndex('index', 'ProformaInvoiceResponse', 'Proforma Invoice Response')],

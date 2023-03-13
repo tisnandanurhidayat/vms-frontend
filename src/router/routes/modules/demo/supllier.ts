@@ -13,7 +13,7 @@ const supplier: AppRouteModule = {
   // redirect: '/charts/echarts/map',
   meta: {
     orderNo: 13,
-    icon: 'ion:logo-buffer',
+    icon: 'ic:baseline-groups',
     title: t('Supplier'),
   },
   // component: () => import('/@/views/demo/charts/map/Baidu.vue'),

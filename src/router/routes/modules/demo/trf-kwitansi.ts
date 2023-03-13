@@ -11,7 +11,7 @@ const TrfKwitansi: AppRouteModule = {
   redirect: '/trfkwi/index',
   meta: {
     orderNo: 28,
-    icon: 'ion:add-circle-outline',
+    icon: 'mdi:receipt-text-check',
     hideChildrenInMenu: true,
     title: t('TRF - Kwitansi'),
   },

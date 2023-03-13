@@ -8,9 +8,10 @@ const PurchaseOrder: AppRouteModule = {
   path: '/purchase-order',
   name: 'PurchaseOrder',
   component: LAYOUT,
+  redirect: '/purchase-order/index',
   meta: {
     orderNo: 15,
-    icon: 'ion:paw-outline',
+    icon: 'ic:round-post-add',
     hideChildrenInMenu: true,
     title: t('Purchase Order'),
   },

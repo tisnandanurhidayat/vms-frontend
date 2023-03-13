@@ -13,7 +13,7 @@ const consignment: AppRouteModule = {
   redirect: '/consignment',
   meta: {
     orderNo: 23,
-    icon: 'ion:add-circle-outline',
+    icon: 'simple-icons:handshake',
     title: t('Consignment'),
   },
   children: [

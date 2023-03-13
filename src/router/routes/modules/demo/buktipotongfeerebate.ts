@@ -13,7 +13,7 @@ const buktipotongfeerebate: AppRouteModule = {
   redirect: '/bukti-potong-fee-rebate',
   meta: {
     orderNo: 26,
-    icon: 'ion:add-circle-outline',
+    icon: 'heroicons-solid:receipt-tax',
     title: t('Bukti Potong Fee Rebate'),
   },
   children: [

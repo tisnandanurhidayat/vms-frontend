@@ -80,7 +80,7 @@
         span: 8,
       },
       componentProps: {
-        placeholder: 'merchant',
+        placeholder: 'Merchant',
         onChange: (e: any) => {
           console.log(e);
         },
@@ -164,14 +164,14 @@
       },
     },
     {
-      field: 'search CDT/No',
+      field: 'Search CDT/No',
       component: 'Input',
-      label: 'search CDT/No',
+      label: 'Search CDT/No',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'search CDT/No',
+        placeholder: 'Search CDT/No',
         onChange: (e: any) => {
           console.log(e);
         },

@@ -27,7 +27,7 @@
             /> -->
             <div class="mt-10 font-medium text-white -enter-x">
               <!-- <span class="inline-block mt-4 text-3xl"> {{ t('sys.login.signInTitle') }}</span> -->
-              <span class="inline-block mt-4 text-3xl">Backstage management system</span>
+              <span class="inline-block mt-4 text-3xl">Vendor Management System</span>
             </div>
             <div class="mt-5 font-normal text-white white:text-gray-500 -enter-x">
               <!-- {{ t('sys.login.signInDesc') }} -->

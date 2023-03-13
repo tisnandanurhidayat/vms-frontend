@@ -11,7 +11,7 @@ const DispatchAdvice: AppRouteModule = {
   component: LAYOUT,
   meta: {
     orderNo: 16,
-    icon: 'ion:game-controller-outline',
+    icon: 'ic:outline-local-shipping',
     hideChildrenInMenu: true,
     title: t('Dispatch Advice'),
   },

@@ -11,7 +11,7 @@ const InvoiceResponse: AppRouteModule = {
   redirect: '/invoice-response/index',
   meta: {
     orderNo: 22,
-    icon: 'ion:settings-outline',
+    icon: 'ion:receipt',
     hideChildrenInMenu: true,
     title: t('Invoice Response'),
   },
