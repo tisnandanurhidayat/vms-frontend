@@ -140,7 +140,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Daftar Store',
+        title: 'Daftar Warehouse',
         api: demoListApi,
         columns: columns,
         bordered: true,
