@@ -15,48 +15,35 @@
     <div class="mt-4">
       权限切换(请先切换权限模式为前端角色权限模式):
       <Space>
-        <a-button @click="changeRole(RoleEnum.SUPER)" :type="isSuper ? 'primary' : 'default'">
-          {{ RoleEnum.SUPER }}
-        </a-button>
-        <a-button @click="changeRole(RoleEnum.TEST)" :type="isTest ? 'primary' : 'default'">
-          {{ RoleEnum.TEST }}
+        <a-button @click="changeRole(RoleEnum.ADMIN)" :type="isSuper ? 'primary' : 'default'">
+          {{ RoleEnum.ADMIN }}
         </a-button>
       </Space>
     </div>
     <Divider>组件方式判断权限(有需要可以自行全局注册)</Divider>
-    <Authority :value="RoleEnum.SUPER">
+    <Authority :value="RoleEnum.ADMIN">
       <a-button type="primary" class="mx-4"> 拥有super角色权限可见 </a-button>
     </Authority>
 
-    <Authority :value="RoleEnum.TEST">
+    <Authority :value="RoleEnum.ADMIN">
       <a-button color="success" class="mx-4"> 拥有test角色权限可见 </a-button>
     </Authority>
 
-    <Authority :value="[RoleEnum.TEST, RoleEnum.SUPER]">
+    <Authority :value="[RoleEnum.ADMIN, RoleEnum.ADMIN]">
       <a-button color="error" class="mx-4"> 拥有[test,super]角色权限可见 </a-button>
     </Authority>
 
     <Divider>函数方式方式判断权限(适用于函数内部过滤)</Divider>
-    <a-button v-if="hasPermission(RoleEnum.SUPER)" type="primary" class="mx-4">
+    <a-button v-if="hasPermission(RoleEnum.ADMIN)" type="primary" class="mx-4">
       拥有super角色权限可见
     </a-button>
 
-    <a-button v-if="hasPermission(RoleEnum.TEST)" color="success" class="mx-4">
-      拥有test角色权限可见
-    </a-button>
-
-    <a-button v-if="hasPermission([RoleEnum.TEST, RoleEnum.SUPER])" color="error" class="mx-4">
+    <a-button v-if="hasPermission([RoleEnum.ADMIN])" color="error" class="mx-4">
       拥有[test,super]角色权限可见
     </a-button>
 
     <Divider>指令方式方式判断权限(该方式不能动态修改权限.)</Divider>
-    <a-button v-auth="RoleEnum.SUPER" type="primary" class="mx-4"> 拥有super角色权限可见 </a-button>
-
-    <a-button v-auth="RoleEnum.TEST" color="success" class="mx-4"> 拥有test角色权限可见 </a-button>
-
-    <a-button v-auth="[RoleEnum.TEST, RoleEnum.SUPER]" color="error" class="mx-4">
-      拥有[test,super]角色权限可见
-    </a-button>
+    <a-button v-auth="RoleEnum.ADMIN" type="primary" class="mx-4"> 拥有super角色权限可见 </a-button>
   </PageWrapper>
 </template>
 <script lang="ts">
@@ -78,8 +65,7 @@
       return {
         userStore,
         RoleEnum,
-        isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
-        isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
+        isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.ADMIN)),
         changeRole,
         hasPermission,
       };

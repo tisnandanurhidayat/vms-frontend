@@ -10,7 +10,7 @@ import {
   RolePageListGetResultModel,
   RoleListGetResultModel,
 } from './model/systemModel';
-import { defHttp } from '/@/utils/http/axios';
+import { otherHttp } from '/@/utils/http/axios';
 
 enum Api {
   AccountList = '/system/getAccountList',
@@ -23,22 +23,22 @@ enum Api {
 }
 
 export const getAccountList = (params: AccountParams) =>
-  defHttp.get<AccountListGetResultModel>({ url: Api.AccountList, params });
+  otherHttp.get<AccountListGetResultModel>({ url: Api.AccountList, params });
 
 export const getDeptList = (params?: DeptListItem) =>
-  defHttp.get<DeptListGetResultModel>({ url: Api.DeptList, params });
+  otherHttp.get<DeptListGetResultModel>({ url: Api.DeptList, params });
 
 export const getMenuList = (params?: MenuParams) =>
-  defHttp.get<MenuListGetResultModel>({ url: Api.MenuList, params });
+  otherHttp.get<MenuListGetResultModel>({ url: Api.MenuList, params });
 
 export const getRoleListByPage = (params?: RolePageParams) =>
-  defHttp.get<RolePageListGetResultModel>({ url: Api.RolePageList, params });
+  otherHttp.get<RolePageListGetResultModel>({ url: Api.RolePageList, params });
 
 export const getAllRoleList = (params?: RoleParams) =>
-  defHttp.get<RoleListGetResultModel>({ url: Api.GetAllRoleList, params });
+  otherHttp.get<RoleListGetResultModel>({ url: Api.GetAllRoleList, params });
 
 export const setRoleStatus = (id: number, status: string) =>
-  defHttp.post({ url: Api.setRoleStatus, params: { id, status } });
+  otherHttp.post({ url: Api.setRoleStatus, params: { id, status } });
 
 export const isAccountExist = (account: string) =>
-  defHttp.post({ url: Api.IsAccountExist, params: { account } }, { errorMessageMode: 'none' });
+  otherHttp.post({ url: Api.IsAccountExist, params: { account } }, { errorMessageMode: 'none' });

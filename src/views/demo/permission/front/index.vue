@@ -15,11 +15,8 @@
     <div class="mt-4">
       权限切换(请先切换权限模式为前端角色权限模式):
       <Space>
-        <a-button @click="changeRole(RoleEnum.SUPER)" :type="isSuper ? 'primary' : 'default'">
-          {{ RoleEnum.SUPER }}
-        </a-button>
-        <a-button @click="changeRole(RoleEnum.TEST)" :type="isTest ? 'primary' : 'default'">
-          {{ RoleEnum.TEST }}
+        <a-button @click="changeRole(RoleEnum.ADMIN)" :type="isSuper ? 'primary' : 'default'">
+          {{ RoleEnum.ADMIN }}
         </a-button>
       </Space>
     </div>
@@ -43,8 +40,7 @@
       return {
         userStore,
         RoleEnum,
-        isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.SUPER)),
-        isTest: computed(() => userStore.getRoleList.includes(RoleEnum.TEST)),
+        isSuper: computed(() => userStore.getRoleList.includes(RoleEnum.ADMIN)),
         changeRole,
       };
     },

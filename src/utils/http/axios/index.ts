@@ -278,9 +278,9 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
 export const defHttp = createAxios();
 
 // other api url
-// export const otherHttp = createAxios({
-//   requestOptions: {
-//     apiUrl: 'xxx',
-//     urlPrefix: 'xxx',
-//   },
-// });
+export const otherHttp = createAxios({
+  requestOptions: {
+    apiUrl: '10.153.198.13:3000/newvms',
+    // urlPrefix: 'xxx',
+  },
+});

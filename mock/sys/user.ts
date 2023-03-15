@@ -6,32 +6,16 @@ export function createFakeUserList() {
     {
       userId: '1',
       username: 'tisnanda',
-      realName: 'tisnanda nur hidayat',
+      realName: 'Tisnanda Nur Hidayat',
       avatar: '',
-      desc: 'manager',
+      desc: 'Manager',
       password: '123456',
       token: 'fakeToken1',
       homePath: '/dashboard/analysis',
       roles: [
         {
-          roleName: 'Super Admin',
-          value: 'super',
-        },
-      ],
-    },
-    {
-      userId: '2',
-      username: 'test',
-      password: '123456',
-      realName: 'test user',
-      avatar: '',
-      desc: 'tester',
-      token: 'fakeToken2',
-      homePath: '/dashboard/workbench',
-      roles: [
-        {
-          roleName: 'Tester',
-          value: 'test',
+          roleName: 'Admin',
+          value: 'admin',
         },
       ],
     },
@@ -51,6 +35,7 @@ export default [
     method: 'post',
     response: ({ body }) => {
       const { username, password } = body;
+      // TODO: Copy API call from here
       const checkUser = createFakeUserList().find(
         (item) => item.username === username && password === item.password,
       );
@@ -74,6 +59,7 @@ export default [
     response: (request: requestParams) => {
       const token = getRequestToken(request);
       if (!token) return resultError('Invalid token');
+      // TODO: Copy API call from here
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) {
         return resultError('The corresponding user information was not obtained!');
@@ -88,6 +74,7 @@ export default [
     response: (request: requestParams) => {
       const token = getRequestToken(request);
       if (!token) return resultError('Invalid token');
+      // TODO: Copy API call from here
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) {
         return resultError('Invalid token!');
@@ -104,6 +91,7 @@ export default [
     response: (request: requestParams) => {
       const token = getRequestToken(request);
       if (!token) return resultError('Invalid token');
+      // TODO: Copy API call from here
       const checkUser = createFakeUserList().find((item) => item.token === token);
       if (!checkUser) {
         return resultError('Invalid token!');

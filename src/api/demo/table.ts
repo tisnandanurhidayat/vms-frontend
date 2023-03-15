@@ -1,4 +1,4 @@
-import { defHttp } from '/@/utils/http/axios';
+import { otherHttp } from '/@/utils/http/axios';
 import { DemoParams, DemoListGetResultModel } from './model/tableModel';
 
 enum Api {
@@ -11,7 +11,7 @@ enum Api {
  */
 
 export const demoListApi = (params: DemoParams) =>
-  defHttp.get<DemoListGetResultModel>({
+  otherHttp.get<DemoListGetResultModel>({
     url: Api.DEMO_LIST,
     params,
     headers: {
@@ -21,6 +21,6 @@ export const demoListApi = (params: DemoParams) =>
   });
 
 // export const getDemoArchiveDocList = (params: DemoParams) =>
-//   defHttp.get<getDemoArchiveDocListGetResultModel>({
+//   otherHttp.get<getDemoArchiveDocListGetResultModel>({
 //     url. Api.
 //   })
