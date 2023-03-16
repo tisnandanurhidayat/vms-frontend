@@ -83,7 +83,6 @@
 </template>
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
-
   import { Checkbox, Form, Input, Row, Col, Button } from 'ant-design-vue';
   // import {
   //   GithubFilled,
@@ -93,15 +92,12 @@
   //   TwitterCircleFilled,
   // } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
-
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useMessage } from '/@/hooks/web/useMessage';
-
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
   //import { onKeyStroke } from '@vueuse/core';
-
   const ACol = Col;
   const ARow = Row;
   const FormItem = Form.Item;
@@ -110,25 +106,18 @@
   const { notification, createErrorModal } = useMessage();
   const { prefixCls } = useDesign('login');
   const userStore = useUserStore();
-
   const { setLoginState, getLoginState } = useLoginState();
   const { getFormRules } = useFormRules();
-
   const formRef = ref();
   const loading = ref(false);
   const rememberMe = ref(false);
-
   const formData = reactive({
     account: 'tisnanda',
     password: '123456',
   });
-
   const { validForm } = useFormValid(formRef);
-
   //onKeyStroke('Enter', handleLogin);
-
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
-
   async function handleLogin() {
     const data = await validForm();
     if (!data) return;
