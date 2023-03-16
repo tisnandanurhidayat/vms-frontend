@@ -26,11 +26,9 @@
               class="w-1/2 -mt-16 -enter-x"
             /> -->
             <div class="mt-10 font-medium text-white -enter-x">
-              <!-- <span class="inline-block mt-4 text-3xl"> {{ t('sys.login.signInTitle') }}</span> -->
               <span class="inline-block mt-4 text-3xl">Vendor Management System</span>
             </div>
             <div class="mt-5 font-normal text-white white:text-gray-500 -enter-x">
-              <!-- {{ t('sys.login.signInDesc') }} -->
               <span class="inline-block mt-1 text-sm"
                 >Batas Waktu Penerimaan Bukti Potong PPh 2020<br />
                 bertahun 2020.<br /><br />

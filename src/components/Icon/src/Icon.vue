@@ -68,12 +68,14 @@
         if (svg) {
           el.textContent = '';
           el.appendChild(svg);
+          console.log('Yes, svg');
         } else {
           const span = document.createElement('span');
           span.className = 'iconify';
           span.dataset.icon = icon;
           el.textContent = '';
           el.appendChild(span);
+          console.log('Yes, span');
         }
       };
 
