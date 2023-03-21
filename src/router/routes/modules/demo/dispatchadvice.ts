@@ -11,7 +11,7 @@ const DispatchAdvice: AppRouteModule = {
   component: LAYOUT,
   meta: {
     orderNo: 16,
-    icon: 'ic:outline-local-shipping',
+    icon: 'vms-dispatch-advice|svg',
     hideChildrenInMenu: true,
     title: t('Dispatch Advice'),
   },

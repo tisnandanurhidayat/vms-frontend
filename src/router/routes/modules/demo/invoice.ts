@@ -11,7 +11,7 @@ const Invoice: AppRouteModule = {
   redirect: '/invoice/index',
   meta: {
     orderNo: 21,
-    icon: 'ion:receipt',
+    icon: 'vms-invoice|svg',
     hideChildrenInMenu: true,
     title: t('Invoice'),
   },

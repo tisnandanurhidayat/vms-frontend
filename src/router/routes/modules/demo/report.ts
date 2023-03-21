@@ -13,7 +13,7 @@ const report: AppRouteModule = {
   redirect: '/report',
   meta: {
     orderNo: 32,
-    icon: 'ic:round-report',
+    icon: 'vms-report|svg',
     title: t('Report'),
   },
   children: [

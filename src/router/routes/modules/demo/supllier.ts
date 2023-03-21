@@ -10,10 +10,9 @@ const supplier: AppRouteModule = {
   path: '/supplier',
   name: 'Supplier',
   component: LAYOUT,
-  // redirect: '/charts/echarts/map',
   meta: {
     orderNo: 13,
-    icon: 'ic:baseline-groups',
+    icon: 'vms-supplier|svg',
     title: t('Supplier'),
   },
   // component: () => import('/@/views/demo/charts/map/Baidu.vue'),

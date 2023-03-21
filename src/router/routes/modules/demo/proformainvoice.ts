@@ -11,7 +11,7 @@ const ProformaInvoice: AppRouteModule = {
   redirect: '/proforma-invoice/index',
   meta: {
     orderNo: 19,
-    icon: 'ion:receipt-outline',
+    icon: 'vms-proforma-invoice|svg',
     title: t('Proforma Invoice'),
     hideChildrenInMenu: true,
   },

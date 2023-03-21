@@ -11,7 +11,7 @@ const TrfKwitansi: AppRouteModule = {
   redirect: '/trfkwi/index',
   meta: {
     orderNo: 28,
-    icon: 'mdi:receipt-text-check',
+    icon: 'vms-trf-kwitansi|svg',
     hideChildrenInMenu: true,
     title: t('TRF - Kwitansi'),
   },
