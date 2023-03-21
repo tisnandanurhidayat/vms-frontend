@@ -8,10 +8,10 @@ const Dashboard: AppRouteModule = {
   path: '/dashboard',
   name: 'Dashboard',
   component: LAYOUT,
-  redirect: '/Dashboard/index',
+  redirect: '/dashboard/index',
   meta: {
     orderNo: 1,
-    icon: 'ion:medkit-outline',
+    icon: 'material-symbols:computer-outline-rounded',
     title: t('Dashboard'),
     hideChildrenInMenu: true,
   },
