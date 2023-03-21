@@ -13,7 +13,7 @@ const retur: AppRouteModule = {
   redirect: '/retur',
   meta: {
     orderNo: 33,
-    icon: 'tabler:truck-return',
+    icon: 'vms-retur|svg',
     title: t('Retur'),
   },
   children: [

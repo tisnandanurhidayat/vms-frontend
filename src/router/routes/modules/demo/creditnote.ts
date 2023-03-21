@@ -12,7 +12,7 @@ const CreditNote: AppRouteModule = {
   meta: {
     orderNo: 30,
     hideChildrenInMenu: true,
-    icon: 'mdi:receipt-text-arrow-left',
+    icon: 'vms-credit-note|svg',
     title: t('Credit Note'),
   },
   children: [addIndex('index', 'CreditNote', 'Credit Note')],

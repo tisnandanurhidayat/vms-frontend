@@ -13,7 +13,7 @@ const contractmanagement: AppRouteModule = {
   redirect: '/contract-management',
   meta: {
     orderNo: 34,
-    icon: 'simple-icons:handshake',
+    icon: 'vms-contract-management|svg',
     title: t('Contract Management'),
   },
   children: [

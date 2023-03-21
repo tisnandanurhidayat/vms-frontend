@@ -11,8 +11,7 @@ const NotaRetur: AppRouteModule = {
   redirect: '/nota-retur/index',
   meta: {
     orderNo: 29,
-    // icon: 'tabler:truck-return',
-    icon: 'heroicons:receipt-refund-20-solid',
+    icon: 'vms-nota-retur|svg',
     hideChildrenInMenu: true,
     title: t('Nota Retur'),
   },

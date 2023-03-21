@@ -25,7 +25,7 @@
       },
       size: {
         type: [Number, String],
-        default: 16,
+        default: 20,
       },
       spin: {
         type: Boolean,
@@ -55,7 +55,7 @@
   .@{prefix-cls} {
     display: inline-block;
     overflow: hidden;
-    vertical-align: -0.15em;
+    // vertical-align: -0.15em;
     fill: currentColor;
   }
 

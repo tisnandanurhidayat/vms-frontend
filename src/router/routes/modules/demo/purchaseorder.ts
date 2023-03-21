@@ -11,7 +11,7 @@ const PurchaseOrder: AppRouteModule = {
   redirect: '/purchase-order/index',
   meta: {
     orderNo: 15,
-    icon: 'ic:round-post-add',
+    icon: 'vms-purchase-order|svg',
     hideChildrenInMenu: true,
     title: t('Purchase Order'),
   },
