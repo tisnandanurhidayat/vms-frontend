@@ -145,7 +145,6 @@
           description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
           duration: 3,
         });
-        console.log('INFOOO USEER' + userInfo.realName);
       }
     } catch (error) {
       createErrorModal({
