@@ -11,7 +11,7 @@ const EFaktur: AppRouteModule = {
   redirect: '/e-faktur/index',
   meta: {
     orderNo: 25,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-e-faktur|svg',
     hideChildrenInMenu: true,
     title: t('E-Faktur'),
   },

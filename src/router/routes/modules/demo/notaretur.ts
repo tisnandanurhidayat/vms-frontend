@@ -11,7 +11,7 @@ const NotaRetur: AppRouteModule = {
   redirect: '/nota-retur/index',
   meta: {
     orderNo: 29,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-nota-retur|svg',
     hideChildrenInMenu: true,
     title: t('Nota Retur'),
   },

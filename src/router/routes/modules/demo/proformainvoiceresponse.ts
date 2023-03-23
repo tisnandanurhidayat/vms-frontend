@@ -12,7 +12,7 @@ const ProformaInvoiceResponse: AppRouteModule = {
   meta: {
     orderNo: 20,
     hideChildrenInMenu: true,
-    icon: 'whh:paintroll',
+    icon: 'vms-proforma-invoice|svg',
     title: t('Proforma Invoice Response'),
   },
   children: [addIndex('index', 'ProformaInvoiceResponse', 'Proforma Invoice Response')],

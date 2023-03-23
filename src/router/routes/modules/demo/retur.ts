@@ -13,7 +13,7 @@ const retur: AppRouteModule = {
   redirect: '/retur',
   meta: {
     orderNo: 33,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-retur|svg',
     title: t('Retur'),
   },
   children: [
