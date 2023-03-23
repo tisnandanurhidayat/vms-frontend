@@ -1,10 +1,10 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
   <div class="p-1">
-    <BasicTable @register="registerTable" />
+    <BasicTable @register="registerTable" :canResize="false" />
   </div>
 </template>
 
@@ -42,9 +42,9 @@
       },
     },
     {
-      field: 'paid PO',
+      field: 'Paid PO',
       component: 'CheckboxGroup',
-      label: 'paid PO',
+      label: 'Paid PO',
       colProps: {
         span: 8,
       },
@@ -87,14 +87,6 @@
       title: 'Status',
       dataIndex: 'status3',
     },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
@@ -123,21 +115,8 @@
         },
       });
 
-      function handleEdit(record: Recordable) {
-        console.log('klik untuk mengedit', record);
-      }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
-      }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
-      }
-
       return {
         registerTable,
-        handleEdit,
-        handleDelete,
-        handleOpen,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {

@@ -1,57 +1,20 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="ACTION">
+    <a-button @click="resolveBatch" :type="'primary'">Batch Resolve/Close</a-button>
+  </CollapseContainer>
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
   <div class="p-1">
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" :canResize="false">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
               {
-                label: 'edit',
-                onClick: handleEdit.bind(null, record),
-                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
-              },
-              {
-                label: 'Hapus',
-                icon: 'ic:outline-delete-outline',
-                onClick: handleDelete.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
-              },
-            ]"
-            :dropDownActions="[
-              {
-                label: 'aktifkan',
-                popConfirm: {
-                  title: 'apakah di aftifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: (_action) => {
-                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
-                },
-              },
-              {
-                label: 'dinonaktifkan',
-                popConfirm: {
-                  title: 'nonaktifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: () => {
-                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
-                },
-              },
-              {
-                label: 'kontrol serentak',
-                popConfirm: {
-                  title: 'apakah anda ingin menampilkan secara dinamis? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                auth: 'super', // 同时根据权限和业务控制是否显示
-                ifShow: () => {
-                  return true;
-                },
+                label: 'Close',
+                onClick: handleResolve.bind(null, record),
               },
             ]"
           />
@@ -215,28 +178,22 @@
         },
       });
 
-      function handleEdit(record: Recordable) {
-        console.log('klik untuk mengedit', record);
-      }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
-      }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
+      function handleResolve(record: Recordable) {
+        console.log('klik untuk menyelesaikan', record);
       }
 
       return {
         registerTable,
-        handleEdit,
-        handleDelete,
-        handleOpen,
+        handleResolve,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        resolveBatch: (values: Recordable) => {
+          createMessage.success('click search,values:' + JSON.stringify(values));
+        },
         setProps,
-        // handleLoad,
       };
     },
   });
