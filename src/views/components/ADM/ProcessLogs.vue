@@ -149,7 +149,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tanel Process Logs',
+        title: 'Tabel Process Logs',
         api: demoListApi,
         columns: columns,
         bordered: true,
