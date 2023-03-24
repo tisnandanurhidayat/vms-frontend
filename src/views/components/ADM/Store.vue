@@ -1,6 +1,7 @@
 <template>
   <CollapseContainer title="ACTION">
     <a-button @click="createStore" :type="'primary'">Buat Toko Baru</a-button>
+    <a-button type="primary" class="ml-2 btn">Download XLS</a-button>
   </CollapseContainer>
   <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
@@ -80,7 +81,7 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Daftar Store',
+        title: 'Tabel Store',
         api: demoListApi,
         columns: columns,
         bordered: true,

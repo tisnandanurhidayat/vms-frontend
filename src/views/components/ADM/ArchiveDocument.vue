@@ -15,8 +15,6 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
 
   const schemas: FormSchema[] = [
     {
@@ -51,7 +49,6 @@
       componentProps: {
         options: [
           {
-            // label: '选项1',
             value: '1',
           },
         ],
@@ -62,13 +59,7 @@
   const columns: BasicColumn[] = [
     {
       title: 'Referensi',
-      dataIndex: 'no',
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
+      dataIndex: 'ref',
     },
     {
       title: 'Created Date',
@@ -76,16 +67,16 @@
       dataIndex: 'beginTime',
     },
     {
-      title: 'Kode Supllier',
-      dataIndex: 'name',
+      title: 'Kode Supplier',
+      dataIndex: 'supplierCode',
     },
     {
       title: 'Kode Toko',
-      dataIndex: 'no',
+      dataIndex: 'storeCode',
     },
     {
       title: 'Status',
-      dataIndex: 'status3',
+      dataIndex: 'status',
     },
   ];
 

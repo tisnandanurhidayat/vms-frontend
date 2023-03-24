@@ -1,6 +1,9 @@
 <template>
   <CollapseContainer title="ACTION">
     <a-button @click="resolveBatch" :type="'primary'">Batch Resolve/Close</a-button>
+    <a-button @click="resolveSelected" :type="'primary'" class="ml-2">
+      Resolve/Close selected logs
+    </a-button>
   </CollapseContainer>
   <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
@@ -17,6 +20,7 @@
                 onClick: handleResolve.bind(null, record),
               },
             ]"
+            :stopButtonPropagation="true"
           />
         </template>
       </template>
@@ -31,8 +35,6 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
 
   const schemas: FormSchema[] = [
     {
@@ -60,12 +62,12 @@
         placeholder: '--Select--',
         options: [
           {
-            label: 'toko sembako',
+            label: 'Duplicate PO',
             value: '1',
             key: '1',
           },
           {
-            label: 'toko buah',
+            label: 'No matching PO',
             value: '2',
             key: '2',
           },
@@ -83,12 +85,12 @@
         placeholder: '--Select--',
         options: [
           {
-            label: 'toko sembako',
+            label: 'PO',
             value: '1',
             key: '1',
           },
           {
-            label: 'toko buah',
+            label: 'RA',
             value: '2',
             key: '2',
           },
@@ -108,42 +110,28 @@
   const columns: BasicColumn[] = [
     {
       title: 'Tanggal',
-      dataIndex: 'beginTime',
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
+      dataIndex: 'date',
     },
     {
       title: 'Tipe Kesalahan',
-      dataIndex: 'namee',
+      dataIndex: 'errorType',
     },
     {
       title: 'Ref',
-      dataIndex: 'namee',
+      dataIndex: 'ref',
     },
     {
       title: 'Tipe Ref',
-      dataIndex: 'namee',
+      dataIndex: 'refType',
     },
     {
       title: 'File Sumber',
-      dataIndex: 'namee',
+      dataIndex: 'sourceFile',
     },
     {
       title: 'Pesan',
-      dataIndex: 'namee',
+      dataIndex: 'message',
     },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
@@ -161,20 +149,18 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Daftar ProcessLogs',
+        title: 'Tanel Process Logs',
         api: demoListApi,
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },
-        // rowKey: 'id',
         rowSelection: {
           type: 'checkbox',
         },
         actionColumn: {
-          width: 250,
+          width: 120,
           title: 'Action',
           dataIndex: 'action',
-          // slots: { customRender: 'action' },
         },
       });
 
@@ -191,6 +177,9 @@
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
         resolveBatch: (values: Recordable) => {
+          createMessage.success('click search,values:' + JSON.stringify(values));
+        },
+        resolveSelected: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
         setProps,
