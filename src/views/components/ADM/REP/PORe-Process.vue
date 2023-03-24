@@ -2,7 +2,7 @@
   <div class="p-4">
     <div class="md:flex enter-y">
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
-        <CollapseContainer title="Download PO Re-Process by Date" :can-expan="false">
+        <CollapseContainer title="Download PO" :can-expan="false">
           <BasicForm @register="register" @submit="handleSubmit" /><!-- subject to change -->
         </CollapseContainer>
       </div>
@@ -44,8 +44,6 @@
           span: 24,
         },
       });
-
-      setProps({ showResetButton: false });
 
       return {
         register,

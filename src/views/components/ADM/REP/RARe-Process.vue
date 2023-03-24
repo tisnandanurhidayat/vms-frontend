@@ -45,7 +45,7 @@
         },
       });
 
-      setProps({ showResetButton: false });
+      // setProps({ showResetButton: false });
 
       return {
         register,

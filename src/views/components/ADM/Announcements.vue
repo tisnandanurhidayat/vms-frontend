@@ -120,8 +120,6 @@
         },
       });
 
-      setProps({ showResetButton: false });
-
       return {
         register,
         schemas,
