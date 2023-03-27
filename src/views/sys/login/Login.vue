@@ -268,6 +268,10 @@
     background: #ed1b24;
   }
 
+  :hover::-webkit-scrollbar-thumb {
+    background: #852025;
+  }
+
   ::-webkit-scrollbar-track {
     background: #fff;
   }
