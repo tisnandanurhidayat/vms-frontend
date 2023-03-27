@@ -19,7 +19,6 @@
               {
                 label: 'Nonaktifkan',
                 onClick: handleNonactivate.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
               },
             ]"
           />
