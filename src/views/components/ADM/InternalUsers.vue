@@ -84,7 +84,7 @@
         actionColOptions: {
           span: 24,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
@@ -94,6 +94,7 @@
         bordered: true,
         tableSetting: { fullScreen: true },
         actionColumn: {
+          ellipsis: true,
           width: 250,
           title: 'Action',
           dataIndex: 'action',

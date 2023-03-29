@@ -58,6 +58,7 @@
         bordered: true,
         showIndexColumn: false,
         actionColumn: {
+          ellipsis: true,
           width: 80,
           title: '操作',
           dataIndex: 'action',

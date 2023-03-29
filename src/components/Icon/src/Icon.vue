@@ -70,7 +70,6 @@
           span.dataset.icon = icon;
           el.textContent = '';
           el.appendChild(span);
-          console.log('Yes, span');
         }
       };
 

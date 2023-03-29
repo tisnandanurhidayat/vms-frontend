@@ -64,7 +64,7 @@
         span: 8,
       },
       componentProps: {
-        valueFormat: 'YYYY-MM-DD',
+        valueFormat: 'DD-MM-YYYY',
       },
       rules: [{ required: true, type: 'string' }],
     },

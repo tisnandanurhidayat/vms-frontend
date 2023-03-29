@@ -1,5 +1,8 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="ACTION">
+    <a-button @click="handlePrintSelected" :type="'primary'">Cetak yang dipilih</a-button>
+  </CollapseContainer>
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
@@ -10,48 +13,12 @@
           <TableAction
             :actions="[
               {
-                label: 'edit',
-                onClick: handleEdit.bind(null, record),
-                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
+                label: 'Dokumen',
+                onClick: handleViewDocument.bind(null, record),
               },
               {
-                label: 'Hapus',
-                icon: 'ic:outline-delete-outline',
-                onClick: handleDelete.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
-              },
-            ]"
-            :dropDownActions="[
-              {
-                label: 'aktifkan',
-                popConfirm: {
-                  title: 'apakah di aftifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: (_action) => {
-                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
-                },
-              },
-              {
-                label: 'dinonaktifkan',
-                popConfirm: {
-                  title: 'nonaktifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: () => {
-                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
-                },
-              },
-              {
-                label: 'kontrol serentak',
-                popConfirm: {
-                  title: 'apakah anda ingin menampilkan secara dinamis? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                auth: 'super', // 同时根据权限和业务控制是否显示
-                ifShow: () => {
-                  return true;
-                },
+                label: 'Detail',
+                onClick: handleViewDetail.bind(null, record),
               },
             ]"
           />
@@ -68,12 +35,34 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
+  import createOptions from './templates/dropdownOptions';
+
+  // for hard code purposes
+  const TOKO_LIST = {
+    TOKO1: 'Toko 1',
+    TOKO2: 'Toko 2',
+    TOKO3: 'Toko 3',
+  };
+
+  const BU_LIST = {
+    BU1: 'BU 1',
+    BU2: 'BU 2',
+    BU3: 'BU 3',
+  };
+
+  const STATUS_LIST = {
+    ALL: 'All',
+    NEW: 'Baru',
+    AWAITING_ACTION: 'Menunggu respon',
+    REJECTED: 'Ditolak',
+    ACCEPTED: 'Disahkan',
+    LITIGATION: 'Litigasi',
+    CANCELLED: 'Ditolak',
+  };
 
   const schemas: FormSchema[] = [
     {
-      field: 'Merchant',
+      field: 'merchant',
       component: 'Input',
       label: 'Merchant',
       colProps: {
@@ -87,7 +76,7 @@
       },
     },
     {
-      field: 'PFI Date From',
+      field: 'PFIFrom',
       component: 'RangePicker',
       label: 'PFI Date From',
       colProps: {
@@ -95,7 +84,7 @@
       },
     },
     {
-      field: 'Status',
+      field: 'status',
       component: 'Select',
       label: 'Status',
       colProps: {
@@ -103,22 +92,11 @@
       },
       componentProps: {
         placeholder: '--Select--',
-        options: [
-          {
-            label: 'toko sembako',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko buah',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions(STATUS_LIST),
       },
     },
     {
-      field: 'Search CDT/No',
+      field: 'CDTorPONo',
       component: 'Input',
       label: 'Search CDT/No',
       colProps: {
@@ -132,7 +110,7 @@
       },
     },
     {
-      field: 'Toko',
+      field: 'store',
       component: 'Select',
       label: 'Toko',
       colProps: {
@@ -140,22 +118,11 @@
       },
       componentProps: {
         placeholder: 'All',
-        options: [
-          {
-            label: 'toko udin',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko rezeki',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions(TOKO_LIST),
       },
     },
     {
-      field: 'Business Unit',
+      field: 'businessUnit',
       component: 'Select',
       label: 'Business Unit',
       colProps: {
@@ -163,18 +130,7 @@
       },
       componentProps: {
         placeholder: 'All',
-        options: [
-          {
-            label: 'IT',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'BOD',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions(BU_LIST),
       },
     },
   ];
@@ -183,42 +139,27 @@
     {
       title: 'Referensi',
       dataIndex: 'no',
-      width: 100,
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
     },
     {
       title: 'Merchant',
-      dataIndex: 'name',
+      dataIndex: 'merchant',
     },
     {
       title: 'Toko',
-      dataIndex: 'name',
+      dataIndex: 'store',
     },
     {
       title: 'Revisi',
-      dataIndex: 'namee',
+      dataIndex: 'revision',
     },
     {
       title: 'Tanggal diterima',
-      dataIndex: 'beginTime',
+      dataIndex: 'acceptedDate',
     },
     {
       title: 'Status',
-      dataIndex: 'status3',
+      dataIndex: 'status',
     },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
@@ -227,16 +168,16 @@
       const { createMessage } = useMessage();
 
       const [register, { setProps }] = useForm({
-        labelWidth: 120,
+        labelWidth: 150,
         schemas,
         actionColOptions: {
-          span: 24,
+          span: 20,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
-        title: 'Daftar Proforma Invoice',
+        title: 'Tabel Proforma Invoice',
         api: demoListApi,
         columns: columns,
         bordered: true,
@@ -246,6 +187,7 @@
           type: 'checkbox',
         },
         actionColumn: {
+          ellipsis: true,
           width: 250,
           title: 'Action',
           dataIndex: 'action',
@@ -253,21 +195,23 @@
         },
       });
 
-      function handleEdit(record: Recordable) {
-        console.log('klik untuk mengedit', record);
+      function handleViewDocument(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
       }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
+
+      function handleViewDetail(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
       }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
+
+      function handlePrintSelected(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
       }
 
       return {
         registerTable,
-        handleEdit,
-        handleDelete,
-        handleOpen,
+        handleViewDocument,
+        handleViewDetail,
+        handlePrintSelected,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {

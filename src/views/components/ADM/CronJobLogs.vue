@@ -31,7 +31,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  import createOptions from '/@/views/components/dropdownOptions';
+  import createOptions from '/@/views/components/templates/dropdownOptions';
 
   const JOB_TYPES = {
     ALL: 'All',
@@ -105,7 +105,7 @@
         actionColOptions: {
           span: 24,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
@@ -115,6 +115,7 @@
         bordered: true,
         tableSetting: { fullScreen: true },
         actionColumn: {
+          ellipsis: true,
           width: 120,
           title: 'Action',
           dataIndex: 'action',
