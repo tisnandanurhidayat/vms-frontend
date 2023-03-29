@@ -13,7 +13,7 @@ const report: AppRouteModule = {
   redirect: '/report',
   meta: {
     orderNo: 32,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-report|svg',
     title: t('Report'),
   },
   children: [

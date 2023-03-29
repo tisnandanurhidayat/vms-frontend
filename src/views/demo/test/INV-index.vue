@@ -183,9 +183,9 @@
       },
     },
     {
-      field: 'view revised POs',
+      field: 'View Revised POs',
       component: 'CheckboxGroup',
-      label: 'view revised POs',
+      label: 'View Revised POs',
       colProps: {
         span: 8,
       },

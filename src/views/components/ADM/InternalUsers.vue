@@ -1,10 +1,30 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="ACTION">
+    <a-button @click="createUser" :type="'primary'">Buat User Baru</a-button>
+  </CollapseContainer>
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
   <div class="p-1">
-    <BasicTable @register="registerTable" />
+    <BasicTable @register="registerTable" :canResize="false">
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'action'">
+          <TableAction
+            :actions="[
+              {
+                label: 'Ubah',
+                onClick: handleEdit.bind(null, record),
+              },
+              {
+                label: 'Nonaktifkan',
+                onClick: handleNonactivate.bind(null, record),
+              },
+            ]"
+          />
+        </template>
+      </template>
+    </BasicTable>
   </div>
 </template>
 
@@ -13,10 +33,9 @@
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
+  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
+  // import { Button } from '/@/components/Button';
 
   const schemas: FormSchema[] = [
     {
@@ -38,38 +57,24 @@
   const columns: BasicColumn[] = [
     {
       title: 'Nama Depan',
-      dataIndex: 'nama',
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
+      dataIndex: 'address', //'firstName'
     },
     {
       title: 'Nama Belakang',
-      dataIndex: 'Nama',
+      dataIndex: 'lastName',
     },
     {
       title: 'User Name',
-      dataIndex: 'status3',
+      dataIndex: 'username',
     },
     {
       title: 'User Role',
-      dataIndex: 'status3',
+      dataIndex: 'role',
     },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, BasicTable },
+    components: { BasicForm, CollapseContainer, BasicTable, TableAction },
     setup() {
       const { createMessage } = useMessage();
 
@@ -83,39 +88,43 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel Archive Document',
+        title: 'Tabel Internal Users',
         api: demoListApi,
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },
-        // rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
+        actionColumn: {
+          width: 250,
+          title: 'Action',
+          dataIndex: 'action',
+          // slots: { customRender: 'action' },
         },
       });
 
       function handleEdit(record: Recordable) {
         console.log('klik untuk mengedit', record);
       }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
-      }
-      function handleOpen(record: Recordable) {
+      function handleActivate(record: Recordable) {
         console.log('klik untuk mengaktifkan', record);
+      }
+      function handleNonactivate(record: Recordable) {
+        console.log('klik untuk menonaktifkan', record);
       }
 
       return {
         registerTable,
         handleEdit,
-        handleDelete,
-        handleOpen,
+        handleActivate,
+        handleNonactivate,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        createUser: (values: Recordable) => {
+          createMessage.success('click search,values:' + JSON.stringify(values));
+        },
         setProps,
-        // handleLoad,
       };
     },
   });

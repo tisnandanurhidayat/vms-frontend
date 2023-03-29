@@ -25,19 +25,43 @@
               src="../../../assets/svg/login-box-bg.svg"
               class="w-1/2 -mt-16 -enter-x"
             /> -->
-            <div class="mt-10 font-medium text-white -enter-x">
+            <div class="mt-10 font-bold text-white -enter-x">
               <!-- <span class="inline-block mt-4 text-3xl"> {{ t('sys.login.signInTitle') }}</span> -->
-              <span class="inline-block mt-4 text-3xl">Backstage management system</span>
+              <span class="inline-block mt-4 text-3xl">Vendor Management System</span>
             </div>
-            <div class="mt-5 font-normal text-white white:text-gray-500 -enter-x">
-              <!-- {{ t('sys.login.signInDesc') }} -->
-              <span class="inline-block mt-1 text-sm"
-                >Batas Waktu Penerimaan Bukti Potong PPh 2020<br />
-                bertahun 2020.<br /><br />
+            <div class="mt-2 font-normal text-white white:text-gray-500 -enter-x">
+              <span class="inline-block mt-2 text-sm mb-10" id="login-announcement">
+                <span class="font-bold text-base">
+                  <!-- Pengumuman: <br /> -->
+                  Batas Waktu Penerimaan Bukti Potong PPh 2020 bertahun 2020.
+                </span>
+                <br />
                 Untuk penjelasan lebih lanjut dapat menghubungi bagian pajak dengan :<br />
-                kevien_firmanda@alfa-retail.co.id dan gunawan_gunawan@alfa-retail.co.id
+                kevien_firmanda@alfa-retail.co.id dan gunawan_gunawan@alfa-retail.co.id <br />
+
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla interdum ut neque id
+                gravida. Curabitur at auctor velit. Ut luctus vitae felis non semper. Curabitur
+                ultrices eget risus quis dapibus. Morbi erat magna, varius non finibus a, pharetra
+                tempus nulla. Proin ac tellus laoreet odio dictum facilisis. Integer malesuada nec
+                velit sed consequat. Etiam vel leo augue. Cras faucibus laoreet mi, eu maximus nibh.
+                Cras tincidunt, elit luctus luctus accumsan, augue diam aliquam est, ut volutpat
+                lorem ipsum venenatis orci. Donec porttitor volutpat neque ac interdum. Maecenas
+                consequat ante eu tortor tempus venenatis. Sed vulputate in leo at aliquet. Duis
+                eget accumsan diam. Integer ac dignissim justo, id ultrices erat. Proin vehicula dui
+                purus, at posuere nisl feugiat et. Morbi vel enim a lacus rutrum fermentum eu eget
+                velit. Sed sit amet odio a ligula gravida eleifend at non nisl. Mauris euismod
+                tellus sed pharetra vestibulum. Nulla eleifend magna eget erat blandit, sit amet
+                tincidunt erat commodo. Curabitur sit amet accumsan justo, sit amet laoreet odio.
+                Vestibulum at tellus eu neque vehicula accumsan sit amet eget massa. Maecenas eget
+                est ut purus vulputate maximus quis sit amet ipsum. Aenean vitae neque leo.
+                Suspendisse non varius nisi, et lobortis orci. Aliquam vehicula est non facilisis
+                varius. Ut vehicula fermentum malesuada. Vestibulum mattis posuere risus. Duis
+                posuere dapibus eleifend. In hac habitasse platea dictumst. Sed id lorem mauris.
+                Duis vulputate velit sit amet augue faucibus rutrum.
+                <br /><br /><br />
               </span>
             </div>
+            <img src="../../../assets/svg/log-in-accent.svg" class="w-3/4 -mb-32 -enter-x" />
           </div>
         </div>
         <div class="flex w-full h-full py-5 xl:h-auto xl:py-0 xl:my-0 xl:w-6/12">
@@ -139,8 +163,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      margin-left: -50%;
-      background-image: url(/@/assets/svg/log-in-bg.svg);
+      margin-left: -45%;
+      background-image: url(/@/assets/svg/log-in-bg-new.svg);
       background-position: 100%;
       background-repeat: no-repeat;
       background-size: auto 100%;
@@ -228,5 +252,27 @@
 
   .prg {
     color: red;
+  }
+
+  #login-announcement {
+    width: 100%;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    // background-color: rgba(0, 0, 0, 0.1);
+    padding: 10px 5px 10px 0;
+    mask-image: linear-gradient(to bottom, black calc(100% - 48px), transparent 100%);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ed1b24;
+  }
+
+  :hover::-webkit-scrollbar-thumb {
+    background: #852025;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #fff;
   }
 </style>

@@ -80,7 +80,7 @@
         span: 8,
       },
       componentProps: {
-        placeholder: 'merchant',
+        placeholder: 'Merchant',
         onChange: (e: any) => {
           console.log(e);
         },
@@ -155,9 +155,9 @@
       },
     },
     {
-      field: 'view revised POs',
+      field: 'View Revised POs',
       component: 'CheckboxGroup',
-      label: 'view revised POs',
+      label: 'View Revised POs',
       colProps: {
         span: 8,
       },

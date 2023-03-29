@@ -1,5 +1,8 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="ACTION">
+    <a-button @click="createWarehouse">Create New Warehouse</a-button>
+  </CollapseContainer>
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
@@ -10,48 +13,8 @@
           <TableAction
             :actions="[
               {
-                label: 'edit',
+                label: 'Edit',
                 onClick: handleEdit.bind(null, record),
-                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
-              },
-              {
-                label: 'Hapus',
-                icon: 'ic:outline-delete-outline',
-                onClick: handleDelete.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
-              },
-            ]"
-            :dropDownActions="[
-              {
-                label: 'aktifkan',
-                popConfirm: {
-                  title: 'apakah di aftifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: (_action) => {
-                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
-                },
-              },
-              {
-                label: 'dinonaktifkan',
-                popConfirm: {
-                  title: 'nonaktifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: () => {
-                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
-                },
-              },
-              {
-                label: 'kontrol serentak',
-                popConfirm: {
-                  title: 'apakah anda ingin menampilkan secara dinamis? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                auth: 'super', // 同时根据权限和业务控制是否显示
-                ifShow: () => {
-                  return true;
-                },
               },
             ]"
           />
@@ -68,8 +31,6 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
 
   const schemas: FormSchema[] = [
     {
@@ -91,38 +52,24 @@
   const columns: BasicColumn[] = [
     {
       title: 'Warehouse Code',
-      dataIndex: 'no',
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
+      dataIndex: 'code',
     },
     {
       title: 'Warehouse Name',
-      dataIndex: 'namee',
+      dataIndex: 'name',
     },
     {
       title: 'Toko',
-      dataIndex: 'namee',
+      dataIndex: 'store',
     },
     {
       title: 'Int Code',
-      dataIndex: 'namee',
+      dataIndex: 'intCode',
     },
     {
       title: 'For Interface',
-      dataIndex: 'namee',
+      dataIndex: 'forInterface',
     },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
@@ -140,45 +87,37 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Daftar Warehouse',
+        title: 'Tabel Warehouse',
         api: demoListApi,
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },
-        // rowKey: 'id',
         rowSelection: {
           type: 'checkbox',
         },
         actionColumn: {
-          width: 250,
+          width: 120,
           title: 'Action',
           dataIndex: 'action',
-          // slots: { customRender: 'action' },
         },
       });
 
       function handleEdit(record: Recordable) {
         console.log('klik untuk mengedit', record);
       }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
-      }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
-      }
 
       return {
         registerTable,
         handleEdit,
-        handleDelete,
-        handleOpen,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        createWarehouse: (values: Recordable) => {
+          createMessage.success('click search,values:' + JSON.stringify(values));
+        },
         setProps,
-        // handleLoad,
       };
     },
   });
