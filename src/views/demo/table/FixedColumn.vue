@@ -73,6 +73,7 @@
         rowSelection: { type: 'radio' },
         bordered: true,
         actionColumn: {
+          ellipsis: true,
           width: 160,
           title: 'Action',
           dataIndex: 'action',

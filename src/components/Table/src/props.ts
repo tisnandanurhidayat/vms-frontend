@@ -96,9 +96,9 @@ export const basicProps = {
     type: Object as PropType<BasicColumn>,
     default: null,
   },
-  ellipsis: { type: Boolean, default: true },
+  ellipsis: { type: Boolean, default: false },
   isCanResizeParent: { type: Boolean, default: false },
-  canResize: { type: Boolean, default: true },
+  canResize: { type: Boolean, default: false },
   clearSelectOnPageChange: propTypes.bool,
   resizeHeightOffset: propTypes.number.def(0),
   rowSelection: {

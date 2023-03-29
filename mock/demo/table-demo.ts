@@ -14,10 +14,12 @@ const demoList = (() => {
   const result: any[] = [];
   for (let index = 0; index < 200; index++) {
     result.push({
+      reference: 'TRI23011828510848',
       id: `${index}`,
       beginTime: '@datetime',
       endTime: '@datetime',
       address: '@city()',
+      merchant: 'JKT (RINSO) UNILEVER INDONESIA TBK',
       name: 'tisnanda',
       name1: '@cname()',
       name2: '@cname()',

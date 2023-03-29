@@ -132,8 +132,8 @@
       editRow: true,
       editComponent: 'DatePicker',
       editComponentProps: {
-        valueFormat: 'YYYY-MM-DD',
-        format: 'YYYY-MM-DD',
+        valueFormat: 'DD-MM-YYYY',
+        format: 'DD-MM-YYYY',
       },
       width: 150,
     },
@@ -237,6 +237,7 @@
         showTableSetting: true,
         tableSetting: { fullScreen: true },
         actionColumn: {
+          ellipsis: true,
           width: 160,
           title: 'Action',
           dataIndex: 'action',

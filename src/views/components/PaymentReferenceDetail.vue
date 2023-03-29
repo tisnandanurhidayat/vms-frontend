@@ -1,5 +1,5 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
@@ -8,6 +8,7 @@
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
+            :stopButtonPropagation="true"
             :actions="[
               {
                 label: 'edit',
@@ -118,7 +119,7 @@
       },
     },
     {
-      field: 'Search CDT/No',
+      field: 'CDTorPONo',
       component: 'Input',
       label: 'Search CDT/No',
       colProps: {
@@ -180,9 +181,9 @@
         labelWidth: 120,
         schemas,
         actionColOptions: {
-          span: 24,
+          span: 20,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
@@ -196,6 +197,7 @@
           type: 'checkbox',
         },
         actionColumn: {
+          ellipsis: true,
           width: 250,
           title: 'Action',
           dataIndex: 'action',
