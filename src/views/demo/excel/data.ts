@@ -42,7 +42,7 @@ export const data: any[] = (() => {
       id: `${index}`,
       name: `${index} John Brown`,
       age: `${index + 10}`,
-      no: `${index}98678`,
+      no: `${index}23011828510848`,
       address: 'New York No. 1 Lake ParkNew York No. 1 Lake Park',
       beginTime: new Date().toLocaleString(),
       endTime: new Date().toLocaleString(),

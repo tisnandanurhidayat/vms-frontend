@@ -16,7 +16,7 @@ function getRangePickerCellValue(
   let cellValue = XEUtils.get(row, column.field as string);
   if (cellValue) {
     cellValue = XEUtils.map(cellValue, (date: any) =>
-      date.format(props.format || 'YYYY-MM-DD'),
+      date.format(props.format || 'DD-MM-YYYY'),
     ).join(' ~ ');
   }
   return cellValue;

@@ -64,6 +64,7 @@
         showIndexColumn: false,
         dataSource: data,
         actionColumn: {
+          ellipsis: true,
           width: 160,
           title: '操作',
           dataIndex: 'action',
