@@ -80,7 +80,7 @@
         span: 8,
       },
       componentProps: {
-        placeholder: 'merchant',
+        placeholder: 'Merchant',
         onChange: (e: any) => {
           console.log(e);
         },
@@ -155,9 +155,9 @@
       },
     },
     {
-      field: 'view revised POs',
+      field: 'View Revised POs',
       component: 'CheckboxGroup',
-      label: 'view revised POs',
+      label: 'View Revised POs',
       colProps: {
         span: 8,
       },
@@ -194,14 +194,14 @@
       },
     },
     {
-      field: 'search CDT/PO No',
+      field: 'Search CDT/PO No',
       component: 'Input',
-      label: 'search CDT/PO No',
+      label: 'Search CDT/PO No',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'search CDT/PO No',
+        placeholder: 'Search CDT/PO No',
         onChange: (e: any) => {
           console.log(e);
         },
@@ -216,7 +216,7 @@
       width: 100,
     },
     {
-      title: 'nama gelar',
+      title: 'Nama Gelar',
       dataIndex: 'name',
       width: 200,
       auth: 'test', // 根据权限控制是否显示: 无权限，不显示

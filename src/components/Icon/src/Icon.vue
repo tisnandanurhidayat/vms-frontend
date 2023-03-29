@@ -1,11 +1,7 @@
 <template>
-  <SvgIcon
-    :size="size"
-    :name="getSvgIcon"
-    v-if="isSvgIcon"
-    :class="[$attrs.class, 'anticon']"
-    :spin="spin"
-  />
+  <span v-if="isSvgIcon" class="svg">
+    <SvgIcon :size="size" :name="getSvgIcon" :class="[$attrs.class, 'anticon']" :spin="spin" />
+  </span>
   <span
     v-else
     ref="elRef"
@@ -42,7 +38,7 @@
       // icon size
       size: {
         type: [String, Number] as PropType<string | number>,
-        default: 16,
+        default: 20,
       },
       spin: propTypes.bool.def(false),
       prefix: propTypes.string.def(''),
@@ -74,6 +70,7 @@
           span.dataset.icon = icon;
           el.textContent = '';
           el.appendChild(span);
+          console.log('Yes, span');
         }
       };
 
@@ -113,8 +110,8 @@
 
   span.iconify {
     display: block;
-    min-width: 1em;
-    min-height: 1em;
+    min-width: 1.2em;
+    min-height: 1.2em;
     background-color: @iconify-bg-color;
     border-radius: 100%;
   }

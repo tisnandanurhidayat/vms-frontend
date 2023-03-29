@@ -1,57 +1,26 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="ACTION">
+    <a-button @click="createBusinessUnit" :type="'primary'"
+      >Create PFIR Notification Configuration</a-button
+    >
+  </CollapseContainer>
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
   <div class="p-1">
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" :canResize="false">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
               {
-                label: 'edit',
+                label: 'Edit',
                 onClick: handleEdit.bind(null, record),
-                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
               },
               {
                 label: 'Hapus',
-                icon: 'ic:outline-delete-outline',
                 onClick: handleDelete.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
-              },
-            ]"
-            :dropDownActions="[
-              {
-                label: 'aktifkan',
-                popConfirm: {
-                  title: 'apakah di aftifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: (_action) => {
-                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
-                },
-              },
-              {
-                label: 'dinonaktifkan',
-                popConfirm: {
-                  title: 'nonaktifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: () => {
-                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
-                },
-              },
-              {
-                label: 'kontrol serentak',
-                popConfirm: {
-                  title: 'apakah anda ingin menampilkan secara dinamis? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                auth: 'super', // 同时根据权限和业务控制是否显示
-                ifShow: () => {
-                  return true;
-                },
               },
             ]"
           />
@@ -68,182 +37,49 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
 
   const schemas: FormSchema[] = [
     {
-      field: 'Merchant',
+      field: 'Search',
       component: 'Input',
-      label: 'Merchant',
+      label: 'Search',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'merchant',
+        placeholder: 'Search',
         onChange: (e: any) => {
           console.log(e);
         },
-      },
-    },
-    {
-      field: 'Kode Supplier',
-      component: 'Input',
-      label: 'Kode Supplier',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Kode Supplier',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
-    },
-    {
-      field: 'Order Date From',
-      component: 'RangePicker',
-      label: 'Order From',
-      colProps: {
-        span: 8,
-      },
-    },
-    {
-      field: 'Status',
-      component: 'Select',
-      label: 'Status',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: '--Select--',
-        options: [
-          {
-            label: 'toko sembako',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko buah',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'Toko',
-      component: 'Select',
-      label: 'Toko',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'All',
-        options: [
-          {
-            label: 'toko udin',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko rezeki',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'view revised POs',
-      component: 'CheckboxGroup',
-      label: 'view revised POs',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            // label: '选项1',
-            value: '1',
-          },
-        ],
-      },
-    },
-    {
-      field: 'Business Unit',
-      component: 'Select',
-      label: 'Business Unit',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'All',
-        options: [
-          {
-            label: 'IT',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'BOD',
-            value: '2',
-            key: '2',
-          },
-        ],
       },
     },
   ];
 
   const columns: BasicColumn[] = [
     {
-      title: 'Referensi',
-      dataIndex: 'no',
-      width: 100,
+      title: 'Store Code',
+      dataIndex: 'storeCode',
     },
     {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
+      title: 'Level 1',
+      dataIndex: 'level1',
     },
     {
-      title: 'Merchant',
-      dataIndex: 'name',
+      title: 'Level 2',
+      dataIndex: 'level2',
     },
     {
-      title: 'Nomer Order',
-      dataIndex: 'no',
+      title: 'Level 3',
+      dataIndex: 'level3',
     },
     {
-      title: 'Tanggal Order',
-      dataIndex: 'beginTime',
+      title: 'Enabled',
+      dataIndex: 'isEnabled',
     },
-    {
-      title: 'Status',
-      dataIndex: 'status3',
-    },
-    {
-      title: 'Perubahan Terakhir',
-      dataIndex: 'endTime',
-      width: 200,
-    },
-    {
-      title: 'Toko',
-      dataIndex: 'name',
-    },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, TableAction, BasicTable },
+    components: { BasicForm, CollapseContainer, BasicTable, TableAction },
     setup() {
       const { createMessage } = useMessage();
 
@@ -257,20 +93,15 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List PurchaseOrder',
+        title: 'Tabel PFIR Notification Configuration',
         api: demoListApi,
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },
-        // rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-        },
         actionColumn: {
           width: 250,
           title: 'Action',
           dataIndex: 'action',
-          // slots: { customRender: 'action' },
         },
       });
 
@@ -280,22 +111,20 @@
       function handleDelete(record: Recordable) {
         console.log('klik untuk menghapus', record);
       }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
-      }
 
       return {
         registerTable,
         handleEdit,
         handleDelete,
-        handleOpen,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        createBusinessUnit: (values: Recordable) => {
+          createMessage.success('click search,values:' + JSON.stringify(values));
+        },
         setProps,
-        // handleLoad,
       };
     },
   });

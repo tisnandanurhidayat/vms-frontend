@@ -11,7 +11,7 @@ const PurchasePriceWorksheet: AppRouteModule = {
   redirect: '/purchase-price-worksheet/index',
   meta: {
     orderNo: 31,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-purchase-price|svg',
     hideChildrenInMenu: true,
     title: t('Purchase Price Worksheet'),
   },

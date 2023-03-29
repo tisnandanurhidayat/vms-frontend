@@ -1,6 +1,6 @@
 <template>
   <PageWrapper title="Announcement Forms">
-    <div class="p-4">
+    <div class="p-1">
       <div class="md:flex enter-y">
         <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
           <CollapseContainer title="Dashboard Announcement" :can-expan="false">
@@ -28,7 +28,7 @@
     {
       field: 'announcementSubject',
       component: 'Input',
-      label: 'Subject:',
+      label: 'Subject',
       colProps: {
         span: 16,
       },
@@ -44,7 +44,7 @@
     {
       field: 'announcementMessage',
       component: 'InputTextArea',
-      label: 'Message:',
+      label: 'Message',
       colProps: {
         span: 20,
       },
@@ -60,7 +60,7 @@
     {
       field: 'announcementImportance',
       component: 'Select',
-      label: 'Importance:',
+      label: 'Importance',
       colProps: {
         span: 16,
       },
@@ -93,7 +93,7 @@
     {
       field: 'announcementPostStatus',
       component: 'CheckboxGroup',
-      label: 'Post:',
+      label: 'Post',
       colProps: {
         span: 16,
       },
@@ -119,8 +119,6 @@
           span: 30,
         },
       });
-
-      setProps({ showResetButton: false });
 
       return {
         register,

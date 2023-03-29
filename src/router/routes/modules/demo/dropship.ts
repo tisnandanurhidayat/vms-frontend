@@ -13,7 +13,7 @@ const dropship: AppRouteModule = {
   redirect: '/dropship',
   meta: {
     orderNo: 35,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-dropbox|svg',
     title: t('Dropship'),
   },
   children: [

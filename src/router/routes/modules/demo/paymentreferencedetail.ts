@@ -11,7 +11,7 @@ const PaymentReferenceDetail: AppRouteModule = {
   redirect: '/payment-reference-detail/index',
   meta: {
     orderNo: 24,
-    icon: 'ion:add-circle-outline',
+    icon: 'vms-payment-reference|svg',
     hideChildrenInMenu: true,
     title: t('Payment Reference Detail'),
   },

@@ -1,231 +1,108 @@
 <template>
-  <PageWrapper title="Announcements">
-    <div class="mb-4">
-      <a-button @click="setProps({ labelWidth: 150 })" class="mr-2"> Change labelWidth </a-button>
-      <a-button @click="setProps({ labelWidth: 120 })" class="mr-2"> restore labelWidth </a-button>
-      <a-button @click="setProps({ size: 'large' })" class="mr-2"> Change Size </a-button>
-      <a-button @click="setProps({ size: 'default' })" class="mr-2"> Restore Size </a-button>
-      <a-button @click="setProps({ disabled: true })" class="mr-2"> Disable form </a-button>
-      <a-button @click="setProps({ disabled: false })" class="mr-2"> Undisable </a-button>
-      <a-button @click="setProps({ compact: true })" class="mr-2"> compact form </a-button>
-      <a-button @click="setProps({ compact: false })" class="mr-2">
-        restore normal spacing
-      </a-button>
-      <a-button @click="setProps({ actionColOptions: { span: 8 } })" class="mr-2">
-        Operation button position
-      </a-button>
-    </div>
-    <div class="mb-4">
-      <a-button @click="setProps({ showActionButtonGroup: false })" class="mr-2">
-        hide action button
-      </a-button>
-      <a-button @click="setProps({ showActionButtonGroup: true })" class="mr-2">
-        Show action buttons
-      </a-button>
-      <a-button @click="setProps({ showResetButton: false })" class="mr-2">
-        Hide reset button
-      </a-button>
-      <a-button @click="setProps({ showResetButton: true })" class="mr-2">
-        Show reset button
-      </a-button>
-      <a-button @click="setProps({ showSubmitButton: false })" class="mr-2">
-        hide query button
-      </a-button>
-      <a-button @click="setProps({ showSubmitButton: true })" class="mr-2">
-        Show query button
-      </a-button>
-      <a-button
-        @click="
-          setProps({
-            resetButtonOptions: {
-              disabled: true,
-              text: 'Reset New',
-            },
-          })
-        "
-        class="mr-2"
-      >
-        Modify the reset button
-      </a-button>
-      <a-button
-        @click="
-          setProps({
-            submitButtonOptions: {
-              disabled: true,
-              loading: true,
-            },
-          })
-        "
-        class="mr-2"
-      >
-        Modify query button
-      </a-button>
-      <a-button @click="handleLoad" class="mr-2"> linkage echo </a-button>
-    </div>
-    <CollapseContainer title="useForm Example">
-      <BasicForm @register="register" @submit="handleSubmit" />
-    </CollapseContainer>
-  </PageWrapper>
+  <CollapseContainer title="ACTION">
+    <a-button @click="handleDelete" :type="'primary'">Hapus Audit Logs</a-button>
+  </CollapseContainer>
+  <CollapseContainer title="FILTER">
+    <BasicForm @register="register" @submit="handleSubmit" />
+  </CollapseContainer>
+
+  <div class="p-1">
+    <BasicTable @register="registerTable" :canResize="false">
+      <template #bodyCell="{ column, record }">
+        <template v-if="column.key === 'action'">
+          <TableAction
+            :actions="[
+              {
+                label: 'Detail',
+                onClick: handleViewDetail.bind(null, record),
+              },
+            ]"
+          />
+        </template>
+      </template>
+    </BasicTable>
+  </div>
 </template>
+
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
-  import { PageWrapper } from '/@/components/Page';
-  import { areaRecord } from '/@/api/demo/cascader';
+  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
+  import { demoListApi } from '/@/api/demo/table';
 
   const schemas: FormSchema[] = [
     {
-      field: 'field1',
-      component: 'Input',
-      label: 'Field 1',
+      field: 'jobType',
+      component: 'Select',
+      label: 'Job Type',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'custom placeholder',
+        placeholder: '--Select Job Type--',
+        options: [
+          {
+            label: 'Purchase Order',
+            value: '1',
+            key: '1',
+          },
+          {
+            label: 'Receiving Advice',
+            value: '2',
+            key: '2',
+          },
+          {
+            label: 'Receiving Advice ZC',
+            value: '3',
+            key: '3',
+          },
+          {
+            label: 'Payment Reference Detail',
+            value: '4',
+            key: '4',
+          },
+        ],
+      },
+    },
+    {
+      field: 'sourceDate',
+      component: 'DatePicker',
+      label: 'Source Date',
+      colProps: {
+        span: 8,
+      },
+      componentProps: {
+        placeholder: '-- Pick Source Date --',
         onChange: (e: any) => {
           console.log(e);
         },
       },
     },
+  ];
+
+  const columns: BasicColumn[] = [
     {
-      field: 'field2',
-      component: 'Input',
-      label: 'Field 2',
-      colProps: {
-        span: 8,
-      },
+      title: 'Source Date',
+      dataIndex: 'sourceDate',
     },
     {
-      field: 'field3',
-      component: 'DatePicker',
-      label: 'Field 3',
-      colProps: {
-        span: 8,
-      },
+      title: 'Source',
+      dataIndex: 'source',
     },
     {
-      field: 'fieldTime',
-      component: 'RangePicker',
-      label: 'time field',
-      colProps: {
-        span: 8,
-      },
-    },
-    {
-      field: 'field4',
-      component: 'Select',
-      label: 'Field 4',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Option 1',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'Option 2',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'field5',
-      component: 'CheckboxGroup',
-      label: 'Field 5',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Option 1',
-            value: '1',
-          },
-          {
-            label: 'Option 2',
-            value: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'field7',
-      component: 'RadioGroup',
-      label: 'Field 7',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        options: [
-          {
-            label: 'Option 1',
-            value: '1',
-          },
-          {
-            label: 'Option 2',
-            value: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'field8',
-      component: 'ApiCascader',
-      label: 'Linkage',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        api: areaRecord,
-        apiParamKey: 'parentCode',
-        dataField: 'data',
-        labelField: 'name',
-        valueField: 'code',
-        initFetchParams: {
-          parentCode: '',
-        },
-        isLeaf: (record) => {
-          return !(record.levelType < 3);
-        },
-      },
-    },
-    {
-      field: 'field9',
-      component: 'ApiCascader',
-      label: 'linkage echo',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        api: areaRecord,
-        apiParamKey: 'parentCode',
-        dataField: 'data',
-        labelField: 'name',
-        valueField: 'code',
-        initFetchParams: {
-          parentCode: '',
-        },
-        isLeaf: (record) => {
-          return !(record.levelType < 3);
-        },
-      },
+      title: 'Process In',
+      dataIndex: 'processIn',
     },
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, PageWrapper },
+    components: { BasicForm, CollapseContainer, BasicTable, TableAction },
     setup() {
       const { createMessage } = useMessage();
 
-      const [register, { setProps, setFieldsValue, updateSchema }] = useForm({
+      const [register, { setProps }] = useForm({
         labelWidth: 120,
         schemas,
         actionColOptions: {
@@ -234,42 +111,36 @@
         fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
       });
 
-      async function handleLoad() {
-        const promiseFn = function () {
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              resolve({
-                field9: ['430000', '430100', '430102'],
-                province: 'Hunan Province',
-                city: 'Changsha City',
-                district: 'Yuelu District',
-              });
-            }, 1000);
-          });
-        };
+      const [registerTable] = useTable({
+        title: 'Tabel Audit Logs',
+        api: demoListApi,
+        columns: columns,
+        bordered: true,
+        tableSetting: { fullScreen: true },
+        actionColumn: {
+          width: 120,
+          title: 'Action',
+          dataIndex: 'action',
+        },
+      });
 
-        const item = await promiseFn();
-
-        const { field9, province, city, district } = item as any;
-        await updateSchema({
-          field: 'field9',
-          componentProps: {
-            displayRenderArray: [province, city, district],
-          },
-        });
-        await setFieldsValue({
-          field9,
-        });
+      function handleViewDetail(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
+      }
+      function handleDelete(record: Recordable) {
+        console.log('klik untuk menghapus', record);
       }
 
       return {
+        registerTable,
+        handleViewDetail,
+        handleDelete,
         register,
         schemas,
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
         setProps,
-        handleLoad,
       };
     },
   });
