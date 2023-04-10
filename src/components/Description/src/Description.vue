@@ -94,11 +94,16 @@
 
       // Prevent line breaks
       function renderLabel({ label, labelMinWidth, labelStyle }: DescItem) {
+        var labelStyles: CSSProperties = {
+          fontWeight: 'bolder',
+          color: '#404040',
+        };
+
         if (!labelStyle && !labelMinWidth) {
-          return label;
+          return <div style={labelStyles}>{label}</div>;
         }
 
-        const labelStyles: CSSProperties = {
+        labelStyles = {
           ...labelStyle,
           minWidth: `${labelMinWidth}px `,
         };
@@ -129,7 +134,18 @@
 
             const width = contentMinWidth;
             return (
-              <Descriptions.Item label={renderLabel(item)} key={field} span={span}>
+              <Descriptions.Item
+                label={renderLabel(item)}
+                key={field}
+                span={span}
+                labelStyle={{
+                  padding: '0px 8px',
+                  background: '#dfdfdf',
+                  textAlign: 'right',
+                  fontSize: '14px',
+                }}
+                contentStyle={{ padding: '0px 8px', fontSize: '14px' }}
+              >
                 {() => {
                   if (!contentMinWidth) {
                     return getContent();

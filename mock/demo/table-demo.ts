@@ -39,6 +39,18 @@ const demoList = (() => {
       time: `@time('HH:mm')`,
       'no|100000-10000000': 100000,
       'status|1': ['normal', 'enable', 'disable'],
+      itemCode: '22000001',
+      itemCodeSub: '001',
+      itemCodeUnit: '01',
+      capacityAndBarcode: '1KGx1 / 2007330000000',
+      itemName: 'CARICA FLOWER',
+      itemNameSub: 'BUNGA PEPAYA',
+      orderQuantity: 2.0,
+      orderQuantityNormal: 'N',
+      orderQuantityFree: 0.0,
+      qtyPerPack: 1.0,
+      totalQty: 2.0,
+      price: 70000.0,
     });
   }
   return result;
