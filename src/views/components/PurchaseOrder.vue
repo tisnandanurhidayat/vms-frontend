@@ -16,9 +16,7 @@
       </div>
       <div class="w-1/4 !md:mt-0 !md:mr-4" style="float: left">
         <a-input ref="inputRef" allow-clear @change="handleSearch">
-          <template #prefix>
-            <SearchOutlined />
-          </template>
+          <template #prefix></template>
         </a-input>
       </div>
     </div>
