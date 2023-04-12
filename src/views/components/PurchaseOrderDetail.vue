@@ -1,6 +1,6 @@
 <template>
   <CollapseContainer
-    :title="'Purchase Order CDT: ' + $route.params.id.toString()"
+    :title="'Purchase Order CDT: ' + $route.params.cdt.toString()"
     :canExpan="false"
   >
     <a-button @click="handleDownloadXML" :type="'primary'">Download XML</a-button>
@@ -12,7 +12,7 @@
     <div class="md:flex enter-y">
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
         <div class="mx-4 mt-4 info-title"> Informasi Order </div>
-        <div class="mx-4 mb-2 destination"> Transmart Gresik Icon </div>
+        <div class="mx-4 mb-2 destination"> Ambassador </div>
         <Description
           size="small"
           :bordered="true"
@@ -23,7 +23,7 @@
       </div>
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
         <div class="mx-4 mt-4 info-title"> Informasi Supplier </div>
-        <div class="mx-4 mb-2 destination"> SBY (POKKA) ESHAM DIMA MANDIRI PT </div>
+        <div class="mx-4 mb-2 destination"> DOMBA KECIL, CV </div>
         <Description
           size="small"
           :bordered="true"
@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div class="p-1">
+  <div class="p-1" style="background-color: white">
     <BasicTable @register="registerTable" class="main-table">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'code'">
@@ -214,6 +214,7 @@
     padding: 8px;
     font-size: 16px;
     text-align: right;
+    margin-bottom: 16px;
   }
 
   #total-price-amount {

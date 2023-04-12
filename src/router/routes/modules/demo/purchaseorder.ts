@@ -19,7 +19,7 @@ const PurchaseOrder: AppRouteModule = {
   },
   children: [
     addIndex('index', 'PurchaseOrder', 'Purchase Order'),
-    addDetail('detail/:id', 'PurchaseOrderDetail', `PO Detail`),
+    addDetail('detail/:cdt', 'PurchaseOrderDetail', `PO Detail`),
   ],
 };
 

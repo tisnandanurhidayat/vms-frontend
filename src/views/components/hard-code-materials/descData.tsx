@@ -2,16 +2,16 @@
 import { DescItem } from '/@/components/Description/index';
 
 export const orderInfoData = {
-  store: 'Transmart Gresik Icon',
-  senderInfo: '8999080000112',
-  deptCode: '10 Beverage',
-  deliveryNo: 'Transmart Gresik Icon',
-  orderNo: '923000646',
-  orderDate: 'Wed, Jan 18,2023, 09:39',
-  arrivalDate: 'Tue, Jan 24,2023, 15:00',
+  store: 'Ambassador',
+  senderInfo: '8990210000000',
+  deptCode: '22 Fruits and Vegetables',
+  deliveryNo: 'Ambassador',
+  orderNo: '916021719',
+  orderDate: 'Wed, Mar 23,2016, 15:27',
+  arrivalDate: 'Thu, Mar 24,2016, 00:00',
   companyName: 'PT. TRANS RETAIL INDONESIA',
   taxNo: '01.711.062.8-092.000',
-  companyAddress: 'Jl. Dr. Wahidin Sudiro Husodo Gresik, Jawa Timur 61124',
+  companyAddress: 'ITC Mall Ambassador JL. Prof.Dr.Satrio Jakarta Selatan 12950',
 };
 
 export const supplierData = {
