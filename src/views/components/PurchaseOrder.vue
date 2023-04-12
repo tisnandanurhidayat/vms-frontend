@@ -1,13 +1,27 @@
 <template>
-  <CollapseContainer title="ACTION">
+  <CollapseContainer title="PURCHASE ORDER" :canExpan="false">
     <a-button @click="handlePrintSelected" :type="'primary'">Cetak yang dipilih</a-button>
     <a-button @click="handleDownloadXML" :type="'primary'" class="ml-2 btn">Download XML</a-button>
   </CollapseContainer>
-  <CollapseContainer title="FILTER">
-    <BasicForm @register="register" @submit="handleSubmit" />
+  <CollapseContainer title="Filter">
+    <BasicForm @register="register" @submit="handleFilter" />
   </CollapseContainer>
-
-  <div class="p-1">
+  <div class="p-1" style="background-color: white">
+    <div style="margin-bottom: 8px">
+      <div
+        class="w-1/6 !md:mt-0 !md:mr-4"
+        style="float: left; text-align: right; align-items: center; height: 32px; display: grid"
+      >
+        Search CDT/PO No: &nbsp;
+      </div>
+      <div class="w-1/4 !md:mt-0 !md:mr-4" style="float: left">
+        <a-input ref="inputRef" allow-clear @change="handleSearch">
+          <template #prefix>
+            <SearchOutlined />
+          </template>
+        </a-input>
+      </div>
+    </div>
     <BasicTable @register="registerTable" :canResize="false">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -30,13 +44,16 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
   import createOptions from './templates/dropdownOptions';
+  import { router } from '/@/router';
+  // import { useRefs } from '/@/hooks/core/useRefs';
+  // import { useCdtSearch } from '../application/useCdtSearch';
 
   // for hard code purposes
   const TOKO_LIST = {
@@ -163,20 +180,6 @@
         options: createOptions(BU_LIST),
       },
     },
-    {
-      field: 'CDTorPONo',
-      component: 'Input',
-      label: 'Search CDT/PO No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Search CDT/PO No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
-    },
   ];
 
   const columns: BasicColumn[] = [
@@ -225,7 +228,6 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel Purchase Order',
         api: demoListApi,
         columns: columns,
         bordered: true,
@@ -238,24 +240,35 @@
           width: 250,
           title: 'Action',
           dataIndex: 'action',
-          // slots: { customRender: 'action' },
         },
       });
 
+      // const [refs] = useRefs();
+      // const { handleSearch } = useCdtSearch(refs);
+      // const { handleSearch, searchResult, keyword, activeIndex } = useCdtSearch(refs);
+
       function handleViewDocument(record: Recordable) {
-        console.log('klik untuk melihat detail', record);
+        console.log('klik untuk melihat detail', record.reference);
       }
 
       function handleViewDetail(record: Recordable) {
-        console.log('klik untuk melihat detail', record);
+        router.push(`/purchase-order/detail/${record.reference}`);
       }
 
       function handlePrintSelected(record: Recordable) {
+        //TODO
         console.log('klik untuk melihat detail', record);
       }
 
       function handleDownloadXML(record: Recordable) {
+        //TODO
         console.log('klik untuk melihat detail', record);
+      }
+
+      const searchValueRef = ref('');
+      function handleSearch(e: ChangeEvent) {
+        searchValueRef.value = e.target.value;
+        console.log(searchValueRef.value);
       }
 
       return {
@@ -266,9 +279,10 @@
         handleDownloadXML,
         register,
         schemas,
-        handleSubmit: (values: Recordable) => {
+        handleFilter: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        handleSearch,
         setProps,
       };
     },

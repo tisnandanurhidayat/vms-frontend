@@ -366,7 +366,6 @@
 
   .ant-table.ant-table-middle .ant-table-tbody > tr > td {
     padding: 3px 2px;
-    text-align: left;
   }
 
   .ant-table-cell {

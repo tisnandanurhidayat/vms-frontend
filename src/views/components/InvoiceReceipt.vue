@@ -1,9 +1,20 @@
 <template>
-  <CollapseContainer title="FILTER">
-    <BasicForm @register="register" @submit="handleSubmit" />
+  <CollapseContainer title="INVOICE RECEIPT" :canExpan="false">
+    <BasicForm @register="register" @submit="handleFilter" />
   </CollapseContainer>
 
-  <div class="p-1">
+  <div class="p-1" style="background-color: white">
+    <div
+      class="w-1/6 !md:mt-0 !md:mr-4"
+      style="float: left; text-align: right; align-items: center; height: 32px; display: grid"
+    >
+      Search CDT/PO No: &nbsp;
+    </div>
+    <div class="w-1/4 !md:mt-0 !md:mr-4" style="float: left">
+      <a-input ref="inputRef" allow-clear @change="handleSearch">
+        <template #prefix></template>
+      </a-input>
+    </div>
     <BasicTable @register="registerTable">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -27,7 +38,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -181,7 +192,6 @@
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel Invoice Receipt',
         api: demoListApi,
         columns: columns,
         bordered: true,
@@ -211,6 +221,12 @@
         console.log('klik untuk melihat detail', record);
       }
 
+      const searchValueRef = ref('');
+      function handleSearch(e: ChangeEvent) {
+        searchValueRef.value = e.target.value;
+        console.log(searchValueRef.value);
+      }
+
       return {
         registerTable,
         handleViewDocument,
@@ -218,9 +234,10 @@
         handlePrintSelected,
         register,
         schemas,
-        handleSubmit: (values: Recordable) => {
+        handleFilter: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        handleSearch,
         setProps,
         // handleLoad,
       };
