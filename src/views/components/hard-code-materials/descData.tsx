@@ -15,10 +15,10 @@ export const orderInfoData = {
 };
 
 export const supplierData = {
-  supplier: 'SBY (POKKA) ESHAM DIMA MANDIRI PT',
-  code: 'I559',
-  telephone: '031-7493537',
-  fax: '031-7491592',
+  supplier: 'DOMBA KECIL, CV',
+  code: 'N972',
+  telephone: '0819-06543268',
+  fax: '021-43931145',
 };
 
 // interface OrderInfoSchemaInstance {

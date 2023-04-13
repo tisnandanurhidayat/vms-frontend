@@ -14,12 +14,13 @@ const demoList = (() => {
   const result: any[] = [];
   for (let index = 0; index < 200; index++) {
     result.push({
-      reference: 'TRI23011828510848',
+      reference: 'TRI1603238761026',
       id: `${index}`,
       beginTime: '@datetime',
       endTime: '@datetime',
       address: '@city()',
-      merchant: 'JKT (RINSO) UNILEVER INDONESIA TBK',
+      merchant: 'DOMBA KECIL',
+      // TRI1603238761026	DOMBA KECIL, CV	916021719	Wed, Mar 23,2016 15:27	Pembayaran sedang berjalan	Tue, Mar 29,2016 09:38	021 - Ambassador
       name: 'tisnanda',
       name1: '@cname()',
       name2: '@cname()',
