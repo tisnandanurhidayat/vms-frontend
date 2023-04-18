@@ -5,7 +5,7 @@ export const orderInfoData = {
   store: 'Ambassador',
   senderInfo: '8990210000000',
   deptCode: '22 Fruits and Vegetables',
-  deliveryNo: 'Ambassador',
+  deliveryTo: 'Ambassador',
   orderNo: '916021719',
   orderDate: 'Wed, Mar 23,2016, 15:27',
   arrivalDate: 'Thu, Mar 24,2016, 00:00',
@@ -13,20 +13,6 @@ export const orderInfoData = {
   taxNo: '01.711.062.8-092.000',
   companyAddress: 'ITC Mall Ambassador JL. Prof.Dr.Satrio Jakarta Selatan 12950',
 };
-
-export const supplierData = {
-  supplier: 'DOMBA KECIL, CV',
-  code: 'N972',
-  telephone: '0819-06543268',
-  fax: '021-43931145',
-};
-
-// interface OrderInfoSchemaInstance {
-//   field: String;
-//   label: String;
-//   labelStyle: CSSProperties;
-// }
-
 export const orderInfoSchema: DescItem[] = [
   {
     field: 'senderInfo',
@@ -66,6 +52,12 @@ export const orderInfoSchema: DescItem[] = [
   },
 ];
 
+export const supplierData = {
+  supplier: 'DOMBA KECIL, CV',
+  code: 'N972',
+  telephone: '0819-06543268',
+  fax: '021-43931145',
+};
 export const supplierSchema: DescItem[] = [
   {
     field: 'code',
@@ -83,6 +75,7 @@ export const supplierSchema: DescItem[] = [
 
 interface Document {
   docKey: string;
+  reference: string;
   status: string;
   date: string;
   accepted?: string;
@@ -99,11 +92,48 @@ export const additionalInfoData: String = `- Selalu sertakan dokumen ini saat me
 - Jika harga yang tertera pada PO kami tidak sesuai dengan kesepakatan, anda bisa menghubungi bagian commercial/buyer yang bersangkutan sebelum melakukan pengiriman.`;
 
 export const documents: Document[] = [
-  { docKey: 'po', status: 'Invoice Ditolak', date: 'Fri, Apr 01, 2016, 00:00' },
-  { docKey: 'ra', status: 'Disahkan', date: 'Fri, Apr 01, 2016, 00:00' },
-  { docKey: 'pfi', status: 'Disahkan', date: 'Sat, Apr 02, 2016, 00:49' },
-  { docKey: 'inv0', status: 'Ditolak', date: 'Fri, Apr 08, 2016, 17:02', accepted: '' },
-  { docKey: 'invr', status: 'Dikirim', date: 'Mon, Oct 23, 2017, 13:11' },
-  { docKey: 'ir', status: 'Revisi sudah dibuat', date: 'Sat, Sep 29, 2018, 10:31' },
-  { docKey: 'inv1', status: 'Draft', date: 'Sat, Sep 29, 2018, 10:45', accepted: '' },
+  {
+    docKey: 'po',
+    reference: 'TRI1603238761026',
+    status: 'Invoice Ditolak',
+    date: 'Fri, Apr 01, 2016, 00:00',
+  },
+  {
+    docKey: 'ra',
+    reference: '9161679',
+    status: 'Disahkan',
+    date: 'Fri, Apr 01, 2016, 00:00',
+  },
+  {
+    docKey: 'pfi',
+    reference: '',
+    status: 'Disahkan',
+    date: 'Sat, Apr 02, 2016, 00:49',
+  },
+  {
+    docKey: 'inv0',
+    reference: '',
+    status: 'Ditolak',
+    date: 'Fri, Apr 08, 2016, 17:02',
+    accepted: '',
+  },
+  {
+    docKey: 'invr',
+    reference: '',
+    status: 'Dikirim',
+    date: 'Mon, Oct 23, 2017, 13:11',
+  },
+  {
+    docKey: 'ir',
+    reference: '',
+    status: 'Revisi sudah dibuat',
+    date: 'Sat, Sep 29, 2018, 10:31',
+  },
+  {
+    docKey: 'inv1',
+    reference: '',
+    status: 'Draft',
+    date: 'Sat, Sep 29, 2018, 10:45',
+    accepted: '',
+  },
 ];

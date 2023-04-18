@@ -52,6 +52,13 @@ const demoList = (() => {
       qtyPerPack: 1.0,
       totalQty: 2.0,
       price: 70000.0,
+      freeQty: 0.0,
+      orderedQty: 2.0,
+      // contentQty:
+      acceptedQty: 0.0,
+      revised: 'N',
+      serviceLevel: 0.0,
+      raId: '1116016047',
     });
   }
   return result;

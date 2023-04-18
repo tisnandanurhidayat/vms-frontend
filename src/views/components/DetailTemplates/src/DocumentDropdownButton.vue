@@ -5,7 +5,7 @@
       <Menu @click="handleMenuClick" :forceSubMenuRender="true">
         <!-- <MenuDivider v-if="getShowDoc" /> -->
         <div class="p-3 mr-6">
-          <strong>{{ $route.params.id.toString() }}</strong>
+          <strong>{{ cdt }}</strong>
         </div>
         <template v-for="document in documents" :key="document.key">
           <!-- :docType="docType[document.key]" -->
@@ -27,7 +27,6 @@
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
   import { propTypes } from '/@/utils/propTypes';
   import { router } from '/@/router';
-  import { useRoute } from 'vue-router';
 
   type MenuEvent = 'po' | 'ra' | 'pfi' | 'inv0' | 'invr' | 'ir' | 'inv1';
 
@@ -51,19 +50,56 @@
       ),
     },
     props: {
+      cdt: propTypes.string,
       documents: propTypes.arrayOf(propTypes.object),
+      // raId: propTypes.string,
+      // pfiId: propTypes.string,
+      // inv0Id: propTypes.string,
+      // invrId: propTypes.string,
+      // irId: propTypes.string,
+      // inv1Id: propTypes.string,
     },
-    setup() {
-      const route = useRoute();
-      const cdt = route.params.id;
+    setup(props) {
+      let references = {
+        cdt: props.cdt,
+        raId: propTypes.string,
+        pfiId: propTypes.string,
+        inv0Id: propTypes.string,
+        invrId: propTypes.string,
+        irId: propTypes.string,
+        inv1Id: propTypes.string,
+      };
+
+      props.documents?.forEach((document) => {
+        switch (document.docKey) {
+          case 'ra':
+            references.raId = document.reference;
+            break;
+          case 'pfi':
+            references.pfiId = document.reference;
+            break;
+          case 'inv0':
+            references.inv0Id = document.reference;
+            break;
+          case 'invr':
+            references.invrId = document.reference;
+            break;
+          case 'ir':
+            references.irId = document.reference;
+            break;
+          case 'inv1':
+            references.inv1Id = document.reference;
+            break;
+        }
+      });
 
       function handleMenuClick(e: MenuInfo) {
         switch (e.key as MenuEvent) {
           case 'po':
-            router.push(`/purchase-order/detail/${cdt}`);
+            router.push(`/purchase-order/detail/${props.cdt}`);
             break;
           case 'ra':
-            router.push(`/receiving-advice/detail/${cdt}`);
+            router.push(`/receiving-advice/detail/${references.raId}`);
             break;
           default: {
             console.log(e.key);

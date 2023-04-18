@@ -1,29 +1,32 @@
 <template>
-  <CollapseContainer
-    :title="'Purchase Order CDT: ' + $route.params.cdt.toString()"
-    :canExpan="false"
-  >
-    <a-button @click="handleDownloadXML" :type="'primary'">Download XML</a-button>
-    <a-button @click="handlePrint" :type="'primary'" class="ml-2 btn">Lihat versi cetak</a-button>
-    <DocumentDropdownButton :documents="documents" :cdt="$route.params.cdt.toString()" />
+  <CollapseContainer :title="'Receiving Advice CDT: ' + otherRaData.cdt" :canExpan="false">
+    <a-button @click="handlePrint" :type="'primary'">Lihat versi cetak</a-button>
+    <DocumentDropdownButton :documents="documents" :cdt="otherRaData.cdt" />
   </CollapseContainer>
 
   <div class="p-1">
     <div class="md:flex enter-y">
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
         <div class="mx-4 mt-4 info-title"> Informasi Order </div>
-        <div class="mx-4 mb-2 destination"> Ambassador </div>
         <Description
           size="small"
           :bordered="true"
           :column="1"
-          :data="orderInfoData"
-          :schema="orderInfoSchema"
+          :data="raOrderInfoData"
+          :schema="raOrderInfoSchema"
+        />
+        <div class="mx-4 mt-4 info-title"> Informasi RA </div>
+        <Description
+          size="small"
+          :bordered="true"
+          :column="1"
+          :data="raInfoData"
+          :schema="raInfoSchema"
         />
       </div>
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
         <div class="mx-4 mt-4 info-title"> Informasi Supplier </div>
-        <div class="mx-4 mb-2 destination"> DOMBA KECIL, CV </div>
+        <div class="mx-4 mb-2 destination"> {{ otherRaData.supplierDest }} </div>
         <Description
           size="small"
           :bordered="true"
@@ -49,34 +52,20 @@
         <template v-else-if="column.key === 'itemName'">
           <ItemNameCell :itemName="record.itemName" :sub="record.itemNameSub" />
         </template>
-        <template v-else-if="column.key === 'orderQuantity'">
-          <QtyOrderCell
-            :qtyOrder="record.orderQuantity"
-            :qtyNormal="record.orderQuantityNormal"
-            :qtyFree="record.orderQuantityFree"
-          />
+        <template v-else-if="column.key === 'freeQty'">
+          {{ record.freeQty.toFixed(2) }}
         </template>
-        <template v-else-if="column.key === 'qtyPerPack'">
-          {{ record.qtyPerPack.toFixed(2) }}
+        <template v-else-if="column.key === 'orderedQty'">
+          {{ record.orderedQty.toFixed(2) }}
         </template>
-        <template v-else-if="column.key === 'totalQty'">
-          {{ record.totalQty.toFixed(2) }}
+        <template v-else-if="column.key === 'acceptedQty'">
+          {{ record.acceptedQty.toFixed(2) }}
         </template>
-        <template v-else-if="column.key === 'price'">
-          {{ record.price.toFixed(2) }}
+        <template v-else-if="column.key === 'serviceLevel'">
+          {{ record.serviceLevel.toFixed(2) }}%
         </template>
       </template>
     </BasicTable>
-    <div class="md:flex enter-y" id="total-price-box">
-      <div class="md:w-4/5 w-full !md:mt-0 !md:mr-4"> Total Harga: </div>
-      <div class="md:w-1/5 w-full !md:mt-0 !md:mr-4" id="total-price-amount">
-        {{ totalPriceData }}
-      </div>
-    </div>
-    <div class="py-4 px-6" id="additional-info">
-      <div class="info-title">Keterangan:</div>
-      <div>{{ additionalInfoData }}</div>
-    </div>
   </div>
 </template>
 
@@ -91,54 +80,64 @@
     DocumentDropdownButton,
     ItemCodeCell,
     ItemNameCell,
-    QtyOrderCell,
   } from '/@/views/components/DetailTemplates';
   import {
-    orderInfoSchema,
-    orderInfoData,
+    raOrderInfoSchema,
+    raOrderInfoData,
+    raInfoSchema,
+    raInfoData,
     supplierData,
     supplierSchema,
-    totalPriceData,
-    additionalInfoData,
     documents,
-  } from './hard-code-materials/descData';
+    otherRaData,
+  } from './hard-code-materials/raData';
   import { Description } from '/@/components/Description';
 
   const columns: BasicColumn[] = [
     {
       title: 'Kode Barang',
       key: 'code',
-      width: 150,
+      width: 120,
     },
     {
       title: 'Kapasitas/Barcode',
       dataIndex: 'capacityAndBarcode',
-      width: 150,
+      width: 120,
     },
     {
       title: 'Nama Barang',
       key: 'itemName',
-      width: 240,
+      width: 180,
     },
     {
-      title: 'Qty Order',
-      key: 'orderQuantity',
-      width: 120,
-    },
-    {
-      title: 'Qty/Pack',
-      key: 'qtyPerPack',
+      title: 'Gratis',
+      key: 'freeQty',
       width: 80,
     },
     {
-      title: 'Total Qty',
-      key: 'totalQty',
+      title: 'Qty dipesan',
+      key: 'orderedQty',
       width: 80,
     },
     {
-      title: 'Harga Unit',
-      key: 'price',
-      width: 100,
+      title: 'Qty konten',
+      key: 'contentQty',
+      width: 80,
+    },
+    {
+      title: 'Qty diterima',
+      key: 'acceptedQty',
+      width: 80,
+    },
+    {
+      title: 'Revised',
+      dataIndex: 'revised',
+      width: 80,
+    },
+    {
+      title: 'Service Level',
+      key: 'serviceLevel',
+      width: 80,
     },
   ];
 
@@ -149,7 +148,6 @@
       BasicTable,
       ItemCodeCell,
       ItemNameCell,
-      QtyOrderCell,
       DocumentDropdownButton,
     },
     setup() {
@@ -188,13 +186,14 @@
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
-        orderInfoData,
-        orderInfoSchema,
+        raOrderInfoData,
+        raOrderInfoSchema,
+        raInfoData,
+        raInfoSchema,
         supplierData,
         supplierSchema,
-        totalPriceData,
-        additionalInfoData,
         documents,
+        otherRaData,
       };
     },
   });
@@ -208,25 +207,5 @@
   .info-title {
     font-size: 14px;
     font-weight: bold;
-  }
-
-  #total-price-box {
-    padding: 8px;
-    font-size: 16px;
-    text-align: right;
-    margin-bottom: 16px;
-  }
-
-  #total-price-amount {
-    font-weight: bold;
-  }
-
-  #additional-info {
-    white-space: pre-line;
-    font-size: 14px;
-    background-color: #ee2a33;
-    color: white;
-    border-radius: 20px;
-    margin: 0px 10px 20px;
   }
 </style>

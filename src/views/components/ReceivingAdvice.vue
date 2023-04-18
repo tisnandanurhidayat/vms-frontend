@@ -47,6 +47,7 @@
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
   import createOptions from './templates/dropdownOptions';
+  import { router } from '/@/router';
 
   // for hard code purposes
   const TOKO_LIST = {
@@ -199,7 +200,7 @@
       }
 
       function handleViewDetail(record: Recordable) {
-        console.log('klik untuk melihat detail', record);
+        router.push(`/receiving-advice/detail/${record.raId}`);
       }
 
       function handlePrintSelected(record: Recordable) {
