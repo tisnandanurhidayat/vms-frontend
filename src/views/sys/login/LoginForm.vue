@@ -112,14 +112,22 @@
   const loading = ref(false);
   const rememberMe = ref(false);
   const formData = reactive({
-    account: 'tisnanda',
-    password: '123456',
+    account: 'fitriani_ilyas',
+    password: 'FdaLjEiv',
   });
+
+ 
   const { validForm } = useFormValid(formRef);
   //onKeyStroke('Enter', handleLogin);
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN);
   async function handleLogin() {
     const data = await validForm();
+    // const A = await userStore.login({
+    //     password: data.password,
+    //     username: data.account,
+    //     mode: 'none', //不要默认的错误提示
+    //   });
+    //   console.log(A);
     if (!data) return;
     try {
       loading.value = true;
@@ -134,6 +142,7 @@
           description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
           duration: 3,
         });
+        console.log('NANDA ' , `${userInfo.realName}`)
       }
     } catch (error) {
       createErrorModal({

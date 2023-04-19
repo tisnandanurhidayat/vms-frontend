@@ -4,7 +4,15 @@
     <a-button @click="handleDownloadXML" :type="'primary'" class="ml-2 btn">Download XML</a-button>
   </CollapseContainer>
   <CollapseContainer title="FILTER">
-    <BasicForm @register="register" @submit="handleSubmit" />
+    <BasicForm 
+    autoFocusFirstItem
+    :labelWidth="200"
+    :schemas="schemas"
+    :actionColOptions="{ span: 24 }"
+    @register="register" 
+    @submit="handleSubmit" >
+
+    </BasicForm>
   </CollapseContainer>
 
   <div class="p-1">
@@ -31,12 +39,22 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
+  import { BasicForm, FormSchema, useForm , ApiSelect } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  // import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
-  import { demoListApi } from '/@/api/demo/table';
+
+  // import { PoListApi } from '/@/api/sys/purchaseOrder';
   import createOptions from './templates/dropdownOptions';
+  import { usePoStore } from '/@/store/modules/Po';
+  import { usePoStoreAdvance } from '/@/store/modules/PoAdvance';
+  import { useDebounceFn } from '@vueuse/core';
+  import { computed,  unref, ref } from 'vue';
+
+  const PoStore = usePoStore();
+  const PoStoree = usePoStoreAdvance();
+
+ 
 
   // for hard code purposes
   const TOKO_LIST = {
@@ -45,12 +63,23 @@
     TOKO3: 'Toko 3',
   };
 
+  // const API_TOK; 
+
   // for hard code purposes
   const BU_LIST = {
     BU1: 'BU 1',
     BU2: 'BU 2',
     BU3: 'BU 3',
   };
+
+
+  async function ApiList(record: Recordable) {
+    const A = await PoStore.Po();
+        console.log('NANDA' ,  A); 
+        console.log('NANDA' ,  A , record);
+        return A;
+  }
+  console.log(ApiList)
 
   const STATUS_LIST = {
     ALL: 'All',
@@ -75,18 +104,20 @@
     EXPIRED: 'Expired',
   };
 
+  
+
   const schemas: FormSchema[] = [
     {
-      field: 'merchant',
+      field: 'store_code',
       component: 'Input',
-      label: 'Merchant',
+      label: 'store_codee',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'Merchant',
+        placeholder: 'store_codee',
         onChange: (e: any) => {
-          console.log(e);
+          return e;
         },
       },
     },
@@ -100,7 +131,7 @@
       componentProps: {
         placeholder: 'Kode Supplier',
         onChange: (e: any) => {
-          console.log(e);
+          return e;
         },
       },
     },
@@ -121,19 +152,22 @@
       },
       componentProps: {
         placeholder: '--Select--',
+        // api: PoListApi,
         options: createOptions(STATUS_LIST),
+
       },
     },
     {
-      field: 'store',
+      field: 'store_codee',
       component: 'Select',
-      label: 'Toko',
+      label: 'Status',
       colProps: {
         span: 8,
       },
       componentProps: {
-        placeholder: 'All',
+        placeholder: '--Select--',
         options: createOptions(TOKO_LIST),
+        
       },
     },
     {
@@ -173,7 +207,7 @@
       componentProps: {
         placeholder: 'Search CDT/PO No',
         onChange: (e: any) => {
-          console.log(e);
+          return e;
         },
       },
     },
@@ -182,19 +216,19 @@
   const columns: BasicColumn[] = [
     {
       title: 'Referensi',
-      dataIndex: 'reference',
+      dataIndex: 'id',
     },
     {
       title: 'Merchant',
-      dataIndex: 'merchant',
+      dataIndex: 'supplier_name_local',
     },
     {
       title: 'Nomer Order',
-      dataIndex: 'orderNo',
+      dataIndex: 'po_no',
     },
     {
       title: 'Tanggal Order',
-      dataIndex: 'orderDate',
+      dataIndex: 'created_on',
     },
     {
       title: 'Status',
@@ -202,18 +236,17 @@
     },
     {
       title: 'Perubahan Terakhir',
-      dataIndex: 'lastChange',
+      dataIndex: 'last_updated_on',
     },
     {
       title: 'Toko',
-      dataIndex: 'store',
+      dataIndex: 'store_code',
     },
   ];
 
   export default defineComponent({
-    components: { BasicForm, CollapseContainer, TableAction, BasicTable },
+    components: { BasicForm, CollapseContainer, TableAction, BasicTable , ApiSelect },
     setup() {
-      const { createMessage } = useMessage();
 
       const [register, { setProps }] = useForm({
         labelWidth: 150,
@@ -224,11 +257,14 @@
         fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
-      const [registerTable] = useTable({
+      const [registerTable, { reload }] = useTable({
+        
         title: 'Tabel Purchase Order',
-        api: demoListApi,
+        api: handleSubmit,
         columns: columns,
+        useSearchForm: false,
         bordered: true,
+        // pagination: { pageSize: 10 },
         tableSetting: { fullScreen: true },
         rowSelection: {
           type: 'checkbox',
@@ -258,18 +294,50 @@
         console.log('klik untuk melihat detail', record);
       }
 
+      async function handleSubmit(record: Recordable) {
+        const a = await PoStoree.AdvancePo({
+          store_code : record.store_code,
+         });
+        console.log(record.store_code)
+        return a;
+      }
+
+      function handleReload() {
+        reload({
+          page: 1,
+        });
+      }
+
+      const check = ref(null);
+
+      const keyword = ref<string>('');
+      const searchParams = computed<Recordable>(() => {
+        return { keyword: unref(keyword) };
+      });
+
+      function onSearch(value: string) {
+        keyword.value = value;
+      }
+
       return {
         registerTable,
+        ApiList,
+        searchParams,
+        onSearch: useDebounceFn(onSearch, 300),
+        // PoListApi,
         handleViewDocument,
         handleViewDetail,
         handlePrintSelected,
         handleDownloadXML,
+        handleReload,
         register,
         schemas,
-        handleSubmit: (values: Recordable) => {
-          createMessage.success('click search,values:' + JSON.stringify(values));
-        },
+        handleSubmit,
+        // handleSubmit: (values: Recordable) => {
+        //   createMessage.success('click search,values:' + JSON.stringify(values));
+        // },
         setProps,
+        check,
       };
     },
   });

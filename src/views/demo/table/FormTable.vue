@@ -49,7 +49,7 @@
       });
 
       function getFormValues() {
-        console.log(getForm().getFieldsValue());
+        // console.log(getForm().getFieldsValue());
       }
 
       function onSelectChange(selectedRowKeys: (string | number)[]) {

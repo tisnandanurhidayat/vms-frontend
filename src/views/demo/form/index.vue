@@ -72,7 +72,7 @@
   const valueSelectA = ref<string[]>([]);
   const valueSelectB = ref<string[]>([]);
   const options = ref<Recordable[]>([]);
-  for (let i = 1; i < 10; i++) options.value.push({ label: '选项' + i, value: `${i}` });
+  for (let i = 1; i < 10; i++) options.value.push({ label: 'options' + i, value: `${i}` });
 
   const optionsA = computed(() => {
     return cloneDeep(unref(options)).map((op) => {

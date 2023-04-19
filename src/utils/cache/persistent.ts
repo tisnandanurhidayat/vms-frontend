@@ -1,4 +1,5 @@
 import type { LockInfo, UserInfo } from '/#/store';
+import type {ListInfo} from '/@/api/sys/model/poModel';
 import type { ProjectConfig } from '/#/config';
 import type { RouteLocationNormalized } from 'vue-router';
 
@@ -7,6 +8,7 @@ import { Memory } from './memory';
 import {
   TOKEN_KEY,
   USER_INFO_KEY,
+  Po_List,
   ROLES_KEY,
   LOCK_INFO_KEY,
   PROJ_CFG_KEY,
@@ -21,6 +23,7 @@ import { pick, omit } from 'lodash-es';
 interface BasicStore {
   [TOKEN_KEY]: string | number | null | undefined;
   [USER_INFO_KEY]: UserInfo;
+  [Po_List]: ListInfo;
   [ROLES_KEY]: string[];
   [LOCK_INFO_KEY]: LockInfo;
   [PROJ_CFG_KEY]: ProjectConfig;

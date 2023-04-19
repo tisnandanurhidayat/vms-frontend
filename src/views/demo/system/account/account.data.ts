@@ -4,32 +4,32 @@ import { FormSchema } from '/@/components/Table';
 
 export const columns: BasicColumn[] = [
   {
-    title: '用户名',
+    title: 'Username',
     dataIndex: 'account',
     width: 120,
   },
   {
-    title: '昵称',
+    title: 'nickname',
     dataIndex: 'nickname',
     width: 120,
   },
   {
-    title: '邮箱',
+    title: 'Mailbox',
     dataIndex: 'email',
     width: 120,
   },
   {
-    title: '创建时间',
+    title: 'Creation time',
     dataIndex: 'createTime',
     width: 180,
   },
   {
-    title: '角色',
+    title: 'Role',
     dataIndex: 'role',
     width: 200,
   },
   {
-    title: '备注',
+    title: 'Remarks',
     dataIndex: 'remark',
   },
 ];
@@ -37,13 +37,13 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'account',
-    label: '用户名',
+    label: 'Username',
     component: 'Input',
     colProps: { span: 8 },
   },
   {
     field: 'nickname',
-    label: '昵称',
+    label: 'nickname',
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -52,13 +52,13 @@ export const searchFormSchema: FormSchema[] = [
 export const accountFormSchema: FormSchema[] = [
   {
     field: 'account',
-    label: '用户名',
+    label: 'Username',
     component: 'Input',
-    helpMessage: ['本字段演示异步验证', '不能输入带有admin的用户名'],
+    helpMessage: ['This field demonstrates asynchronous authentication', 'You cannot enter a username with admin'],
     rules: [
       {
         required: true,
-        message: '请输入用户名',
+        message: 'Please enter a username',
       },
       {
         validator(_, value) {
@@ -66,7 +66,7 @@ export const accountFormSchema: FormSchema[] = [
             isAccountExist(value)
               .then(() => resolve())
               .catch((err) => {
-                reject(err.message || '验证失败');
+                reject(err.message || 'Verification failed');
               });
           });
         },
@@ -75,13 +75,13 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     field: 'pwd',
-    label: '密码',
+    label: 'password',
     component: 'InputPassword',
     required: true,
     ifShow: false,
   },
   {
-    label: '角色',
+    label: 'Role',
     field: 'role',
     component: 'ApiSelect',
     componentProps: {
@@ -93,7 +93,7 @@ export const accountFormSchema: FormSchema[] = [
   },
   {
     field: 'dept',
-    label: '所属部门',
+    label: 'Department',
     component: 'TreeSelect',
     componentProps: {
       fieldNames: {
@@ -101,26 +101,26 @@ export const accountFormSchema: FormSchema[] = [
         key: 'id',
         value: 'id',
       },
-      getPopupContainer: () => document.body,
+      getPopupContainer: () => document. body,
     },
     required: true,
   },
   {
     field: 'nickname',
-    label: '昵称',
+    label: 'nickname',
     component: 'Input',
     required: true,
   },
 
   {
-    label: '邮箱',
+    label: 'Email',
     field: 'email',
     component: 'Input',
     required: true,
   },
 
   {
-    label: '备注',
+    label: 'Remarks',
     field: 'remark',
     component: 'InputTextArea',
   },

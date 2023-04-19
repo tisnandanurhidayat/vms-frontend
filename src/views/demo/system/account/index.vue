@@ -10,25 +10,25 @@
           <TableAction
             :actions="[
               {
-                icon: 'clarity:info-standard-line',
-                tooltip: '查看用户详情',
-                onClick: handleView.bind(null, record),
-              },
-              {
-                icon: 'clarity:note-edit-line',
-                tooltip: '编辑用户资料',
-                onClick: handleEdit.bind(null, record),
-              },
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                tooltip: '删除此账号',
-                popConfirm: {
-                  title: '是否确认删除',
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record),
-                },
-              },
+                 icon: 'clarity:info-standard-line',
+                 tooltip: 'View user details',
+                 onClick: handleView. bind(null, record),
+               },
+               {
+                 icon: 'clarity:note-edit-line',
+                 tooltip: 'Edit User Profile',
+                 onClick: handleEdit. bind(null, record),
+               },
+               {
+                 icon: 'ant-design:delete-outlined',
+                 color: 'error',
+                 tooltip: 'Delete this account',
+                 popConfirm: {
+                   title: 'Are you sure to delete',
+                   placement: 'left',
+                   confirm: handleDelete. bind(null, record),
+                 },
+               },
             ]"
           />
         </template>
@@ -78,7 +78,7 @@
         actionColumn: {
           ellipsis: true,
           width: 120,
-          title: '操作',
+          title: 'operate',
           dataIndex: 'action',
           // slots: { customRender: 'action' },
         },

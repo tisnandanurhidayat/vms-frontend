@@ -1,7 +1,7 @@
 <template>
-  <PageWrapper title="详情组件示例">
+  <PageWrapper title="Detail Component Example">
     <Description
-      title="基础示例"
+      title="Basic Example"
       :collapseOptions="{ canExpand: true, helpMessage: 'help me' }"
       :column="3"
       :data="mockData"
@@ -10,7 +10,7 @@
 
     <Description
       class="mt-4"
-      title="垂直示例"
+      title="vertical example"
       layout="vertical"
       :collapseOptions="{ canExpand: true, helpMessage: 'help me' }"
       :column="2"
@@ -33,34 +33,34 @@
     age: '123',
     phone: '15695909xxx',
     email: '190848757@qq.com',
-    addr: '厦门市思明区',
-    sex: '男',
+    addr: 'Xiamen Siming District',
+    sex: 'male',
     certy: '3504256199xxxxxxxxx',
     tag: 'orange',
   };
   const schema: DescItem[] = [
     {
       field: 'username',
-      label: '用户名',
+      label: 'Username',
     },
     {
       field: 'nickName',
-      label: '昵称',
+      label: 'nickname',
       render: (curVal, data) => {
         return `${data.username}-${curVal}`;
       },
     },
     {
       field: 'phone',
-      label: '联系电话',
+      label: 'Contact number',
     },
     {
       field: 'email',
-      label: '邮箱',
+      label: 'Email',
     },
     {
       field: 'addr',
-      label: '地址',
+      label: 'Address',
     },
   ];
   export default defineComponent({
@@ -73,7 +73,7 @@
       });
 
       const [register1] = useDescription({
-        title: '无边框',
+        title: 'Borderless',
         bordered: false,
         data: mockData,
         schema: schema,
