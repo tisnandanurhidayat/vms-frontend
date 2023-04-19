@@ -44,14 +44,12 @@
   // import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
 
-  // import { PoListApi } from '/@/api/sys/purchaseOrder';
+  import { PoListApi } from '/@/api/sys/purchaseOrder';
   import createOptions from './templates/dropdownOptions';
-  import { usePoStore } from '/@/store/modules/Po';
   import { usePoStoreAdvance } from '/@/store/modules/PoAdvance';
   import { useDebounceFn } from '@vueuse/core';
   import { computed,  unref, ref } from 'vue';
 
-  const PoStore = usePoStore();
   const PoStoree = usePoStoreAdvance();
 
  
@@ -72,14 +70,6 @@
     BU3: 'BU 3',
   };
 
-
-  async function ApiList(record: Recordable) {
-    const A = await PoStore.Po();
-        console.log('NANDA' ,  A); 
-        console.log('NANDA' ,  A , record);
-        return A;
-  }
-  console.log(ApiList)
 
   const STATUS_LIST = {
     ALL: 'All',
@@ -321,10 +311,9 @@
 
       return {
         registerTable,
-        ApiList,
         searchParams,
         onSearch: useDebounceFn(onSearch, 300),
-        // PoListApi,
+        PoListApi,
         handleViewDocument,
         handleViewDetail,
         handlePrintSelected,
