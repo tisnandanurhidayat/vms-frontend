@@ -209,20 +209,6 @@
         }),
       },
     },
-    {
-      field: 'CDTorPONo',
-      component: 'Input',
-      label: 'Search CDT/PO No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Search CDT/PO No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
-    },
   ];
 
   const columns: BasicColumn[] = [

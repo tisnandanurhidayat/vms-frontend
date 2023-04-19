@@ -1,5 +1,6 @@
 <template>
-  <CollapseContainer title="INVOICE RECEIPT" :canExpan="false">
+  <CollapseContainer title="INVOICE RECEIPT" :canExpan="false" />
+  <CollapseContainer title="Filter">
     <BasicForm @register="register" @submit="handleFilter" />
   </CollapseContainer>
 
@@ -124,20 +125,6 @@
       componentProps: {
         placeholder: 'All',
         options: createOptions(BU_LIST),
-      },
-    },
-    {
-      field: 'CDTorPONo',
-      component: 'Input',
-      label: 'Search CDT/PO No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Search CDT/PO No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
       },
     },
   ];

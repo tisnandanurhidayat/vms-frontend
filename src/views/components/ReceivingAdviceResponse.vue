@@ -106,20 +106,6 @@
       },
     },
     {
-      field: 'CDTorPONo',
-      component: 'Input',
-      label: 'Search CDT/No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Search CDT/No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
-      },
-    },
-    {
       field: 'store',
       component: 'Select',
       label: 'Toko',
