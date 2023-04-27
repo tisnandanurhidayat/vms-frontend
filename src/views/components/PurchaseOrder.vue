@@ -47,7 +47,7 @@
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
-  import { demoListApi } from '/@/api/demo/table';
+  import { poListApi } from '/@/api/vms/purchaseOrder';
   import createOptions from './templates/dropdownOptions';
   import { router } from '/@/router';
   // import { useRefs } from '/@/hooks/core/useRefs';
@@ -226,7 +226,7 @@
       });
 
       const [registerTable] = useTable({
-        api: demoListApi,
+        api: poListApi,
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },

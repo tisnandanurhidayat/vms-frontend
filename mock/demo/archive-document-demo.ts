@@ -14,7 +14,7 @@ const demoArchiveDocList = (() => {
 
 export default [
   {
-    url: '/basic-api/table/getDemoArchiveDocList',
+    url: '/mock-api/table/getDemoArchiveDocList',
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
