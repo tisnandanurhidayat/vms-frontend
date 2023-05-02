@@ -58,6 +58,11 @@
         <template v-else-if="column.key === 'orderedQty'">
           {{ record.orderedQty.toFixed(2) }}
         </template>
+        <template v-else-if="column.key === 'isAccepted'">
+          <span v-if="record.isAccepted">Y</span>
+          <span v-else-if="!record.isAccepted">N</span>
+          <span v-else-if="null"></span>
+        </template>
         <template v-else-if="column.key === 'acceptedQty'">
           {{ record.acceptedQty.toFixed(2) }}
         </template>
@@ -92,6 +97,7 @@
   import { rarInfoData, rarInfoSchema } from './hard-code-materials/rarData';
   import { Description } from '/@/components/Description';
 
+  // COLOR #fcc0c0
   const columns: BasicColumn[] = [
     {
       title: 'Kode Barang',
@@ -124,6 +130,11 @@
       width: 80,
     },
     {
+      title: 'Terima',
+      key: 'isAccepted',
+      width: 80,
+    },
+    {
       title: 'Qty diterima',
       key: 'acceptedQty',
       width: 80,
@@ -137,6 +148,11 @@
       title: 'Service Level',
       key: 'serviceLevel',
       width: 80,
+    },
+    {
+      title: 'Keterangan',
+      dataIndex: 'description',
+      width: 120,
     },
   ];
 
