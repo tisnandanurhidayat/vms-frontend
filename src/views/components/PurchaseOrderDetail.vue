@@ -12,7 +12,7 @@
     <div class="md:flex enter-y">
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
         <div class="mx-4 mt-4 info-title"> Informasi Order </div>
-        <div class="mx-4 mb-2 destination"> Ambassador </div>
+        <div class="mx-4 mb-2 destination"> {{ orderInfoData.store }} </div>
         <Description
           size="small"
           :bordered="true"
@@ -23,12 +23,12 @@
       </div>
       <div class="ant-card ant-card-bordered ant-card-small md:w-1/2 w-full !md:mt-0 !md:mr-4">
         <div class="mx-4 mt-4 info-title"> Informasi Supplier </div>
-        <div class="mx-4 mb-2 destination"> DOMBA KECIL, CV </div>
+        <div class="mx-4 mb-2 destination"> {{ supplierInfoData.supplier }} </div>
         <Description
           size="small"
           :bordered="true"
           :column="2"
-          :data="supplierData"
+          :data="supplierInfoData"
           :schema="supplierSchema"
         />
         <div class="p-4 mb-4 font-bold"> Note: Confirmed Order </div>
@@ -85,7 +85,7 @@
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn } from '/@/components/Table';
-  import { demoListApi } from '/@/api/demo/table';
+  import { poItemListApi, poOrderInfoApi, poSupplierInfoApi } from '/@/api/vms/purchaseOrder';
 
   import {
     DocumentDropdownButton,
@@ -95,8 +95,6 @@
   } from '/@/views/components/DetailTemplates';
   import {
     orderInfoSchema,
-    orderInfoData,
-    supplierData,
     supplierSchema,
     totalPriceData,
     additionalInfoData,
@@ -142,6 +140,10 @@
     },
   ];
 
+  // API calls
+  const orderInfoData = await poOrderInfoApi();
+  const supplierInfoData = await poSupplierInfoApi();
+
   export default defineComponent({
     components: {
       Description,
@@ -157,7 +159,7 @@
 
       const [registerTable] = useTable({
         title: 'Tabel Item',
-        api: demoListApi,
+        api: poItemListApi,
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },
@@ -188,10 +190,10 @@
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
-        orderInfoData,
         orderInfoSchema,
-        supplierData,
         supplierSchema,
+        orderInfoData,
+        supplierInfoData,
         totalPriceData,
         additionalInfoData,
         documents,

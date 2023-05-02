@@ -1,18 +1,6 @@
 // import { CSSProperties } from 'vue';
 import { DescItem } from '/@/components/Description/index';
 
-export const orderInfoData = {
-  store: 'Ambassador',
-  senderInfo: '8990210000000',
-  deptCode: '22 Fruits and Vegetables',
-  deliveryTo: 'Ambassador',
-  orderNo: '916021719',
-  orderDate: 'Wed, Mar 23,2016, 15:27',
-  arrivalDate: 'Thu, Mar 24,2016, 00:00',
-  companyName: 'PT. TRANS RETAIL INDONESIA',
-  taxNo: '01.711.062.8-092.000',
-  companyAddress: 'ITC Mall Ambassador JL. Prof.Dr.Satrio Jakarta Selatan 12950',
-};
 export const orderInfoSchema: DescItem[] = [
   {
     field: 'senderInfo',
@@ -23,7 +11,7 @@ export const orderInfoSchema: DescItem[] = [
     label: 'Kode Departemen',
   },
   {
-    field: 'deliveryNo',
+    field: 'deliveryTo',
     label: 'Pengiriman Ke',
   },
   {
@@ -52,12 +40,6 @@ export const orderInfoSchema: DescItem[] = [
   },
 ];
 
-export const supplierData = {
-  supplier: 'DOMBA KECIL, CV',
-  code: 'N972',
-  telephone: '0819-06543268',
-  fax: '021-43931145',
-};
 export const supplierSchema: DescItem[] = [
   {
     field: 'code',
