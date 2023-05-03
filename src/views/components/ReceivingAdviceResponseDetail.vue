@@ -1,5 +1,5 @@
 <template>
-  <CollapseContainer :title="'Receiving Advice CDT: ' + otherRaData.cdt" :canExpan="false">
+  <CollapseContainer :title="'Receiving Advice Response CDT: ' + otherRaData.cdt" :canExpan="false">
     <a-button @click="handlePrint" :type="'primary'">Lihat versi cetak</a-button>
     <DocumentDropdownButton :documents="documents" :cdt="otherRaData.cdt" />
   </CollapseContainer>
