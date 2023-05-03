@@ -60,7 +60,7 @@
         </template>
         <template v-else-if="column.key === 'isAccepted'">
           <span v-if="record.isAccepted">Y</span>
-          <span v-else-if="!record.isAccepted">N</span>
+          <span v-else-if="!record.isAccepted"><strong>N</strong></span>
           <span v-else-if="null"></span>
         </template>
         <template v-else-if="column.key === 'acceptedQty'">
@@ -178,6 +178,9 @@
         pagination: false,
         canResize: true,
         scroll: { y: 300 },
+        highlight: (data) => {
+          return !data['isAccepted'];
+        },
         // showSummary: true,
       });
 

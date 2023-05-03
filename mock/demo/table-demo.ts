@@ -54,7 +54,7 @@ const demoList = (() => {
       price: 70000.0,
       freeQty: 0.0,
       orderedQty: 2.0,
-      isAccepted: true,
+      'isAccepted|1': [true, false],
       // contentQty:
       acceptedQty: 0.0,
       revised: 'N',

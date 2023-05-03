@@ -393,6 +393,23 @@
     max-width: 100%;
     height: 100%;
 
+    &-row__highlighted {
+      td {
+        background-color: #fcc0c0;
+        pointer-events: none;
+      }
+
+      td:hover {
+        background-color: #fcc0c0;
+        pointer-events: none;
+      }
+
+      td.ant-table-row-hover {
+        background-color: #fcc0c0;
+        pointer-events: none;
+      }
+    }
+
     &-row__striped {
       td {
         background-color: @app-content-background;

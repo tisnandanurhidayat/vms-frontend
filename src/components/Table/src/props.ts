@@ -148,4 +148,8 @@ export const basicProps = {
     type: String as PropType<SizeType>,
     default: DEFAULT_SIZE,
   },
+  // highlighter: {
+  //   type: String,
+  //   default: null,
+  // },
 };
