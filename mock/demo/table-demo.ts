@@ -52,6 +52,7 @@ const demoList = (() => {
       qtyPerPack: 1.0,
       totalQty: 2.0,
       price: 70000.0,
+      matchedPrice: 80000.0,
       freeQty: 0.0,
       orderedQty: 2.0,
       'isAccepted|1': [true, false],
