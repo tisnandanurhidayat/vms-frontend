@@ -53,10 +53,10 @@
           <ItemNameCell :itemName="record.itemName" :sub="record.itemNameSub" />
         </template>
         <template v-else-if="column.key === 'freeQty'">
-          {{ record.freeQty.toFixed(2) }}
+          {{ toFixedFloat(record.freeQty) }}
         </template>
         <template v-else-if="column.key === 'orderedQty'">
-          {{ record.orderedQty.toFixed(2) }}
+          {{ toFixedFloat(record.orderedQty) }}
         </template>
         <template v-else-if="column.key === 'isAccepted'">
           <span v-if="record.isAccepted">Y</span>
@@ -64,10 +64,10 @@
           <span v-else-if="null"></span>
         </template>
         <template v-else-if="column.key === 'acceptedQty'">
-          {{ record.acceptedQty.toFixed(2) }}
+          {{ toFixedFloat(record.acceptedQty) }}
         </template>
         <template v-else-if="column.key === 'serviceLevel'">
-          {{ record.serviceLevel.toFixed(2) }}%
+          {{ toFixedFloat(record.serviceLevel) }}%
         </template>
       </template>
     </BasicTable>
@@ -85,6 +85,7 @@
     DocumentDropdownButton,
     ItemCodeCell,
     ItemNameCell,
+    toFixedFloat,
   } from '/@/views/components/DetailTemplates';
   import {
     raOrderInfoSchema,
@@ -204,6 +205,7 @@
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        toFixedFloat,
         raOrderInfoData,
         raOrderInfoSchema,
         rarInfoData,

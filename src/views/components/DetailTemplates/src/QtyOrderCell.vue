@@ -1,5 +1,5 @@
 <template>
-  <div>{{ qtyOrder.toFixed(2) }}</div>
+  <div>{{ toFixedFloat(qtyOrder) }}</div>
   <div>Kemasan</div>
   <div>
     Normal:&nbsp;
@@ -13,7 +13,7 @@
     Gratis:&nbsp;
     <Tag color="#f25a60">
       <strong>
-        {{ qtyFree.toFixed(2) }}
+        {{ toFixedFloat(qtyFree) }}
       </strong></Tag
     >
   </div>
@@ -22,6 +22,7 @@
   import { defineComponent } from 'vue';
   import { propTypes } from '/@/utils/propTypes';
   import { Tag } from 'ant-design-vue';
+  import { toFixedFloat } from '../index';
 
   export default defineComponent({
     name: 'ItemCodeCell',
@@ -32,7 +33,7 @@
       qtyFree: propTypes.number.def(0.0),
     },
     setup(props) {
-      return { props };
+      return { props, toFixedFloat };
     },
   });
 </script>

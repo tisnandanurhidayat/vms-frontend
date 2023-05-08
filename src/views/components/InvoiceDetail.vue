@@ -103,22 +103,22 @@
           <ItemNameCell :itemName="record.itemName" :sub="record.itemNameSub" />
         </template>
         <template v-else-if="column.key === 'totalQty'">
-          {{ record.totalQty.toFixed(2) }}
+          {{ toFixedFloat(record.totalQty) }}
         </template>
         <template v-else-if="column.key === 'price'">
-          {{ record.price.toFixed(2) }}
+          {{ toFixedFloat(record.price) }}
         </template>
         <template v-else-if="column.key === 'priceBeforeTax'">
-          {{ record.priceBeforeTax.toFixed(2) }}
+          {{ toFixedFloat(record.priceBeforeTax) }}
         </template>
         <template v-else-if="column.key === 'priceAfterTax'">
-          {{ record.priceAfterTax.toFixed(2) }}
+          {{ toFixedFloat(record.priceAfterTax) }}
         </template>
         <template v-else-if="column.key === 'taxPercentage'">
-          {{ record.taxPercentage.toFixed(2) }}
+          {{ toFixedFloat(record.taxPercentage) }}
         </template>
         <template v-else-if="column.key === 'luxuryTax'">
-          {{ record.luxuryTax.toFixed(2) }}
+          {{ toFixedFloat(record.luxuryTax) }}
         </template>
       </template>
     </BasicTable>
@@ -155,6 +155,7 @@
     DocumentDropdownButton,
     ItemCodeCell,
     ItemNameCell,
+    toFixedFloat,
   } from '/@/views/components/DetailTemplates';
   import {
     invOrderInfoSchema,
@@ -310,6 +311,7 @@
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        toFixedFloat,
         invOrderInfoData,
         invOrderInfoSchema,
         supplierData,

@@ -10,3 +10,10 @@ export const ItemNameCell = withInstall(itemNameCell);
 export const QtyOrderCell = withInstall(quantityOrderCell);
 export const DropDocumentItem = withInstall(dropDocumentItem);
 export const DocumentDropdownButton = withInstall(documentDropdownButton);
+
+export function toFixedFloat(num: number): string {
+  return num.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+}

@@ -52,10 +52,10 @@
           <ItemNameCell :itemName="record.itemName" :sub="record.itemNameSub" />
         </template>
         <template v-else-if="column.key === 'totalQty'">
-          {{ record.totalQty.toFixed(2) }}
+          {{ toFixedFloat(record.totalQty) }}
         </template>
         <template v-else-if="column.key === 'price'">
-          {{ record.price.toFixed(2) }}
+          {{ toFixedFloat(record.price) }}
         </template>
       </template>
     </BasicTable>
@@ -83,6 +83,7 @@
     DocumentDropdownButton,
     ItemCodeCell,
     ItemNameCell,
+    toFixedFloat,
   } from '/@/views/components/DetailTemplates';
   import {
     pfiOrderInfoSchema,
@@ -174,6 +175,7 @@
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        toFixedFloat,
         pfiOrderInfoData,
         pfiOrderInfoSchema,
         pfiInfoData,

@@ -57,13 +57,13 @@
           />
         </template>
         <template v-else-if="column.key === 'qtyPerPack'">
-          {{ record.qtyPerPack.toFixed(2) }}
+          {{ toFixedFloat(record.qtyPerPack) }}
         </template>
         <template v-else-if="column.key === 'totalQty'">
-          {{ record.totalQty.toFixed(2) }}
+          {{ toFixedFloat(record.totalQty) }}
         </template>
         <template v-else-if="column.key === 'price'">
-          {{ record.price.toFixed(2) }}
+          {{ toFixedFloat(record.price) }}
         </template>
       </template>
     </BasicTable>
@@ -92,6 +92,7 @@
     ItemCodeCell,
     ItemNameCell,
     QtyOrderCell,
+    toFixedFloat,
   } from '/@/views/components/DetailTemplates';
   import {
     orderInfoSchema,
@@ -190,6 +191,7 @@
         handleSubmit: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        toFixedFloat,
         orderInfoSchema,
         supplierSchema,
         orderInfoData,
