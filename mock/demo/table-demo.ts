@@ -12,7 +12,7 @@ function getRandomPics(count = 10): string[] {
 
 const demoList = (() => {
   const result: any[] = [];
-  for (let index = 0; index < 200; index++) {
+  for (let index = 0; index < 199; index++) {
     result.push({
       reference: 'TRI1603238761026',
       id: `${index}`,
@@ -49,9 +49,9 @@ const demoList = (() => {
       orderQuantity: 2.0,
       orderQuantityNormal: 'N',
       orderQuantityFree: 0.0,
-      qtyPerPack: 1.0,
+      qtyPerPack: 2.0,
       totalQty: 2.0,
-      price: 70000.0,
+      price: 70001.0,
       matchedPrice: 80000.0,
       freeQty: 0.0,
       orderedQty: 2.0,
@@ -62,6 +62,10 @@ const demoList = (() => {
       serviceLevel: 0.0,
       description: 'TEST KETERANGAN',
       raId: '1116016047',
+      priceBeforeTax: 140002.0,
+      priceAfterTax: 154002.2,
+      taxPercentage: 10.0,
+      luxuryTax: 0.0,
     });
   }
   return result;
@@ -73,7 +77,7 @@ export default [
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
-      const { page = 1, pageSize = 20 } = query;
+      const { page = 1, pageSize = 1000 } = query;
       return resultPageSuccess(page, pageSize, demoList);
     },
   },

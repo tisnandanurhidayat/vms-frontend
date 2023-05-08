@@ -143,8 +143,13 @@
                   background: '#dfdfdf',
                   textAlign: 'right',
                   fontSize: '14px',
+                  borderBottom: '2px solid #f0f0f0',
                 }}
-                contentStyle={{ padding: '0px 8px', fontSize: '14px' }}
+                contentStyle={{
+                  padding: '0px 8px',
+                  fontSize: '14px',
+                  borderBottom: '2px solid #f0f0f0',
+                }}
               >
                 {() => {
                   if (!contentMinWidth) {
@@ -198,3 +203,8 @@
     },
   });
 </script>
+<style scoped>
+  .ant-descriptions-bordered .ant-descriptions-row {
+    border-bottom: 2px solid #f0f0f0;
+  }
+</style>
