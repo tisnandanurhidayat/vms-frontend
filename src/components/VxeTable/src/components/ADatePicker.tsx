@@ -24,10 +24,10 @@ export function getDatePickerCellValue(
 export default {
   renderEdit: createEditRender(),
   renderCell: createCellRender(getDatePickerCellValue, () => {
-    return ['YYYY-MM-DD'];
+    return ['DD-MM-YYYY'];
   }),
   renderItemContent: createFormItemRender(),
   exportMethod: createExportMethod(getDatePickerCellValue, () => {
-    return ['YYYY-MM-DD'];
+    return ['DD-MM-YYYY'];
   }),
 };

@@ -1,6 +1,6 @@
 <template>
   <div :class="[`${prefixCls}__header px-2 py-5`, $attrs.class]">
-    <BasicTitle :helpMessage="helpMessage" normal>
+    <BasicTitle :helpMessage="helpMessage" normal :style="{ cursor: 'text', userSelect: 'text' }">
       <template v-if="title">
         {{ title }}
       </template>

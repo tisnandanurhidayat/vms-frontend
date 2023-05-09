@@ -3,6 +3,8 @@ import type { AppRouteModule } from '/@/router/types';
 import { t } from '/@/hooks/web/useI18n';
 import { LAYOUT } from '/@/router/constant';
 import addIndex from './layout-menu/indexMenu';
+// import addChild from './layout-menu/childMenu';
+import addDetail from './layout-menu/detailMenu';
 
 const PurchaseOrder: AppRouteModule = {
   path: '/purchase-order',
@@ -15,7 +17,10 @@ const PurchaseOrder: AppRouteModule = {
     hideChildrenInMenu: true,
     title: t('Purchase Order'),
   },
-  children: [addIndex('index', 'PurchaseOrder', 'Purchase Order')],
+  children: [
+    addIndex('index', 'PurchaseOrder', 'Purchase Order'),
+    addDetail('detail/:cdt', 'PurchaseOrderDetail', `PO Detail`),
+  ],
 };
 
 export default PurchaseOrder;

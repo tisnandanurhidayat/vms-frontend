@@ -10,7 +10,7 @@ const InvoiceResponse: AppRouteModule = {
   component: LAYOUT,
   redirect: '/invoice-response/index',
   meta: {
-    orderNo: 22,
+    orderNo: 21,
     icon: 'vms-invoice-response|svg',
     hideChildrenInMenu: true,
     title: t('Invoice Response'),

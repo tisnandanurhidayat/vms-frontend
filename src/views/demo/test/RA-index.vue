@@ -1,5 +1,5 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
@@ -73,7 +73,7 @@
 
   const schemas: FormSchema[] = [
     {
-      field: 'Merchant',
+      field: 'merchant',
       component: 'Input',
       label: 'Merchant',
       colProps: {
@@ -171,7 +171,7 @@
       },
     },
     {
-      field: 'Business Unit',
+      field: 'businessUnit',
       component: 'Select',
       label: 'Business Unit',
       colProps: {
@@ -253,7 +253,7 @@
         actionColOptions: {
           span: 24,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
@@ -267,6 +267,7 @@
           type: 'checkbox',
         },
         actionColumn: {
+          ellipsis: true,
           width: 250,
           title: 'Action',
           dataIndex: 'action',

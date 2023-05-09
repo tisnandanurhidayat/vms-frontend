@@ -62,6 +62,7 @@
         showIndexColumn: false,
         canResize: false,
         actionColumn: {
+          ellipsis: true,
           width: 80,
           title: '操作',
           dataIndex: 'action',

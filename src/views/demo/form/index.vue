@@ -613,7 +613,7 @@
       label: '时间范围',
       component: 'RangePicker',
       componentProps: {
-        format: 'YYYY-MM-DD HH:mm:ss',
+        format: 'DD-MM-YYYY HH:mm:ss',
         placeholder: ['开始时间', '结束时间'],
         showTime: { format: 'HH:mm:ss' },
       },

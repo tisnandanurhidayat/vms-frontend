@@ -1,59 +1,36 @@
 <template>
-  <CollapseContainer title="FILTERS">
-    <a-button ghost type="primary" class="ml-2 btnn"> download xls </a-button>
-    <div class="p-3"><BasicForm @register="register" @submit="handleSubmit" /></div>
-    <!-- <a-button ghost type="primary" class="ml-2"> download xls </a-button> -->
+  <CollapseContainer title="INVOICE" :canExpan="false">
+    <a-button @click="handlePrintSelected" :type="'primary'">Cetak yang dipilih</a-button>
+    <a-button type="primary" class="ml-2 btn">Download XLS</a-button>
+  </CollapseContainer>
+  <CollapseContainer title="Filter">
+    <div class="p-3"><BasicForm @register="register" @submit="handleFilter" /></div>
   </CollapseContainer>
 
-  <div class="p-1">
+  <div class="p-1" style="background-color: white">
+    <div
+      class="w-1/6 !md:mt-0 !md:mr-4"
+      style="float: left; text-align: right; align-items: center; height: 32px; display: grid"
+    >
+      Search CDT/PO No: &nbsp;
+    </div>
+    <div class="w-1/4 !md:mt-0 !md:mr-4" style="float: left">
+      <a-input ref="inputRef" allow-clear @change="handleSearch">
+        <template #prefix></template>
+      </a-input>
+    </div>
     <BasicTable @register="registerTable">
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
             :actions="[
               {
-                label: 'edit',
-                onClick: handleEdit.bind(null, record),
-                auth: 'other', // 根据权限控制是否显示: 无权限，不显示
+                label: 'Dokumen',
+                onClick: handleViewDocument.bind(null, record),
               },
               {
-                label: 'Hapus',
-                icon: 'ic:outline-delete-outline',
-                onClick: handleDelete.bind(null, record),
-                auth: 'super', // 根据权限控制是否显示: 有权限，会显示
-              },
-            ]"
-            :dropDownActions="[
-              {
-                label: 'aktifkan',
-                popConfirm: {
-                  title: 'apakah di aftifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: (_action) => {
-                  return record.status !== 'enable'; // 根据业务控制是否显示: 非enable状态的不显示启用按钮
-                },
-              },
-              {
-                label: 'dinonaktifkan',
-                popConfirm: {
-                  title: 'nonaktifkan? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                ifShow: () => {
-                  return record.status === 'enable'; // 根据业务控制是否显示: enable状态的显示禁用按钮
-                },
-              },
-              {
-                label: 'kontrol serentak',
-                popConfirm: {
-                  title: 'apakah anda ingin menampilkan secara dinamis? ',
-                  confirm: handleOpen.bind(null, record),
-                },
-                auth: 'super', // 同时根据权限和业务控制是否显示
-                ifShow: () => {
-                  return true;
-                },
+                label: 'Detail',
+                onClick: handleViewDetail.bind(null, record),
               },
             ]"
           />
@@ -64,19 +41,46 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
   import { demoListApi } from '/@/api/demo/table';
+  import createOptions from './templates/dropdownOptions';
 
-  // import { PageWrapper } from '/@/components/Page';
-  // import { areaRecord } from '/@/api/demo/cascader';
+  // for hard code purposes
+  const TOKO_LIST = {
+    TOKO1: 'Toko 1',
+    TOKO2: 'Toko 2',
+    TOKO3: 'Toko 3',
+  };
+
+  const BU_LIST = {
+    BU1: 'BU 1',
+    BU2: 'BU 2',
+    BU3: 'BU 3',
+  };
+
+  const STATUS_LIST = {
+    ALL: 'All',
+    DRAFT: 'Draft',
+    SENT: 'Dikirim',
+    ACKNOWLEDGED: 'Diakui',
+    RECEIVED: 'Diterima',
+    ACCEPTED: 'Disahkan',
+    REJECTED: 'Ditolak',
+    PAYMENT_READY: 'Siap untuk dibayar',
+    PAYMENT_IN_TRANSIT: 'Pembayaran sedang berjalan',
+    RECEIVED_BY_BANK: 'Diterima oleh Bank',
+    UPLOADED_BY_BANK: 'Diupload oleh Bank',
+    UNPAID: 'Tidak terbayar',
+    PAID: 'Terbayar',
+  };
 
   const schemas: FormSchema[] = [
     {
-      field: 'Status',
+      field: 'status',
       component: 'Select',
       label: 'Status',
       colProps: {
@@ -84,22 +88,11 @@
       },
       componentProps: {
         placeholder: '--Select--',
-        options: [
-          {
-            label: 'toko sembako',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko buah',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions(STATUS_LIST),
       },
     },
     {
-      field: 'Date From',
+      field: 'dateFrom',
       component: 'RangePicker',
       label: 'Date From',
       colProps: {
@@ -107,7 +100,7 @@
       },
     },
     {
-      field: 'Toko',
+      field: 'store',
       component: 'Select',
       label: 'Toko',
       colProps: {
@@ -115,22 +108,11 @@
       },
       componentProps: {
         placeholder: 'All',
-        options: [
-          {
-            label: 'toko udin',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko rezeki',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions(TOKO_LIST),
       },
     },
     {
-      field: 'Dept Code From',
+      field: 'deptCodeFrom',
       component: 'Input',
       label: 'Dept Code From',
       colProps: {
@@ -144,7 +126,7 @@
       },
     },
     {
-      field: 'Dept Code To',
+      field: 'deptCodeTo',
       component: 'Input',
       label: 'Dept Code To',
       colProps: {
@@ -158,7 +140,7 @@
       },
     },
     {
-      field: 'Business Unit',
+      field: 'businessUnit',
       component: 'Select',
       label: 'Business Unit',
       colProps: {
@@ -166,22 +148,11 @@
       },
       componentProps: {
         placeholder: 'All',
-        options: [
-          {
-            label: 'IT',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'BOD',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions(BU_LIST),
       },
     },
     {
-      field: 'Supp Code From',
+      field: 'supplierCodeFrom',
       component: 'Input',
       label: 'Supp Code From',
       colProps: {
@@ -195,7 +166,7 @@
       },
     },
     {
-      field: 'Supp Code To',
+      field: 'supplierCodeTo',
       component: 'Input',
       label: 'Supp Code To',
       colProps: {
@@ -209,7 +180,7 @@
       },
     },
     {
-      field: 'Consignment',
+      field: 'consignment',
       component: 'Select',
       label: 'Consignment',
       colProps: {
@@ -217,22 +188,14 @@
       },
       componentProps: {
         placeholder: 'All',
-        options: [
-          {
-            label: 'toko udin',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko rezeki',
-            value: '2',
-            key: '2',
-          },
-        ],
+        options: createOptions({
+          Y: 'Ya',
+          N: 'Tidak',
+        }),
       },
     },
     {
-      field: 'Digital Invoice',
+      field: 'digitalInvoice',
       component: 'Select',
       label: 'Digital Invoice',
       colProps: {
@@ -240,32 +203,10 @@
       },
       componentProps: {
         placeholder: 'All',
-        options: [
-          {
-            label: 'toko udin',
-            value: '1',
-            key: '1',
-          },
-          {
-            label: 'toko rezeki',
-            value: '2',
-            key: '2',
-          },
-        ],
-      },
-    },
-    {
-      field: 'Search CDT/PO No',
-      component: 'Input',
-      label: 'Search CDT/PO No',
-      colProps: {
-        span: 8,
-      },
-      componentProps: {
-        placeholder: 'Search CDT/PO No',
-        onChange: (e: any) => {
-          console.log(e);
-        },
+        options: createOptions({
+          Y: 'Ya',
+          N: 'Tidak',
+        }),
       },
     },
   ];
@@ -273,58 +214,43 @@
   const columns: BasicColumn[] = [
     {
       title: 'Toko',
-      dataIndex: 'no',
-      width: 100,
-    },
-    {
-      title: 'nama gelar',
-      dataIndex: 'name',
-      width: 200,
-      auth: 'test', // 根据权限控制是否显示: 无权限，不显示
+      dataIndex: 'store',
     },
     {
       title: 'Referensi',
       sorter: true,
-      dataIndex: 'name',
+      dataIndex: 'reference',
     },
     {
       title: 'Kode Supllier',
       sorter: true,
-      dataIndex: 'no',
+      dataIndex: 'supplierCode',
     },
     {
       title: 'Merchant',
       sorter: true,
-      dataIndex: 'name',
+      dataIndex: 'merchant',
     },
     {
       title: 'Total Amount Invoice',
       sorter: true,
-      dataIndex: 'no',
+      dataIndex: 'totalAmount',
     },
     {
       title: 'Tanggal Kirim',
       sorter: true,
-      dataIndex: 'beginTime',
+      dataIndex: 'deliveryDate',
     },
     {
       title: 'Status',
       sorter: true,
-      dataIndex: 'no',
+      dataIndex: 'status',
     },
     {
       title: 'Revisi',
       sorter: true,
-      dataIndex: 'name',
+      dataIndex: 'revision',
     },
-    // {
-    //   title: 'alamat',
-    //   dataIndex: 'address',
-    //   auth: 'super', // 同时根据权限和业务控制是否显示
-    //   ifShow: (_column) => {
-    //     return true;
-    //   },
-    // },
   ];
 
   export default defineComponent({
@@ -333,16 +259,15 @@
       const { createMessage } = useMessage();
 
       const [register, { setProps }] = useForm({
-        labelWidth: 120,
+        labelWidth: 150,
         schemas,
         actionColOptions: {
-          span: 24,
+          span: 20,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
-        title: 'Tabel List Invoice',
         api: demoListApi,
         columns: columns,
         bordered: true,
@@ -352,6 +277,7 @@
           type: 'checkbox',
         },
         actionColumn: {
+          ellipsis: true,
           width: 250,
           title: 'Action',
           dataIndex: 'action',
@@ -359,26 +285,35 @@
         },
       });
 
-      function handleEdit(record: Recordable) {
-        console.log('klik untuk mengedit', record);
+      function handleViewDocument(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
       }
-      function handleDelete(record: Recordable) {
-        console.log('klik untuk menghapus', record);
+
+      function handleViewDetail(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
       }
-      function handleOpen(record: Recordable) {
-        console.log('klik untuk mengaktifkan', record);
+
+      function handlePrintSelected(record: Recordable) {
+        console.log('klik untuk melihat detail', record);
+      }
+
+      const searchValueRef = ref('');
+      function handleSearch(e: ChangeEvent) {
+        searchValueRef.value = e.target.value;
+        console.log(searchValueRef.value);
       }
 
       return {
         registerTable,
-        handleEdit,
-        handleDelete,
-        handleOpen,
+        handleViewDocument,
+        handleViewDetail,
+        handlePrintSelected,
         register,
         schemas,
-        handleSubmit: (values: Recordable) => {
+        handleFilter: (values: Recordable) => {
           createMessage.success('click search,values:' + JSON.stringify(values));
         },
+        handleSearch,
         setProps,
         // handleLoad,
       };

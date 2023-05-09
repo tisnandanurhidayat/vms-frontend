@@ -1,5 +1,5 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
@@ -79,7 +79,7 @@
       },
     },
     {
-      field: 'Business Unit',
+      field: 'businessUnit',
       component: 'Select',
       label: 'Business Unit',
       colProps: {
@@ -158,9 +158,9 @@
         labelWidth: 120,
         schemas,
         actionColOptions: {
-          span: 24,
+          span: 20,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({

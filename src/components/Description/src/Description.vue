@@ -94,11 +94,16 @@
 
       // Prevent line breaks
       function renderLabel({ label, labelMinWidth, labelStyle }: DescItem) {
+        var labelStyles: CSSProperties = {
+          fontWeight: 'bolder',
+          color: '#404040',
+        };
+
         if (!labelStyle && !labelMinWidth) {
-          return label;
+          return <div style={labelStyles}>{label}</div>;
         }
 
-        const labelStyles: CSSProperties = {
+        labelStyles = {
           ...labelStyle,
           minWidth: `${labelMinWidth}px `,
         };
@@ -129,7 +134,23 @@
 
             const width = contentMinWidth;
             return (
-              <Descriptions.Item label={renderLabel(item)} key={field} span={span}>
+              <Descriptions.Item
+                label={renderLabel(item)}
+                key={field}
+                span={span}
+                labelStyle={{
+                  padding: '0px 8px',
+                  background: '#dfdfdf',
+                  textAlign: 'right',
+                  fontSize: '14px',
+                  borderBottom: '2px solid #f0f0f0',
+                }}
+                contentStyle={{
+                  padding: '0px 8px',
+                  fontSize: '14px',
+                  borderBottom: '2px solid #f0f0f0',
+                }}
+              >
                 {() => {
                   if (!contentMinWidth) {
                     return getContent();
@@ -182,3 +203,8 @@
     },
   });
 </script>
+<style scoped>
+  .ant-descriptions-bordered .ant-descriptions-row {
+    border-bottom: 2px solid #f0f0f0;
+  }
+</style>

@@ -15,7 +15,7 @@ import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from 
 import { propTypes } from '/@/utils/propTypes';
 
 export const basicProps = {
-  clickToRowSelect: { type: Boolean, default: true },
+  clickToRowSelect: { type: Boolean, default: false },
   isTreeTable: Boolean,
   tableSetting: propTypes.shape<TableSetting>({}),
   inset: Boolean,
@@ -96,9 +96,9 @@ export const basicProps = {
     type: Object as PropType<BasicColumn>,
     default: null,
   },
-  ellipsis: { type: Boolean, default: true },
+  ellipsis: { type: Boolean, default: false },
   isCanResizeParent: { type: Boolean, default: false },
-  canResize: { type: Boolean, default: true },
+  canResize: { type: Boolean, default: false },
   clearSelectOnPageChange: propTypes.bool,
   resizeHeightOffset: propTypes.number.def(0),
   rowSelection: {
@@ -148,4 +148,8 @@ export const basicProps = {
     type: String as PropType<SizeType>,
     default: DEFAULT_SIZE,
   },
+  // highlighter: {
+  //   type: String,
+  //   default: null,
+  // },
 };

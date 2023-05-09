@@ -1,5 +1,5 @@
 <template>
-  <CollapseContainer title="FILTERS">
+  <CollapseContainer title="FILTER">
     <BasicForm @register="register" @submit="handleSubmit" />
   </CollapseContainer>
 
@@ -138,9 +138,9 @@
         labelWidth: 120,
         schemas,
         actionColOptions: {
-          span: 24,
+          span: 20,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
@@ -154,6 +154,7 @@
           type: 'checkbox',
         },
         actionColumn: {
+          ellipsis: true,
           width: 250,
           title: 'Action',
           dataIndex: 'action',

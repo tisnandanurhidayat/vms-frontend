@@ -53,6 +53,7 @@
         canResize: false,
         expandRowByClick: true,
         actionColumn: {
+          ellipsis: true,
           width: 160,
           title: 'Action',
           dataIndex: 'action',

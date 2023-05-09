@@ -405,6 +405,8 @@ export interface BasicTableProps<T = any> {
   onExpandedRowsChange?: (expandedRows: string[] | number[]) => void;
 
   onColumnsChange?: (data: ColumnChangeParam[]) => void;
+
+  highlight?: (data: Recordable) => boolean;
 }
 
 export type CellFormat =

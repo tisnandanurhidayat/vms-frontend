@@ -324,7 +324,7 @@
       }
 
       &:not(.ant-form-item-with-help) {
-        margin-bottom: 20px;
+        margin-bottom: 8px;
       }
 
       &.suffix-item {
@@ -355,5 +355,9 @@
         margin-bottom: 8px !important;
       }
     }
+  }
+
+  .ant-btn {
+    padding: 4.4px 12px;
   }
 </style>

@@ -83,7 +83,7 @@
         actionColOptions: {
           span: 24,
         },
-        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'YYYY-MM']],
+        fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
       const [registerTable] = useTable({
@@ -96,6 +96,7 @@
           type: 'checkbox',
         },
         actionColumn: {
+          ellipsis: true,
           width: 120,
           title: 'Action',
           dataIndex: 'action',
