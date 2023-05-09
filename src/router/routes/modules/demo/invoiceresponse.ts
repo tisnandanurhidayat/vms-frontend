@@ -3,6 +3,7 @@ import type { AppRouteModule } from '/@/router/types';
 import { t } from '/@/hooks/web/useI18n';
 import { LAYOUT } from '/@/router/constant';
 import addIndex from './layout-menu/indexMenu';
+import addDetail from './layout-menu/detailMenu';
 
 const InvoiceResponse: AppRouteModule = {
   path: '/invoice-response',
@@ -15,7 +16,10 @@ const InvoiceResponse: AppRouteModule = {
     hideChildrenInMenu: true,
     title: t('Invoice Response'),
   },
-  children: [addIndex('index', 'InvoiceResponse', 'Invoice Response')],
+  children: [
+    addIndex('index', 'InvoiceResponse', 'Invoice Response'),
+    addDetail('detail/:id', 'InvoiceResponseDetail', 'IR Detail'),
+  ],
 };
 
 export default InvoiceResponse;
