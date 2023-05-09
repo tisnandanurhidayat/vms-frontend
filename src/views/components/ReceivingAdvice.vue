@@ -147,11 +147,11 @@
     },
     {
       title: 'Nomor RA',
-      dataIndex: 'RANo',
+      dataIndex: 'raNo',
     },
     {
       title: 'Tanggal RA',
-      dataIndex: 'RADate',
+      dataIndex: 'raDate',
     },
     {
       title: 'Status',
