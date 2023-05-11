@@ -45,13 +45,28 @@
   import { defineComponent, ref } from 'vue';
   import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
-  import { poListApi } from '/@/api/vms/purchaseOrder';
+  // import { poFilterApi } from '/@/api/vms/purchaseOrder';
+  // import { useMessage } from '/@/hooks/web/useMessage';
+  // import { usePoStoreAdvance } from '/@/store/modules/PoAdvance';
+
+  // const PoStoree = usePoStoreAdvance();
+
+  import {
+    BasicTable,
+    useTable,
+    BasicColumn,
+    TableAction,
+    BasicTableProps,
+  } from '/@/components/Table';
+  import { poListApi , poFilterApi } from '/@/api/vms/purchaseOrder';
   import createOptions from './templates/dropdownOptions';
   import { router } from '/@/router';
+  import { DynamicProps } from '/#/utils';
+  import { DEFAULT_SORT_FN } from '/@/components/Table/src/const';
   // import { useRefs } from '/@/hooks/core/useRefs';
   // import { useCdtSearch } from '../application/useCdtSearch';
+
+  let API_URL_PARAMS: Recordable;
 
   // for hard code purposes
   const TOKO_LIST = {
@@ -92,7 +107,7 @@
 
   const schemas: FormSchema[] = [
     {
-      field: 'merchant',
+      field: 'store_code',
       component: 'Input',
       label: 'Merchant',
       colProps: {
@@ -100,7 +115,7 @@
       },
       componentProps: {
         placeholder: 'Merchant',
-        onChange: (e: any) => {
+        onSubmit: (e: any) => {
           console.log(e);
         },
       },
@@ -114,7 +129,7 @@
       },
       componentProps: {
         placeholder: 'Kode Supplier',
-        onChange: (e: any) => {
+        onSubmit: (e: any) => {
           console.log(e);
         },
       },
@@ -125,6 +140,11 @@
       label: 'Order From',
       colProps: {
         span: 8,
+      },
+      componentProps: {
+        onSubmit: (e: any) => {
+          console.log(e);
+        },
       },
     },
     {
@@ -184,6 +204,7 @@
     {
       title: 'Referensi',
       dataIndex: 'reference',
+      sorter: true,
     },
     {
       title: 'Merchant',
@@ -207,14 +228,32 @@
     },
     {
       title: 'Toko',
-      dataIndex: 'store',
+      dataIndex: 'store_code',
     },
   ];
+
+  // const apiResult = await poListApi({ page: 1, pageSize: 200 });
+  // console.log(apiResult.items);
+  let registerTableProp: Partial<DynamicProps<BasicTableProps<any>>> = {
+    columns: columns,
+    bordered: true,
+    tableSetting: { fullScreen: true },
+    rowSelection: {
+      type: 'checkbox',
+    },
+    actionColumn: {
+      ellipsis: true,
+      width: 250,
+      title: 'Action',
+      dataIndex: 'action',
+    },
+    sortFn: DEFAULT_SORT_FN,
+  };
 
   export default defineComponent({
     components: { BasicForm, CollapseContainer, TableAction, BasicTable },
     setup() {
-      const { createMessage } = useMessage();
+      // const { createMessage } = useMessage();
 
       const [register, { setProps }] = useForm({
         labelWidth: 150,
@@ -225,8 +264,7 @@
         fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
-      const [registerTable] = useTable({
-        api: poListApi,
+      let registerTableProp: Partial<DynamicProps<BasicTableProps<any>>> = {
         columns: columns,
         bordered: true,
         tableSetting: { fullScreen: true },
@@ -239,7 +277,15 @@
           title: 'Action',
           dataIndex: 'action',
         },
+        sortFn: DEFAULT_SORT_FN,
+      };
+
+      let [registerTable] = useTable({
+        // dataSource: apiResult.items,
+        api: poListApi,
+        ...registerTableProp,
       });
+      // API_URL_PARAMS.pageSize =
 
       // const [refs] = useRefs();
       // const { handleSearch } = useCdtSearch(refs);
@@ -263,11 +309,36 @@
         console.log('klik untuk melihat detail', record);
       }
 
-      const searchValueRef = ref('');
-      function handleSearch(e: ChangeEvent) {
-        searchValueRef.value = e.target.value;
-        console.log(searchValueRef.value);
-      }
+      // async function handleFilter(values: Recordable) {
+      //   const apiResult = await poFilterApi({ page: 1, pageSize: 200, ...values });
+      //   // const apiResult = await filterApi({ page: 1, pageSize: 200, ...values });
+      //   [registerTable] = useTable({
+      //     dataSource: apiResult.items,
+      //     ...registerTableProp,
+      //   });
+      //   API_URL_PARAMS = values;
+      // }
+
+      // const searchValueRef = ref('');
+      // async function handleSearch(e: ChangeEvent) {
+      //   searchValueRef.value = e.target.value;
+      //   const SEARCH_URL_PARAMS = { ...API_URL_PARAMS, cdt: searchValueRef.value };
+      //   const apiResult = await poListApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
+      //   // const apiResult = await advanceSearchApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
+      //   console.log(apiResult.items);
+      //   [registerTable] = useTable({
+      //     dataSource: apiResult.items,
+      //     ...registerTableProp,
+      //   });
+      // }
+
+      // async function handleFilter(record: Recordable) {
+      //   const a = await PoStoree.AdvancePo({
+      //     store_code : record.store_code,
+      //    });
+      //   console.log(record.store_code)
+      //   return a;
+      // }
 
       return {
         registerTable,
@@ -277,12 +348,39 @@
         handleDownloadXML,
         register,
         schemas,
-        handleFilter: (values: Recordable) => {
-          createMessage.success('click search,values:' + JSON.stringify(values));
-        },
-        handleSearch,
+        // handleFilter,
+        // handleSearch,
         setProps,
       };
+    },
+    methods: {
+      async handleFilter(values: Recordable) {
+        const apiResult = await poFilterApi({ page: 1, pageSize: 200, ...values });
+        // const apiResult = await filterApi({ page: 1, pageSize: 200, ...values });
+        // registerTable.tableAction;
+        let [registerTable, { reload }] = useTable({
+          dataSource: apiResult.items,
+          ...registerTableProp,
+        });
+        API_URL_PARAMS = values;
+        // this.$forceUpdate();
+        reload();
+        return registerTable;
+      },
+      async handleSearch(e: ChangeEvent) {
+        const searchValueRef = ref('');
+        searchValueRef.value = e.target.value;
+        const SEARCH_URL_PARAMS = { ...API_URL_PARAMS, cdt: searchValueRef.value };
+        const apiResult = await poListApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
+        // const apiResult = await advanceSearchApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
+        console.log(apiResult.items);
+        const [registerTable, { reload }] = useTable({
+          dataSource: apiResult.items,
+          ...registerTableProp,
+        });
+        reload();
+        return registerTable;
+      },
     },
   });
 </script>

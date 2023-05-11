@@ -1,13 +1,16 @@
 import { defHttp } from '/@/utils/http/axios';
-import { PoParams, PoListGetResultModel } from './model/po/poListModel';
+import { PoParams, PoListGetResultModel, PoFilterParams } from './model/po/poListModel';
 import { PoItemParams, PoItemListGetResultModel } from './model/po/poItemListModel';
 import { PoOrderInfoGetResultModel } from './model/po/poOrderInfoModel';
 import { PoSupplierInfoGetResultModel } from './model/po/poSupplierInfoModel';
 
 enum Api {
-  PO_LIST = '/purchase-order/getPoList',
+  PO_LIST = '/po/getPO',
+  PO_ADVANCE = '/po/getPoAll',
+  // PO_DETAIL = '/viewbycdtdetail',
   PO_ITEM_LIST = `/purchase-order/getPoItemList`,
-  PO_ORDER_INFO = `/purchase-order/getPoOrderInfo`,
+  // PO_ORDER_INFO = `/purchase-order/getPoOrderInfo`,
+  PO_ORDER_INFO = `/po/viewbycdtdetail`,
   PO_SUPPLIER_INFO = `/purchase-order/getPoSupplierInfo`,
 }
 
@@ -19,11 +22,34 @@ export const poListApi = (params: PoParams) =>
   defHttp.get<PoListGetResultModel>({
     url: Api.PO_LIST,
     params,
+    timeout: 10000,
     headers: {
       // @ts-ignore
       ignoreCancelToken: true,
     },
   });
+
+  export const poFilterApi = (params: PoFilterParams) =>
+  defHttp.get<PoListGetResultModel>({
+    url: Api.PO_ADVANCE,
+    params,
+    timeout: 100000,
+    headers: {
+      // @ts-ignore
+      ignoreCancelToken: true,
+    },
+  });
+
+  // export const poDetailApi = (params: PoParams) =>
+  // defHttp.get<PoListGetResultModel>({
+  //   url: Api.PO_DETAIL,
+  //   params,
+  //   timeout: 100000,
+  //   headers: {
+  //     // @ts-ignore
+  //     ignoreCancelToken: true,
+  //   },
+  // });
 
 export const poItemListApi = (params: PoItemParams) =>
   defHttp.get<PoItemListGetResultModel>({
@@ -36,7 +62,7 @@ export const poItemListApi = (params: PoItemParams) =>
   });
 
 export const poOrderInfoApi = () =>
-  defHttp.get<PoOrderInfoGetResultModel>({
+  defHttp.post<PoOrderInfoGetResultModel>({
     url: Api.PO_ORDER_INFO,
     headers: {
       // @ts-ignore
