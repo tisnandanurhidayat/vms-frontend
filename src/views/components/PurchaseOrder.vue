@@ -26,10 +26,6 @@
           <TableAction
             :actions="[
               {
-                label: 'Dokumen',
-                onClick: handleViewDocument.bind(null, record),
-              },
-              {
                 label: 'Detail',
                 onClick: handleViewDetail.bind(null, record),
               },
@@ -53,20 +49,21 @@
 
   import {
     BasicTable,
+    FormProps,
     useTable,
     BasicColumn,
     TableAction,
-    BasicTableProps,
+    // BasicTableProps,
   } from '/@/components/Table';
-  import { poListApi , poFilterApi } from '/@/api/vms/purchaseOrder';
+  import { AdvanceSearchPoApi } from '/@/api/vms/purchaseOrder';
   import createOptions from './templates/dropdownOptions';
   import { router } from '/@/router';
-  import { DynamicProps } from '/#/utils';
-  import { DEFAULT_SORT_FN } from '/@/components/Table/src/const';
+  // import { DynamicProps } from '/#/utils';
+  // import { DEFAULT_SORT_FN } from '/@/components/Table/src/const';
   // import { useRefs } from '/@/hooks/core/useRefs';
   // import { useCdtSearch } from '../application/useCdtSearch';
 
-  let API_URL_PARAMS: Recordable;
+  // let API_URL_PARAMS: Recordable;
 
   // for hard code purposes
   const TOKO_LIST = {
@@ -104,6 +101,119 @@
     PAID: 'Terbayar',
     EXPIRED: 'Expired',
   };
+
+  export function getFormPo(): Partial<FormProps> {
+  return {
+    labelWidth: 100,
+    schemas: [
+      // ...getAdvanceSchema(1),
+      // {
+      //   field: 'store_code',
+      //   component: 'Input',
+      //   label: 'store_codee',
+      //   colProps: {
+      //     span: 8,
+      //   },
+      //   componentProps: {
+      //     placeholder: 'store_codee',
+      //     onChange: (e: any) => {
+      //       return e;
+      //     },
+      //   },
+      // },
+      {
+        field: 'store_code',
+        component: 'Input',
+        label: 'id',
+        colProps: {
+          span: 8,
+        },
+        componentProps: {
+          placeholder: 'store_code',
+          onChange: (e: any) => {
+            return e;
+          },
+        },
+      },
+      {
+        field: 'orderFrom',
+        component: 'RangePicker',
+        label: 'Order From',
+        colProps: {
+          span: 8,
+        },
+      },
+      {
+        field: 'status',
+        component: 'Select',
+        label: 'Status',
+        colProps: {
+          span: 8,
+        },
+        componentProps: {
+          placeholder: '--Select--',
+          // api: PoListApi,
+          options: createOptions(STATUS_LIST),
+  
+        },
+      },
+      {
+        field: 'store_codee',
+        component: 'Select',
+        label: 'Status',
+        colProps: {
+          span: 8,
+        },
+        componentProps: {
+          placeholder: '--Select--',
+          options: createOptions(TOKO_LIST),
+          
+        },
+      },
+      {
+        field: 'isRevisedPO',
+        component: 'CheckboxGroup',
+        label: 'View Revised POs',
+        colProps: {
+          span: 8,
+        },
+        componentProps: {
+          options: [
+            {
+              value: '1',
+            },
+          ],
+        },
+      },
+      {
+        field: 'businessUnit',
+        component: 'Select',
+        label: 'Business Unit',
+        colProps: {
+          span: 8,
+        },
+        componentProps: {
+          placeholder: 'All',
+          options: createOptions(BU_LIST),
+        },
+      },
+      {
+        field: 'id',
+        component: 'Input',
+        label: 'Search CDT/PO No',
+        colProps: {
+          span: 8,
+        },
+        componentProps: {
+          placeholder: 'Search CDT/PO No',
+          onChange: (e: any) => {
+            return e;
+          },
+        },
+      },
+    ],
+  };
+}
 
   const schemas: FormSchema[] = [
     {
@@ -203,20 +313,19 @@
   const columns: BasicColumn[] = [
     {
       title: 'Referensi',
-      dataIndex: 'reference',
-      sorter: true,
+      dataIndex: 'id',
     },
     {
       title: 'Merchant',
-      dataIndex: 'merchant',
+      dataIndex: 'supplier_name_local',
     },
     {
       title: 'Nomer Order',
-      dataIndex: 'orderNo',
+      dataIndex: 'po_no',
     },
     {
       title: 'Tanggal Order',
-      dataIndex: 'orderDate',
+      dataIndex: 'created_on',
     },
     {
       title: 'Status',
@@ -224,7 +333,7 @@
     },
     {
       title: 'Perubahan Terakhir',
-      dataIndex: 'lastChange',
+      dataIndex: 'last_updated_on',
     },
     {
       title: 'Toko',
@@ -234,28 +343,32 @@
 
   // const apiResult = await poListApi({ page: 1, pageSize: 200 });
   // console.log(apiResult.items);
-  let registerTableProp: Partial<DynamicProps<BasicTableProps<any>>> = {
-    columns: columns,
-    bordered: true,
-    tableSetting: { fullScreen: true },
-    rowSelection: {
-      type: 'checkbox',
-    },
-    actionColumn: {
-      ellipsis: true,
-      width: 250,
-      title: 'Action',
-      dataIndex: 'action',
-    },
-    sortFn: DEFAULT_SORT_FN,
-  };
+  // let registerTableProp: Partial<DynamicProps<BasicTableProps<any>>> = {
+  //   columns: columns,
+  //   bordered: true,
+  //   tableSetting: { fullScreen: true },
+  //   rowSelection: {
+  //     type: 'checkbox',
+  //   },
+  //   actionColumn: {
+  //     ellipsis: true,
+  //     width: 250,
+  //     title: 'Action',
+  //     dataIndex: 'action',
+  //   },
+  //   sortFn: DEFAULT_SORT_FN,
+  // };
+
+  var FORM_VALUES: Recordable;
 
   export default defineComponent({
     components: { BasicForm, CollapseContainer, TableAction, BasicTable },
     setup() {
       // const { createMessage } = useMessage();
 
-      const [register, { setProps }] = useForm({
+      const check = ref(null);
+
+      const [register] = useForm({
         labelWidth: 150,
         schemas,
         actionColOptions: {
@@ -264,10 +377,19 @@
         fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
-      let registerTableProp: Partial<DynamicProps<BasicTableProps<any>>> = {
+      const [registerTable, { getForm }] = useTable({
+        
+        title: 'Tabel Purchase Order',
+        api: AdvanceSearchPoApi,
         columns: columns,
+        useSearchForm: true,
         bordered: true,
+        formConfig: getFormPo(),
+        pagination: true ,
         tableSetting: { fullScreen: true },
+        // onChange(pagination, filters, sorter, extra) {
+        //   // pagination: { pageSize: 10 },
+        // },
         rowSelection: {
           type: 'checkbox',
         },
@@ -276,15 +398,13 @@
           width: 250,
           title: 'Action',
           dataIndex: 'action',
+          // slots: { customRender: 'action' },
         },
-        sortFn: DEFAULT_SORT_FN,
-      };
-
-      let [registerTable] = useTable({
-        // dataSource: apiResult.items,
-        api: poListApi,
-        ...registerTableProp,
       });
+
+      // const searchParams = computed<Recordable>(() => {
+      //   return { keyword: unref(keyword) };
+      // });
       // API_URL_PARAMS.pageSize =
 
       // const [refs] = useRefs();
@@ -308,6 +428,11 @@
         //TODO
         console.log('klik untuk melihat detail', record);
       }
+
+      // const keyword = ref<string>('');
+      // function onSearch(value: string) {
+      //   keyword.value = value;
+      // }
 
       // async function handleFilter(values: Recordable) {
       //   const apiResult = await poFilterApi({ page: 1, pageSize: 200, ...values });
@@ -342,44 +467,41 @@
 
       return {
         registerTable,
+        // searchParams,
+        // onSearch: useDebounceFn(onSearch, 300),
+        // PoListApi,
+        // getFormValues,
         handleViewDocument,
         handleViewDetail,
         handlePrintSelected,
         handleDownloadXML,
+        getForm,
+        // handleReload,
         register,
-        schemas,
-        // handleFilter,
-        // handleSearch,
-        setProps,
+        // schemas,
+        // handleSubmit,
+        // handleSubmit: (values: Recordable) => {
+        //   createMessage.success('click search,values:' + JSON.stringify(values));
+        // },
+        check,
       };
     },
     methods: {
       async handleFilter(values: Recordable) {
-        const apiResult = await poFilterApi({ page: 1, pageSize: 200, ...values });
         // const apiResult = await filterApi({ page: 1, pageSize: 200, ...values });
         // registerTable.tableAction;
-        let [registerTable, { reload }] = useTable({
-          dataSource: apiResult.items,
-          ...registerTableProp,
-        });
-        API_URL_PARAMS = values;
+        FORM_VALUES = values;
         // this.$forceUpdate();
-        reload();
-        return registerTable;
+        await this.getForm().setFieldsValue(FORM_VALUES);
+        await this.getForm().submit();
       },
       async handleSearch(e: ChangeEvent) {
         const searchValueRef = ref('');
         searchValueRef.value = e.target.value;
-        const SEARCH_URL_PARAMS = { ...API_URL_PARAMS, cdt: searchValueRef.value };
-        const apiResult = await poListApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
+        const SEARCH_FORM_VALUES = { ...FORM_VALUES, id: searchValueRef.value };
         // const apiResult = await advanceSearchApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
-        console.log(apiResult.items);
-        const [registerTable, { reload }] = useTable({
-          dataSource: apiResult.items,
-          ...registerTableProp,
-        });
-        reload();
-        return registerTable;
+        await this.getForm().setFieldsValue(SEARCH_FORM_VALUES);
+        await this.getForm().submit();
       },
     },
   });

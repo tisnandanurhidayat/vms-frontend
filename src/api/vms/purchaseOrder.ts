@@ -1,17 +1,18 @@
 import { defHttp } from '/@/utils/http/axios';
 import { PoParams, PoListGetResultModel, PoFilterParams } from './model/po/poListModel';
 import { PoItemParams, PoItemListGetResultModel } from './model/po/poItemListModel';
+import { AdvanceSearch } from './model/po/poListModel';
 import { PoOrderInfoGetResultModel } from './model/po/poOrderInfoModel';
 import { PoSupplierInfoGetResultModel } from './model/po/poSupplierInfoModel';
 
 enum Api {
   PO_LIST = '/po/getPO',
   PO_ADVANCE = '/po/getPoAll',
-  // PO_DETAIL = '/viewbycdtdetail',
+  AdvancePo = '/Po/advanceSearchPO' ,
   PO_ITEM_LIST = `/purchase-order/getPoItemList`,
   // PO_ORDER_INFO = `/purchase-order/getPoOrderInfo`,
-  PO_ORDER_INFO = `/po/viewbycdtdetail`,
-  PO_SUPPLIER_INFO = `/purchase-order/getPoSupplierInfo`,
+  PO_ORDER_INFO = `/Po/viewbycdtdetail`,
+  PO_SUPPLIER_INFO = `/Po/viewbycdtinfo`,
 }
 
 /**
@@ -27,6 +28,12 @@ export const poListApi = (params: PoParams) =>
       // @ts-ignore
       ignoreCancelToken: true,
     },
+  });
+
+  export const AdvanceSearchPoApi = (params: AdvanceSearch) =>
+  defHttp.post({
+    url: Api.AdvancePo,
+    params,
   });
 
   export const poFilterApi = (params: PoFilterParams) =>
