@@ -43,15 +43,22 @@
 
 <script lang="ts">
   import { defineComponent, ref } from 'vue';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
+  import { BasicForm, FormProps, FormSchema, useForm } from '/@/components/Form/index';
   import { CollapseContainer } from '/@/components/Container/index';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { BasicTable, useTable, BasicColumn, TableAction } from '/@/components/Table';
+  import {
+    BasicTable,
+    useTable,
+    BasicColumn,
+    TableAction,
+    BasicTableProps,
+  } from '/@/components/Table';
   import { poListApi } from '/@/api/vms/purchaseOrder';
   import createOptions from './templates/dropdownOptions';
   import { router } from '/@/router';
-  // import { useRefs } from '/@/hooks/core/useRefs';
-  // import { useCdtSearch } from '../application/useCdtSearch';
+  import { DynamicProps } from '/#/utils';
+  import { DEFAULT_SORT_FN } from '/@/components/Table/src/const';
+
+  let FORM_VALUES: Recordable;
 
   // for hard code purposes
   const TOKO_LIST = {
@@ -100,7 +107,7 @@
       },
       componentProps: {
         placeholder: 'Merchant',
-        onChange: (e: any) => {
+        onSubmit: (e: any) => {
           console.log(e);
         },
       },
@@ -114,7 +121,7 @@
       },
       componentProps: {
         placeholder: 'Kode Supplier',
-        onChange: (e: any) => {
+        onSubmit: (e: any) => {
           console.log(e);
         },
       },
@@ -125,6 +132,11 @@
       label: 'Order From',
       colProps: {
         span: 8,
+      },
+      componentProps: {
+        onSubmit: (e: any) => {
+          console.log(e);
+        },
       },
     },
     {
@@ -184,6 +196,7 @@
     {
       title: 'Referensi',
       dataIndex: 'reference',
+      // sorter: true,
     },
     {
       title: 'Merchant',
@@ -211,10 +224,29 @@
     },
   ];
 
+  export function getFormPo(): Partial<FormProps> {
+    return { schemas: schemas };
+  }
+  let registerTableProp: Partial<DynamicProps<BasicTableProps<any>>> = {
+    columns: columns,
+    bordered: true,
+    tableSetting: { fullScreen: true },
+    rowSelection: {
+      type: 'checkbox',
+    },
+    actionColumn: {
+      ellipsis: true,
+      width: 250,
+      title: 'Action',
+      dataIndex: 'action',
+    },
+    sortFn: DEFAULT_SORT_FN,
+  };
+
   export default defineComponent({
     components: { BasicForm, CollapseContainer, TableAction, BasicTable },
     setup() {
-      const { createMessage } = useMessage();
+      // const { createMessage } = useMessage();
 
       const [register, { setProps }] = useForm({
         labelWidth: 150,
@@ -225,25 +257,12 @@
         fieldMapToTime: [['fieldTime', ['startTime', 'endTime'], 'MM-YYYY']],
       });
 
-      const [registerTable] = useTable({
+      let [registerTable, { getForm }] = useTable({
+        // dataSource: apiResult.items,
         api: poListApi,
-        columns: columns,
-        bordered: true,
-        tableSetting: { fullScreen: true },
-        rowSelection: {
-          type: 'checkbox',
-        },
-        actionColumn: {
-          ellipsis: true,
-          width: 250,
-          title: 'Action',
-          dataIndex: 'action',
-        },
+        ...registerTableProp,
+        useSearchForm: true,
       });
-
-      // const [refs] = useRefs();
-      // const { handleSearch } = useCdtSearch(refs);
-      // const { handleSearch, searchResult, keyword, activeIndex } = useCdtSearch(refs);
 
       function handleViewDocument(record: Recordable) {
         console.log('klik untuk melihat detail', record.reference);
@@ -263,12 +282,6 @@
         console.log('klik untuk melihat detail', record);
       }
 
-      const searchValueRef = ref('');
-      function handleSearch(e: ChangeEvent) {
-        searchValueRef.value = e.target.value;
-        console.log(searchValueRef.value);
-      }
-
       return {
         registerTable,
         handleViewDocument,
@@ -277,12 +290,28 @@
         handleDownloadXML,
         register,
         schemas,
-        handleFilter: (values: Recordable) => {
-          createMessage.success('click search,values:' + JSON.stringify(values));
-        },
-        handleSearch,
         setProps,
+        getForm,
       };
     },
+    methods: {
+      async handleFilter(values: Recordable) {
+        // const apiResult = await filterApi({ page: 1, pageSize: 200, ...values });
+        // registerTable.tableAction;
+        FORM_VALUES = values;
+        // this.$forceUpdate();
+        await this.getForm().setFieldsValue(FORM_VALUES);
+      },
+      async handleSearch(e: ChangeEvent) {
+        const searchValueRef = ref('');
+        searchValueRef.value = e.target.value;
+        const SEARCH_FORM_VALUES = { ...FORM_VALUES, cdt: searchValueRef.value };
+        // const apiResult = await advanceSearchApi({ page: 1, pageSize: 200, ...SEARCH_URL_PARAMS });
+        await this.getForm().setFieldsValue(SEARCH_FORM_VALUES);
+      },
+    },
+    // mounted() {
+    //   this.handleFilter(values)
+    // }
   });
 </script>

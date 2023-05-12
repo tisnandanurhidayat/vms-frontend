@@ -3,15 +3,22 @@ import { resultPageSuccess, resultSuccess } from '../_util';
 
 const poList = (() => {
   const result: any[] = [];
+  const merchant: string[] = [
+    'PT. Unilever Indonesia',
+    'PT. Wings Sayap Emas',
+    'PT. Boga Sari',
+    'PT. Indofood, Tbk',
+  ];
+  const store: string[] = ['Lebak Bulus', 'Cempaka Putih', 'MT Haryono'];
   for (let index = 0; index < 200; index++) {
     result.push({
       reference: `TRI${1603238761026 + index}`,
-      'merchant|1': ['PT. Unilever Indonesia', 'PT. Wings Sayap Emas', 'PT. Boga Sari'],
+      merchant: merchant[index % 4],
       orderNo: 916042922,
       orderDate: `@date('dd-MM-yyyy')`,
       status: 'Pembayaran selesai',
       lastChange: `@date('dd-MM-yyyy')`,
-      'store|1': ['Lebak Bulus', 'Cempaka Putih', 'MT Haryono'],
+      store: store[index % 3],
     });
   }
   return result;
@@ -67,13 +74,24 @@ const poSupplierInfo = (() => {
 })();
 
 export default [
+  // {
+  //   url: '/mock-api/purchase-order/getPoList',
+  //   timeout: 100,
+  //   method: 'get',
+  //   response: ({ query }) => {
+  //     const { page = 1, pageSize = 20 } = query;
+  //     return resultPageSuccess(page, pageSize, poList);
+  //   },
+  // },
   {
     url: '/mock-api/purchase-order/getPoList',
     timeout: 100,
     method: 'get',
     response: ({ query }) => {
-      const { page = 1, pageSize = 20 } = query;
-      return resultPageSuccess(page, pageSize, poList);
+      const { page = 1, pageSize = 20, merchant = 'Unilever' } = query;
+      const ret = poList.filter((x) => x.merchant?.includes(merchant));
+      console.log(ret);
+      return resultPageSuccess(page, pageSize, ret);
     },
   },
   {
