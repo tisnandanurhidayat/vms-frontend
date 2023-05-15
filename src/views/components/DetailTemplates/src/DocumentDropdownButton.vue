@@ -96,7 +96,7 @@
       function handleMenuClick(e: MenuInfo) {
         switch (e.key as MenuEvent) {
           case 'po':
-            router.push(`/purchase-order/detail/${props.cdt}`);
+            router.push(`/Po/viewbycdtdetail/${props.cdt}`);
             break;
           case 'ra':
             router.push(`/receiving-advice/detail/${references.raId}`);

@@ -193,7 +193,7 @@
       }
 
       function handleViewDetail(record: Recordable) {
-        console.log('klik untuk melihat detail', record);
+        console.log('klik untuk melihat detail', record.reference);
       }
 
       function handlePrintSelected(record: Recordable) {
