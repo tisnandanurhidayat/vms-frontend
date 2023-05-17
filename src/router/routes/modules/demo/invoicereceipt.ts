@@ -18,7 +18,7 @@ const InvoiceReceipt: AppRouteModule = {
   },
   children: [
     addIndex('index', 'InvoiceReceipt', 'Invoice Receipt'),
-    addDetail('detail/:id', 'InvoiceReceipt', `Invoice Receipt`),
+    addDetail('detail/:id', 'InvoiceReceiptDetail', `INVR Detail`),
   ],
 };
 
