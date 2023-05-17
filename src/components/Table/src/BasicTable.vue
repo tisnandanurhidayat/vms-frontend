@@ -1,6 +1,7 @@
 <template>
   <div ref="wrapRef" :class="getWrapperClass">
-    <BasicForm
+    <div style='display:none;'>
+      <BasicForm
       ref="formRef"
       submitOnReset
       v-bind="getFormProps"
@@ -13,7 +14,7 @@
       <template #[replaceFormSlotKey(item)]="data" v-for="item in getFormSlotKeys">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
-    </BasicForm>
+    </BasicForm></div>
 
     <Table
       ref="tableElRef"
@@ -364,62 +365,12 @@
     }
   }
 
-  .ant-table.ant-table-middle .ant-table-tbody > tr > td {
-    padding: 3px 2px;
-  }
-
-  .ant-table-cell {
-    padding: 3px 2px;
-  }
-
-  .ant-table.ant-table-bordered
-    > .ant-table-container
-    > .ant-table-content
-    > table
-    > tbody
-    > tr
-    > td {
-    border-top: 0.1px solid #7f7f7f;
-    border-right: 0.1px solid #dfdfdf;
-  }
-
-  input[type='checkbox'] {
-    box-sizing: border-box;
-    padding: 0;
-    outline: 2px solid #000;
-  }
-
   .@{prefix-cls} {
     max-width: 100%;
     height: 100%;
 
-    &-row__highlighted {
-      td {
-        background-color: #fcc0c0;
-        pointer-events: none;
-      }
-
-      td:hover {
-        background-color: #fcc0c0;
-        pointer-events: none;
-      }
-
-      td.ant-table-row-hover {
-        background-color: #fcc0c0;
-        pointer-events: none;
-      }
-    }
-
     &-row__striped {
       td {
-        background-color: @app-content-background;
-      }
-
-      td:hover {
-        background-color: @app-content-background;
-      }
-
-      td.ant-table-row-hover {
         background-color: @app-content-background;
       }
     }
@@ -450,9 +401,9 @@
         padding: 0 0 8px !important;
       }
 
-      // .ant-table.ant-table-bordered .ant-table-title {
-      //   border: none !important;
-      // }
+      .ant-table.ant-table-bordered .ant-table-title {
+        border: none !important;
+      }
     }
 
     .ant-table {

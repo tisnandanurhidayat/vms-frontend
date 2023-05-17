@@ -90,7 +90,10 @@ export const useUserStore = defineStore({
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
+        console.log(params);
         const data = await loginApi(loginParams, mode);
+        console.log(data);
+
         const { token } = data;
 
         // save token
@@ -124,7 +127,24 @@ export const useUserStore = defineStore({
     },
     async getUserInfoAction(): Promise<UserInfo | null> {
       if (!this.getToken) return null;
-      const userInfo = await getUserInfo();
+      // const userInfo = await getUserInfo();
+      const userInfo = {
+        userId: '1',
+        username: 'tisnanda',
+        realName: 'tisnanda nur hidayat',
+        avatar: 'https://q1.qlogo.cn/g?b=qq&nk=190848757&s=640',
+        desc: 'manager',
+        password: '123456',
+        token: 'fakeToken1',
+        homePath: '/dashboard/analysis',
+        roles: [
+          {
+            roleName: 'Super Admin',
+            value: 'super',
+          },
+        ],
+      };
+
       const { roles = [] } = userInfo;
       if (isArray(roles)) {
         const roleList = roles.map((item) => item.value) as RoleEnum[];
